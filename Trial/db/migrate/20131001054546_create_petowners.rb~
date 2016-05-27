@@ -6,7 +6,6 @@ class CreatePetowners < ActiveRecord::Migration
       t.string :pet_name
       t.datetime :adopted_on
       t.boolean :maintenance, default: false
-
       t.timestamps
     end
   end

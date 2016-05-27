@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160514041400) do
+ActiveRecord::Schema.define(:version => 20160515025807) do
 
   create_table "artworks", :force => true do |t|
     t.string   "title"
@@ -48,7 +48,6 @@ ActiveRecord::Schema.define(:version => 20160514041400) do
     t.boolean  "maintenance", :default => false
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
-    t.string   "document"
   end
 
   create_table "comments", :force => true do |t|
@@ -80,13 +79,13 @@ ActiveRecord::Schema.define(:version => 20160514041400) do
     t.integer  "mhp"
     t.boolean  "battle_done",  :default => false
     t.integer  "pet_hp"
-    t.integer  "exp_gained",   :default => 0
     t.integer  "level"
     t.integer  "exp"
     t.integer  "hp"
     t.integer  "atk"
     t.integer  "def"
     t.integer  "spd"
+    t.integer  "exp_gained",   :default => 0
     t.integer  "boost_tokens", :default => 0
   end
 
@@ -129,6 +128,7 @@ ActiveRecord::Schema.define(:version => 20160514041400) do
     t.string   "ipicture"
     t.string   "type"
     t.boolean  "manyuses",    :default => false
+    t.boolean  "maintenance", :default => false
   end
 
   create_table "mainfolders", :force => true do |t|
@@ -175,6 +175,7 @@ ActiveRecord::Schema.define(:version => 20160514041400) do
     t.integer  "pet_id"
     t.string   "pet_name"
     t.datetime "adopted_on"
+    t.boolean  "maintenance",  :default => false
     t.datetime "created_at",                      :null => false
     t.datetime "updated_at",                      :null => false
     t.integer  "level"
@@ -194,16 +195,17 @@ ActiveRecord::Schema.define(:version => 20160514041400) do
     t.datetime "created_on"
     t.datetime "created_at",                      :null => false
     t.datetime "updated_at",                      :null => false
-    t.integer  "level",        :default => 1
-    t.integer  "hp",           :default => 1
-    t.integer  "atk",          :default => 1
-    t.integer  "def",          :default => 1
-    t.integer  "spd",          :default => 1
-    t.integer  "cost",         :default => 1
+    t.integer  "level"
+    t.integer  "hp"
+    t.integer  "atk"
+    t.integer  "def"
+    t.integer  "spd"
+    t.integer  "cost"
     t.string   "image"
     t.boolean  "monster",      :default => false
     t.boolean  "reviewed",     :default => false
     t.boolean  "starter",      :default => false
+    t.boolean  "maintenance",  :default => false
     t.integer  "user_id"
   end
 
@@ -213,6 +215,8 @@ ActiveRecord::Schema.define(:version => 20160514041400) do
     t.datetime "created_at",                  :null => false
     t.datetime "updated_at",                  :null => false
   end
+
+  add_index "pouches", ["user_id"], :name => "index_pouches_on_user_id", :unique => true
 
   create_table "sbooks", :force => true do |t|
     t.string   "name"
@@ -266,8 +270,10 @@ ActiveRecord::Schema.define(:version => 20160514041400) do
   create_table "tcontainers", :force => true do |t|
     t.string   "name"
     t.integer  "forum_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_on"
+    t.boolean  "maintenance", :default => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
     t.integer  "user_id"
   end
 

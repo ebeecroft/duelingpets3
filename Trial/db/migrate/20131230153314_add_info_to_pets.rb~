@@ -4,5 +4,6 @@ class AddInfoToPets < ActiveRecord::Migration
     add_column :pets, :monster, :boolean, default: false
     add_column :pets, :created_by, :string
     add_column :pets, :reviewed, :boolean, default: false
+    add_column :pets, :starter, :boolean, default: false
   end
 end

@@ -1,10 +1,10 @@
-class CreateSubtopics < ActiveRecord::Migration
+class CreateMaintopics < ActiveRecord::Migration
   def change
-    create_table :subtopics do |t|
-      t.integer :maintopic_id
+    create_table :maintopics do |t|
       t.integer :user_id
       t.string :topicname
       t.text :description
+      t.datetime :created_on
 
       t.timestamps
     end

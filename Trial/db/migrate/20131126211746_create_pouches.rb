@@ -6,5 +6,6 @@ class CreatePouches < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index :pouches, :user_id, unique: true
   end
 end
