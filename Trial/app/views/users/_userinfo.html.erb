@@ -11,4 +11,5 @@
    <% if current_user && (current_user.id == @user.id || current_user.admin?) %>
       <p>Money: <%= @pouch.amount %></p>
    <% end %>
+   <p>Status: <%= getStatus(@user) %></p>
 </div>

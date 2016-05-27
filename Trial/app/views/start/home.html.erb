@@ -20,7 +20,7 @@
       <!--Need to indent this-->
       <br>
       <p class="pagetext">New User:</p>
-      <p class="pagetext">If you like to learn how to create a basic forum click on the Tutorial Forum link: <%= link_to "Tutorial Forum", forums_path %></p>
+      <p class="pagetext">If you like to learn how to create a basic forum click on the Tutorial Forum link: <%= link_to "Tutorial Forum", tutorial %></p>
       <p class="pagetext">Once there choose a topic you are interested in learning about.</p>
       <!--End indent-->
    <% end %>
@@ -32,8 +32,8 @@
    <p class="pagetext">Guest:</p>
    <p class="pagetext">If you like to explore this site more then sign up for an account today by using the register link!</p>
    <p class="pagetext">Which is located in the upper right hand corner of the screen.</p>
-   <p class="pagetext">If you like to get familiar with the features of this site check out the <%= link_to "Tutorial Forum", user_forum_path(3, 1) %></p>
+   <p class="pagetext">If you like to get familiar with the features of this site check out the <%= link_to "Tutorial Forum", tutorial %></p>
    <!--End indent-->
 <% end %>
 <br>
-<div class="mascotbox"><%#= image_tag("../../../mainimage.jpeg", class: "mascot") %></div>
+<div class="mascotbox"><%= image_tag("../../../mainimage.jpeg", class: "mascot") %></div>

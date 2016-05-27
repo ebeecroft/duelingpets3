@@ -7,7 +7,7 @@
    <% if current_user && current_user.id == @user.id %>
       <div class="inner"><%= button_to 'Edit', edit_user_path(@user), method: :get %></div>
    <% end %>
-   <p><%= image_tag @user.avatar_url(:thumb).to_s %></p>
+   <p><%= image_tag getAvatar(@user) %></p>
 </div>
 <%= render 'userinfo' %>
 <br>

@@ -31,6 +31,24 @@ module UsersHelper
    end
 
    private
+      def getStatus(userFound)
+         status = Sessionkey.find_by_user_id(userFound.id)
+         value = "Offline"
+         if(status.remember_token != "NULL")
+            value = "Online"
+         end
+         return value
+      end
+
+      def getAvatar(userFound)
+         currentAvatar = "No avatar available"
+         avatarFound = userFound.avatar_url(:thumb)
+         if(avatarFound)
+           currentAvatar = avatarFound
+         end
+         return currentAvatar
+      end
+
       def getCreated
          allPets = Pet.all
          userPets = allPets.select{|pet| pet.user_id == @user.id}

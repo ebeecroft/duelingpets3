@@ -74,6 +74,10 @@ module StartHelper
          return value
       end
 
+      def tutorial
+         user_forum_path("forumowner", "tutorial")
+      end
+
       def switch(type)
          if(type == "home") #Guest
          end
