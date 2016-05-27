@@ -1,6 +1,0 @@
-<% provide(:title, "Register: Create your virtual pet account today!") %>
-<% provide(:keywords, "create, virtual, pet, account, today") %>
-<% provide(:description, "Where the user can create their free virtual pet account on Duelingpets.net.") %>
-<h1 class="pagetextheader">New user</h1>
-<%= render 'form' %>
-<p class="pagetext"><%= link_to 'Back', root_path %></p>

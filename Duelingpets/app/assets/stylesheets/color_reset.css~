@@ -1,7 +1,0 @@
-//This is to be used for reseting the colors
-
-pre {
-  background-color: #fff;
-  padding: 10px;
-  font-size: 11px;
-}

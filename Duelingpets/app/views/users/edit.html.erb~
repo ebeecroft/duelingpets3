@@ -1,5 +1,0 @@
-<% provide(:title, "User: Edit your account here!") %>
-<% provide(:description, "Allows the users to change their account settings to the best of their abilities.") %>
-<h1 class="pagetextheader">Editing user</h1>
-<%= render 'form' %>
-<p class="pagetext"><%= link_to 'Back', @user %></p>

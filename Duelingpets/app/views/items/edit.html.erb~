@@ -1,6 +1,0 @@
-<% provide(:title, "Item: Edit your item here!") %>
-<% provide(:description, "Allows the admin to change the attributes of a particular item.") %>
-<h1 class="pagetextheader">Editing item</h1>
-<%= render 'form' %>
-<p class="pagetext"><%= link_to 'Show', @item %> |
-<%= link_to 'Back', items_path %></p>

@@ -1,5 +1,0 @@
-class AddSpdToPets < ActiveRecord::Migration
-  def change
-    add_column :pets, :spd, :integer
-  end
-end

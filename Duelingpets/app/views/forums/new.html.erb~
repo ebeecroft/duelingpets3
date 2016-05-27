@@ -1,5 +1,0 @@
-<% provide(:title, "Forum: Create new forums here!") %>
-<% provide(:description, "Where new forums are born from the users wild imagination.") %>
-<h1 class="pagetextheader">New forum</h1>
-<%= render 'form' %>
-<p class="pagetext"><%= link_to 'Back', user_path(current_user) %></p>

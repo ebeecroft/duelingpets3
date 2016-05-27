@@ -1,7 +1,0 @@
-<% if current_user.admin %>
-   $<%= link_to current_user.vname, current_user %>
-<% else %>
-   ~<%= link_to current_user.vname, current_user %>
-<% end %>
-<%= getSymbol %><%= link_to current_user.vname, current_user %>
-<%= link_to "Log out", logout_path, method: "delete" %>

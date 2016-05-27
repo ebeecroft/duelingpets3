@@ -1,5 +1,0 @@
-<% provide(:title, "Gallery: Edit your gallery here!") %>
-<% provide(:description, "Allows the users to change their gallery to the best of their abilities.") %>
-<h1 class="pagetextheader">Editing mainfolder</h1>
-<%= render 'form' %>
-<p class="pagetext"><%= link_to 'Back', user_mainfolder_path(@mainfolder.user, @mainfolder) %></p>

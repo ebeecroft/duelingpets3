@@ -1,3 +1,0 @@
-<h1 class="pageheader">New usertype</h1>
-<%= render 'form' %>
-<p class="pagetext"><%= link_to 'Back', usertypes_path %></p>

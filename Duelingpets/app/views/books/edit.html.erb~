@@ -1,6 +1,0 @@
-<% provide(:title, "Book: Edit your books here!") %>
-<% provide(:keywords, "fanfiction, stories, books") %>
-<% provide(:description, "Where users create their own books for a particular series that they are interested in.") %>
-<h1 class="pagetextheader">Editing book</h1>
-<%= render 'form' %>
-<p class="pagetext"><%= link_to 'Back', sbook_book_path(@book.sbook, @book) %></p>

@@ -1,5 +1,0 @@
-<% provide(:title, "Petowner: Create new petowners here!") %>
-<% provide(:description, "Where new petowners are born from the users wild imagination.") %>
-<h1 class="pagetextheader">Congratulations on being on adopting a pet! Your pet is so excited that you picked him. Please give him a name below and a lifetime of happiness!</h1>
-<%= render 'form' %>
-<p class="pagetext"><%= link_to 'Back', pets_path %></p>

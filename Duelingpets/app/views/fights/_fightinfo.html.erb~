@@ -1,8 +1,0 @@
-<% @fights.each do |fight| %>
-   <br>
-   <div class="inner">battling monster: <%= link_to fight.pet.species_name, petowner_fight_path(fight.petowner, fight) %></div>
-   <% if current_user && current_user.admin %>
-      <div class="inner"> with pet: <%= link_to fight.petowner.pet_name, user_petowner_path(fight.petowner.user, fight.petowner) %></td>
-      <div class="inner"><%= button_to 'Destroy', [fight.petowner, fight], method: :delete, data: { confirm: 'Are you sure?' } %></td>
-   <% end %>
-<% end %>

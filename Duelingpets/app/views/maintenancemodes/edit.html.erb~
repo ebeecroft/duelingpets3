@@ -1,5 +1,0 @@
-<% provide(:title, "Maintenancemode: Edit your maintenancemode here!") %>
-<% provide(:description, "Allows the admin to change the attributes of a particular maintenancemode.") %>
-<h1 class="pagetextheader">Editing maintenancemode</h1>
-<%= render 'form' %>
-<p class="pagetext"><%= link_to 'Back', maintenancemodes_path %></p>

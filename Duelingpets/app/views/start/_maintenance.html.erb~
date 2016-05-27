@@ -1,9 +1,0 @@
-<% provide(:title, "The site is currently down for repairs!") %>
-<% provide(:keywords, "site, under, repair") %>
-<% provide(:description, "I am sorry to report that the Duelingpets site is currently down for repairs. We are currently looking into the error.") %>
-<h1 class="pageheader">Maintenance Page</h1>
-<br>
-<p class="pagetext">I am sorry to report that the Duelingpets website is currently down due to an unexpected fatal error.
-I am trying to isolate and repair this error and will get the server back up and running as soon as I
-possibly can. Battiro is currently taking a little snooze and will awake from his roost when the server
-is up and running again.</p>
