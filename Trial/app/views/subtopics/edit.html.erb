@@ -1,0 +1,5 @@
+<% provide(:title, "Subtopic: Edit your subtopic here!") %>
+<% provide(:description, "Allows the users to edit their subtopic to the best of their abilities.") %>
+<h1 class="pagetextheader">Editing subtopic</h1>
+<%= render 'form' %>
+<p class="pagetext"><%= link_to 'Back', maintopic_subtopic_path(@subtopic.maintopic, @subtopic) %></p>

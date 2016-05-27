@@ -1,0 +1,5 @@
+class AddAtkToPets < ActiveRecord::Migration
+  def change
+    add_column :pets, :atk, :integer
+  end
+end

@@ -1,0 +1,18 @@
+Your chapter <%= @chapter.title %> was not approved.
+===============================================
+ 
+The reason that this chapter was denied access onto
+the site was either because the chapter itself was
+empty, or the chapter was found to be inappropriate.
+
+If you can revise the chapter that was just sent
+then maybe it will be able to be approved the next
+time around. Its no big deal and the review team
+would be happy to point into the right direction
+for your artwork to be processed.
+ 
+To edit this chapter just follow this link: <%= @url %>.
+Once there just click the edit button to edit your
+chapter.
+
+Your friends the Review Team

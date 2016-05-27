@@ -1,0 +1,29 @@
+<div class="inner">
+   <div class="inner"><%= getName(object) %></div>
+   <p><%= image_tag getImage(object) %></p>
+</div>
+<div class="inner">
+   <table>
+      <tr>
+         <td>Level: <%= getLevel(object) %></td>
+         <% if object == "Pet" %>
+            <td>EXP: <%= getExp(object) %></td>
+         <% end %>
+      </tr>
+      <tr>
+         <td>HP: <%= getCurrentHp(object) %>/<%= getMaxHp(object) %></td>
+      </tr>
+      <tr>
+         <td>ATK: <%= getAtk(object) %></td>
+      </tr>
+      <tr>
+         <td>DEF: <%= getDef(object) %></td>
+      </tr>
+      <tr>
+         <td>SPD: <%= getSpd(object) %></td>
+      </tr>
+   </table>
+   <% if startBattle %>
+      <p><%= getDamage(object) %></p>
+   <% end %>
+</div>

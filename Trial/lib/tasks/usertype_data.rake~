@@ -1,0 +1,15 @@
+namespace :db do
+   task populate: :environment do
+      #Admin
+      admin = Usertypes.create!(privilege: "Admin", user_id: 1)
+      admin.save
+
+      #Pet Creator
+      creator = Usertypes.create!(privilege: "User", user_id: 2)
+      creator.save
+
+      #Forum Owner
+      owner = Usertypes.create!(privilege: "User", user_id: 3)
+      owner.save
+   end
+end

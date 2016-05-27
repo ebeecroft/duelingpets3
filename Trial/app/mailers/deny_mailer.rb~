@@ -1,0 +1,9 @@
+class DenyMailer < ActionMailer::Base
+   #default from: "from@example.com"
+
+   def deny_art(artwork)
+      @artwork = artwork
+      @url = "http://www.duelingpets.net/subfolders/#{@artwork.subfolder.id}/artworks/#{@artwork.id}"
+      mail(to: @artwork.user.email, subject: "Artwork was not approved", from: "reviewteam@duelingpets.net")
+   end
+end

@@ -1,0 +1,33 @@
+<%= form_for([@book, @chapter], :html=>{:multipart => true}) do |f| %>
+  <% if @chapter.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@chapter.errors.count, "error") %> prohibited this chapter from being saved:</h2>
+
+      <ul>
+      <% @chapter.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <br>
+  <div class="pagetext">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="pagetext">
+    <%= f.file_field :document %>
+  </div>
+  <div class="pagetext">
+    <%= f.label :remote_document_url, "or document URL" %><br/>
+    <%= f.text_field :remote_document_url %>
+  </div>
+  <div class="pagetext">
+    <%= f.label :story %><br />
+    <%= f.text_area :story %>
+  </div>
+  <div class="pagetext">
+    <%= f.submit %>
+  </div>
+  <br>
+<% end %>

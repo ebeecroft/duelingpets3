@@ -1,0 +1,5 @@
+<% provide(:title, "Series: Edit your series here!") %>
+<% provide(:description, "Allows the users to edit their series to the best of their abilities.") %>
+<h1 class="pagetextheader">Editing sbook</h1>
+<%= render 'form' %>
+<p class="pagetext"><%= link_to 'Back', user_sbook_path(@sbook.user, @sbook) %></p>

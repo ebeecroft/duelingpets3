@@ -1,0 +1,46 @@
+<% provide(:title, "Forum: The users social community!") %>
+<% provide(:keywords, "forum, users, social, community") %>
+<% provide(:description, "Where users to get together to socialize, roleplay or even chat.") %>
+<p id="notice"><%= notice %></p>
+<h1 class="pageheader">
+   <div class="inner"><%= @forum.name %></div>
+   <% if current_user && (current_user.id == @forum.user_id || current_user.admin) %>
+      <div class="inner"><%= button_to 'Edit', edit_user_forum_path(@forum.user, @forum), method: :get %></div>
+      <div class="inner"><%= button_to 'Destroy', [@forum.user, @forum], method: :delete, data: { confirm: 'Are you sure?' } %></div>
+   <% end %>
+</h1>
+<p class="pagetext"><%= @forum.description %></p>
+<br>
+<div class="pagebox"><%= paginate @tcontainers %></div>
+<br>
+<% @tcontainers.each do |tcontainer| %>
+   <div class="pagetext">
+      <div class="inner"><%= link_to tcontainer.name, forum_tcontainer_path(@forum, tcontainer) %></div>
+      <% if current_user && (current_user.id == @forum.user_id || current_user.admin) %>
+         <div class="inner"><%= button_to 'Edit', edit_forum_tcontainer_path(@forum, tcontainer), method: :get %></div>
+         <div class="inner"><%= button_to 'Destroy', [@forum, tcontainer], method: :delete, data: { confirm: 'Are you sure?' } %></div>
+      <% end %>
+      <br>
+      <% if !tcontainer.maintopics.empty? %>
+         <table>
+            <tr>
+               <td>
+                  <div class="containerbox">
+                     <% tcontainer.maintopics.each do |maintopic| %>
+                        <p><%= link_to maintopic.topicname, tcontainer_maintopic_path(tcontainer, maintopic) %></p>
+                        <p><%= maintopic.description %></p>
+                        <br>
+                     <% end %>
+                  </div>
+               </td>
+            </tr>
+         </table>
+      <% end %>
+   </div>
+<% end %>
+<% if current_user %>
+   <br>
+   <p class="pagetext"><%= link_to 'New Tcontainer', new_forum_tcontainer_path(@forum) %></p>
+<% end %>
+<br>
+<p class="pagetext"><%= link_to 'Back', user_forums_path(@forum.user) %>

@@ -1,0 +1,20 @@
+<% provide(:title, "Gchaper: Where the general chapters live!") %>
+<% provide(:description, "A place for the admin to view all the general chapters that were created.") %>
+<h1 class="pageheader">Listing gchapters</h1>
+<br>
+<div class="pagebox"><%= paginate @gchapters %></div>
+<br>
+<div class="pagetext">
+   <table>
+      <tr>
+         <th>Title</th>
+         <th>Created on</th>
+      </tr>
+      <% @gchapters.each do |gchapter| %>
+         <tr>
+            <td><%= gchapter.title %></td>
+            <td>&nbsp;&nbsp;<%= gchapter.created_on.strftime("%B-%d-%Y") %></td>
+         </tr>
+      <% end %>
+   </table>
+</div>

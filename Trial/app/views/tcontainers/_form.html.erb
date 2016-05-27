@@ -1,0 +1,22 @@
+<%= form_for([@forum, @tcontainer]) do |f| %>
+  <% if @tcontainer.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@tcontainer.errors.count, "error") %> prohibited this tcontainer from being saved:</h2>
+
+      <ul>
+      <% @tcontainer.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <br>
+  <div class="pagetext">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="pagetext">
+    <%= f.submit %>
+  </div>
+  <br>
+<% end %>

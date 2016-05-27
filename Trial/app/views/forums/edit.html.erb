@@ -1,0 +1,5 @@
+<% provide(:title, "Forum: Edit your forum here!") %>
+<% provide(:description, "Allows the users to change their forum to the best of their abilities.") %>
+<h1 class="pagetextheader">Editing forum</h1>
+<%= render 'form' %>
+<p class="pagetext"><%= link_to 'Back', user_forum_path(@forum.user, @forum) %></p>

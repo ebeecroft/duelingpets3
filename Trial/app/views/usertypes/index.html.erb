@@ -1,0 +1,20 @@
+<h1 class="pageheader">Listing usertypes</h1>
+
+<div class="pagetext">
+   <table>
+      <tr>
+         <th>User</th>
+         <th>Privilege</th>
+         <th></th>
+      </tr>
+      <% @usertypes.each do |usertype| %>
+         <tr>
+            <td><%= usertype.user.vname %>&nbsp;&nbsp;</td>
+            <td><%= usertype.privilege %>&nbsp;&nbsp;</td>
+            <td><%= button_to 'Edit', edit_usertype_path(usertype), method: :get %></td>
+         </tr>
+      <% end %>
+   </table>
+</div>
+<br>
+<p class="pagetext"><%= link_to 'New Usertype', new_usertype_path %></p>

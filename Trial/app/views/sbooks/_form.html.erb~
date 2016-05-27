@@ -1,0 +1,26 @@
+<%= form_for([@user, @sbook]) do |f| %>
+  <% if @sbook.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@sbook.errors.count, "error") %> prohibited this sbook from being saved:</h2>
+
+      <ul>
+      <% @sbook.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <br>
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :series_open %><br />
+    <%= f.check_box :series_open %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+  <br>
+<% end %>

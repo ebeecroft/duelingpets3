@@ -1,0 +1,10 @@
+class Bookcollection < ActiveRecord::Base
+  attr_accessible :title, :series_open
+  belongs_to :user
+  VALID_TITLE_REGEX = /\A[a-z][a-z][a-z]+\z/i
+#  validates :pet_name, presence: true, uniqueness: { case_sensitive: false, :scope =>[:user_id, :pet_id]} #current setting applies to just a
+  #validates :title, presence: true, format: { with: VALID_TITLE_REGEX}, uniqueness: { case_sensitive: false, :scope =>[:user_id]}
+  validates :title, presence: true, uniqueness: { case_sensitive: false}
+end
+
+

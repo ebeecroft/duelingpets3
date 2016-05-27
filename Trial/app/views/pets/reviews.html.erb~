@@ -1,0 +1,44 @@
+<h1>Pets to be reviewed</h1>
+
+<table border='1'>
+  <tr>
+    <th>Species name</th>
+    <th>Description</th>
+    <th>Created on</th>
+    <th>Level</th>
+    <th>Health</th>
+    <th>Attack</th>
+    <th>Defense</th>
+    <th>Speed</th>
+    <th>Cost</th>
+    <th>Monster</th>
+    <th>Reviewed</th>
+    <th>Created_by</th>
+    <th></th>
+    <th></th>
+  </tr>
+</table>
+</table>
+<% @pets.each do |pet| %>
+  <% if !pet.reviewed? %>
+  <tr>
+    <td><%= pet.species_name %></td>
+    <td><%= image_tag pet.image_url(:thumb).to_s %></td>
+    <td><%= pet.description %></td>
+    <td><%= pet.created_on %></td>
+    <td><%= pet.level %></td>
+    <td><%= pet.hp %></td>
+    <td><%= pet.atk %></td>
+    <td><%= pet.def %></td>
+    <td><%= pet.spd %></td>
+    <td><%= pet.cost %></td>
+    <td><%= pet.monster %></td>
+    <td><%= pet.reviewed %></td>
+    <td><%= pet.created_by %></td>
+    <td><%= button_to 'Approve', pets_reviews_path(:pet_id=>pet.id) %></td>
+    <td><%= button_to 'Deny', pet, method: :post %></td>
+ </tr>
+ <% end %>
+<% end %>
+</table>
+<%#= link_to 'Adopt', new_user_petowner_path(current_user, :pet_id =>pet.id) %>

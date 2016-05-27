@@ -1,0 +1,37 @@
+<div class="pagetext">
+   <% @inventories.each_with_index do |inventory, index| %>
+      <div class="container">
+         <div class="inner">
+            <!--Inventory name-->
+            <div class="inner">Item name: <%= link_to inventory.item.name, item_path(inventory.item.name) %></div>
+            <div class="inner"><%= button_to 'Destroy', [inventory.user, inventory], method: :delete, data: { confirm: 'Are you sure?' } %></div>
+         </div>
+         <br>
+         <div class="inner"><%= image_tag inventory.item.ipicture_url(:thumb).to_s %></div>
+         <div class="inner">
+            <table>
+               <tr>
+                  <td>HP: <%= getItemValue(inventory.item.hp) %></td>
+               </tr>
+               <tr>
+                  <td>ATK: <%= getItemValue(inventory.item.atk) %></td>
+               </tr>
+               <tr>
+                  <td>DEF: <%= getItemValue(inventory.item.def) %></td>
+               </tr>
+               <tr>
+                  <td>SPD: <%= getItemValue(inventory.item.spd) %></td>
+               </tr>
+               <tr>
+                  <td>Type: <%= getItemType(inventory.item) %></td>
+               </tr>
+            </table>
+         </div>
+         <p>Owner: <%= getType(inventory.user) %><%= link_to inventory.user.vname, user_path(inventory.user) %></p>
+      </div>
+      <% if ((index + 1)%3) == 0 %>         
+         <br>
+         <br>
+      <% end %>
+   <% end %>
+</div>

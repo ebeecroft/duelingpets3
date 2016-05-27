@@ -1,0 +1,5 @@
+<% provide(:title, "Tcontainer: Edit your tcontainer here!") %>
+<% provide(:description, "Allows the users to change their tcontainer to the best of their abilities.") %>
+<h1 class="pagetextheader">Editing tcontainer</h1>
+<%= render 'form' %>
+<p class="pagetext"><%= link_to 'Back', forum_tcontainer_path(@tcontainer.forum, @tcontainer) %></p>

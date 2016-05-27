@@ -1,0 +1,22 @@
+<% provide(:title, "Tcontainer: The place that holds all the users tcontainers!") %>
+<% provide(:description, "A listing of all the tcontainers created for the admin to view.") %>
+<h1 class="pageheader">Listing tcontainers</h1>
+<br>
+<div class="pagebox"><%= paginate @tcontainers %></div>
+<% @tcontainers.each do |tcontainer| %>
+   <br>
+   <div class="pagetext">
+      <p>I belong to <%= tcontainer.forum.name %> forum</p>
+      <div class="inner"><%= link_to tcontainer.name, forum_tcontainer_path(tcontainer.forum_id, tcontainer.id) %></div>
+      <div class="inner"><%= button_to 'Edit', edit_forum_tcontainer_path(tcontainer.forum, tcontainer), method: :get %></div>
+      <div class="inner"><%= button_to 'Destroy', [tcontainer.forum, tcontainer], method: :delete, data: { confirm: 'Are you sure?' } %></div>
+      <br>
+      <div class="containerbox">I am a giant box to contain things for<%= tcontainer.name %>
+         <% tcontainer.maintopics.each do |maintopic| %>
+            <br>
+            <p><%= link_to maintopic.topicname, tcontainer_maintopic_path(tcontainer, maintopic) %></p>
+         <% end %>
+      </div>
+   </div>
+<% end %>
+

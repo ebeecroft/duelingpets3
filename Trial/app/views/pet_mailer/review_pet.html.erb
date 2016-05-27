@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1><%= @pet.species_name %> is awaiting your review.</h1>
+    <p>
+      Greetings Review Team the creator <%= @pet.user.vname %> 
+      has recently created this new pet that he/she would 
+      like to add to our wonderful site. Please take the time
+      to review the pet itself very carefully and use
+      your best judgment to determine whether this pet
+      should be featured here or if it should be revised first.
+    </p>
+    <p>
+      If you feel that this creator is truly deserving to
+      have their pet featured here then please click the
+      approve button on the review section. An accept not
+      only gives the user some gratitude but also gives
+      the user some points to continue their wonderful
+      pet creations.
+    </p>
+    <p>
+      If you feel that the creator's pet is just not up
+      to snuff yet or features inappropriate content
+      then please click the deny button from the review
+      section. As members of this special team please
+      do not abuse your powers for evil purposes, that
+      is all.
+    </p>
+    <p>
+      To start the pet review process, just follow this
+      link: <%= @url %>.
+    </p>
+    <p>From Bolt Greywing the Admin</p>
+  </body>
+</html>

@@ -1,0 +1,30 @@
+<%= form_for([@mainfolder, @subfolder]) do |f| %>
+  <% if @subfolder.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@subfolder.errors.count, "error") %> prohibited this subfolder from being saved:</h2>
+
+      <ul>
+      <% @subfolder.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <br>
+  <div class="pagetext">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="pagetext">
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </div>
+  <div class="pagetext">
+    <%= f.label :collab_mode %><br />
+    <%= f.check_box :collab_mode %>
+  </div>
+  <div class="pagetext">
+    <%= f.submit %>
+  </div>
+  <br>
+<% end %>

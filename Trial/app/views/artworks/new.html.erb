@@ -1,0 +1,5 @@
+<% provide(:title, "Artwork: Create new artwork here!") %>
+<% provide(:description, "New artwork is uploaded only to the site when the artwork gets approved.") %>
+<h1 class="pagetextheader">New artwork</h1>
+<%= render 'form' %>
+<p class="pagetext"><%= link_to 'Back', mainfolder_subfolder_path(@subfolder.mainfolder, @subfolder) %></p>

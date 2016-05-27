@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Password recovery for <%= @user.vname %></h1>
+    <p>
+      We heard that you were having trouble accessing your account.
+      If you trully are the user that is having an issue logging
+      into your account then follow the steps below. Otherwise 
+      please ignore this email.
+    </p>
+    <p>
+      Your new password token is: <%= @passwordtoken %>
+      Please enter this password into the signin section.
+      Once you have done so please set a new password as
+      soon as you possibly can so that no one else can
+      get into your account.
+    </p>
+    <p>
+      To login to the site, just follow this link: <%= @url %>.
+    </p>
+  </body>
+</html>
