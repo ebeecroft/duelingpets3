@@ -1,0 +1,19 @@
+<% provide(:title, "Petowner: The place where users get to see the pets attributes!") %>
+<% provide(:keywords, "user, pets, attributes") %>
+<% provide(:description, "Allows the user to see what their pets stats is and how well they will do battling monsters.") %>
+<p id="notice"><%= notice %></p>
+<div class="pagetext">
+   <div class="inner">Pet name: <%= @petowner.pet_name %></div>
+   <% if current_user && @petowner.user_id == current_user.id %>
+      <div class="inner"><%= button_to 'Edit', edit_user_petowner_path(@petowner), method: :get %></div>
+   <% end %>
+   <p><%= image_tag @petowner.pet.image_url(:thumb).to_s %></p>
+   <p>Pet type: <%= link_to @petowner.pet.species_name, pet_path(@petowner.pet) %></p>
+   <p>Boost tokens available: <%= @petowner.boost_tokens %></p>
+   <p>Owner: <%= getType(@petowner.user) %><%= link_to @petowner.user.vname, user_path(@petowner.user) %></p>
+   <p>Adopted on: <%= @petowner.adopted_on.strftime("%B-%d-%Y") %></p>
+   <p><%= link_to 'View Equipped Items', petowner_equips_path(@petowner) %> | <%= link_to 'View Fights', petowner_fights_path(@petowner) %></p>
+   <br>
+   <p><%= link_to 'Back', user_petowners_path(@petowner.user) %></p>
+</div>
+

@@ -1,0 +1,19 @@
+<% provide(:title, "Artwork: Where all art is collected as a whole.") %>
+<% provide(:description, "A place where the admin can view all the art that has been collected.") %>
+<h1 class="pageheader">Listing Artworks</h1>
+<br>
+<div class="pagebox"><%= paginate @artworks %></div>
+<% @artworks.each do |artwork| %>
+   <br>
+   <div class="pagetext">
+      <p>I belong to <%= link_to artwork.subfolder.name, mainfolder_subfolder_path(artwork.subfolder.mainfolder, artwork.subfolder) %> subfolder</p>
+      <div class="inner">Title: <%= link_to artwork.title, subfolder_artwork_path(artwork.subfolder, artwork) %></div>
+      <div class="inner"><%= button_to 'Edit', edit_subfolder_artwork_path(artwork.subfolder, artwork), method: :get %></div>
+      <div class="inner"><%= button_to 'Destroy', [artwork.subfolder, artwork], method: :delete, data: { confirm: 'Are you sure?' } %></div>
+      <p><%= image_tag artwork.art_url(:thumb).to_s %></p>
+      <p>Created on: <%= artwork.created_on.strftime("%B-%d-%Y") %></p>
+      <p><%= artwork.description %></p>
+      <p>Artist: <%= getType %><%= link_to artwork.user.vname, user_path(artwork.user) %></p>
+      <p>Reviewed: <%= artwork.reviewed %></p>
+   </div>
+<% end %>

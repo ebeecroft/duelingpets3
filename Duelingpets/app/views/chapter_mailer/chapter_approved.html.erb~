@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Your chapter <%= @chapter.title %> was successfully added.</h1>
+    <p>
+      Way to go <%= @chapter.user.vname %> the author
+      your chapter was really great and we at 
+      Duelingpets.net appreciate the effort and time you
+      put in to making this great piece of art.
+    </p>
+    <p>
+      As a token of our generousity please feel free to
+      take these <%= @points %> points with you. Please
+      feel free to find a good use for them or save
+      them up for something truly special. You deserve
+      it kiddo. :)
+    </p>
+    <p>
+      To view your recently created chapter just
+      follow this link: <%= @url %>.
+    </p>
+    <p>Your friends the Review Team</p>
+  </body>
+</html>

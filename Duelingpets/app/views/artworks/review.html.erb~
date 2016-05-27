@@ -1,0 +1,18 @@
+<% provide(:title, "Artwork: A place to review uploaded artwork!") %>
+<% provide(:description, "The place where one can review unprocessed art and add it to the approved artwork section.") %>
+<h1 class="pageheader">Artworks to be reviewed</h1>
+<br>
+<div class="pagebox"><%= paginate @artworks %></div>
+<% @artworks.each do |artwork| %>
+   <br>
+   <div class="pagetext">
+      <div class="inner"><%= link_to artwork.title, subfolder_artwork_path(artwork.subfolder, artwork) %></div>
+      <div class="inner"><%= button_to 'Approve', artworks_review1_path(:artwork_id=>artwork.id), method: :post %></div>
+      <div class="inner"><%= button_to 'Deny', artworks_review2_path(:artwork_id=>artwork.id), method: :post %></div>
+      <p><%= image_tag artwork.art_url(:thumb).to_s %></p>
+      <p>Created: <%= distance_of_time_in_words_to_now artwork.created_on %> ago</td>
+      <p><%= artwork.description %></p>
+      <p>Artist: <%= getType(artwork.user) %><%= link_to artwork.user.vname, user_path(artwork.user.vname) %></p>
+      <p>Subfolder: <%= link_to artwork.subfolder.name, mainfolder_subfolder_path(artwork.subfolder.mainfolder, artwork.subfolder) %></p>
+   </div>
+<% end %>

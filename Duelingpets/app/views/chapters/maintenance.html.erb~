@@ -1,0 +1,8 @@
+<% provide(:title, "Chapter is currently under repairs!") %>
+<% provide(:keywords, "chapter, under, repair") %>
+<% provide(:description, "I am sorry to report that the chapter section is currently down. I am working on repairs right now.") %>
+<h1 class="pageheader">Chapter Maintenance Page</h1>
+<br>
+<p class="pagetext">The chapter pages are currently under repair due to a recently discovered bug. I appologize for the inconvenience 
+and will have this section up and running very shortly. In the meantime feel free to explore the other features of my website and
+be sure to have fun while your at it. :)</p>

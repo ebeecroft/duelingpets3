@@ -1,0 +1,28 @@
+<% provide(:title, "Tcontainer: Where forum topics are contained!") %>
+<% provide(:keywords, "forum, topics, contained") %>
+<% provide(:description, "A special type of container for the forum that holds multiple topics.") %>
+<p id="notice"><%= notice %></p>
+<h1 class="pageheader"><%= @tcontainer.name %></h1>
+<br>
+<div class="pagebox"><%= paginate @maintopics %></div>
+<br>
+<% if !@maintopics.empty? %>
+   <div class="pagetext">
+      <div class="containerbox">
+         <% @maintopics.each do |maintopic| %>
+            <div class="inner"><%= link_to maintopic.topicname, tcontainer_maintopic_path(@tcontainer, maintopic) %></div>
+            <% if current_user && (current_user.id == maintopic.user_id || current_user.admin) %>
+               <div class="inner"><%= button_to 'Edit', edit_tcontainer_maintopic_path(maintopic.tcontainer, maintopic), method: :get %></div>
+               <div class="inner"><%= button_to 'Destroy', [maintopic.tcontainer, maintopic], method: :delete, data: { confirm: 'Are you sure?' } %></div>
+            <% end %>
+            <br>
+            <br>
+         <% end %>
+         <% if current_user %>
+            <p><%= link_to "New Topic", new_tcontainer_maintopic_path(@tcontainer) %></p>
+         <% end %>
+      </div>
+   </div>
+   <br>
+<% end %>
+<p class="pagetext"><%= link_to 'Back', user_forum_path(@forum.user, @forum) %></p>

@@ -1,0 +1,40 @@
+<% provide(:title, "Duelingpets: A kid friendly virtual pet site!") %>
+<% provide(:keywords, "kid, friendly, virtual, pet, site") %>
+<% provide(:description, "Duelingpets is a kid friendly virtual pet site that allows users to create their own pets, art, and stories.") %>
+<h1 class="pageheader">Welcome to the Dueling Pets Home Page!</h1>
+<br>
+<!--Need to indent this-->
+<p class="pagetext">At Dueling Pets, we offer users of our site the ability to not only join in pet vs monster fights, but to also have a chance to exercise their creativity when it comes to creating a pet or monster. Now for some of you, creating a pet may not be an option, but that is okay. We also offer users a chance to engage in telling stories or engaging in role plays on our forum. For the pet owners we offer several items from our shop to be used with your pet. These range from battle equipment to potions that can be purchased in the store, each of which will have some form of cost and will be deducted from your DP pouch upon initial purchase.</p>
+<!--End indent-->
+<br>
+<p class="pagetext">Amount of users Online: <%= getOnline %></p>
+<p class="pagetext">Amount of users Offline: <%= getOffline %></p>
+<p class="pagetext">Total users: <%= getTotal %></p>
+<br>
+<p class="pagetext">Users signed up today: <%= getDaySignups %></p>
+<p class="pagetext">Users signed up this week: <%= getWeekSignups %></p>
+<p class="pagetext">Users signed up this month: <%= getMonthSignups %></p>
+<p class="pagetext">Users signed up this year: <%= getYearSignups %></p>
+<% if current_user %>
+   <% if current_user.forums.count == 0 %>
+      <!--Need to indent this-->
+      <br>
+      <p class="pagetext">New User:</p>
+<!-- "Tutorial Forum"-->
+      <p class="pagetext">If you like to learn how to create a basic forum click on the Tutorial Forum link: <%= link_to "Tutorial Forum", tutorial %></p>
+      <p class="pagetext">Once there choose a topic you are interested in learning about.</p>
+      <!--End indent-->
+   <% end %>
+<% end %>
+
+<% if !current_user %>
+   <!--Need to indent-->
+   <br>
+   <p class="pagetext">Guest:</p>
+   <p class="pagetext">If you like to explore this site more then sign up for an account today by using the register link!</p>
+   <p class="pagetext">Which is located in the upper right hand corner of the screen.</p>
+   <p class="pagetext">If you like to get familiar with the features of this site check out the <%= link_to "Tutorial Forum", user_forum_path(3, 1) %></p>
+   <!--End indent-->
+<% end %>
+<br>
+<div class="mascotbox"><%= image_tag("../../../mainimage.jpeg", class: "mascot") %></div>

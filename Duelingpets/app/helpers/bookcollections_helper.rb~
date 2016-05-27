@@ -1,0 +1,190 @@
+module BookcollectionsHelper
+
+   def mode(type)
+      #Check if Maintenance is turned_on
+      allmode = Maintenancemode.find_by_id(1)
+      bookcollectionmode = Maintenancemode.find_by_id(14)
+      mode_turned_on = (allmode.maintenance_on || bookcollectionmode.maintenance_on)
+      #Determine if any maintenance is on
+      if(mode_turned_on)
+         #Determine if we are a regular user
+         regularUser = (!current_user || !current_user.admin?)
+         if(regularUser)
+            #Determine which maintenance mode is on
+            if(allmode.maintenance_on)
+               redirect_to maintenance_path
+            else
+               redirect_to equips_maintenance_path
+            end
+         else
+            switch type
+         end
+      else
+         switch type
+      end
+   end
+
+   def getOptional
+      @optional
+   end
+
+   private
+      def setOptional(optional)
+         @optional = optional
+      end
+
+      def switch(type)
+         if(type == "index") #Guest
+            optional = params[:user_id]
+            setOptional optional
+            if(getOptional)
+               userFound = User.find_by_vname(optional)
+               if(userFound)
+                  userBookCollections = userFound.bookcollections.all
+                  @bookcollections = Kaminari.paginate_array(userBookCollections).page(params[:page]).per(10)
+                  @user = userFound
+               else
+                  render "public/404"
+               end
+            else
+               allBookCollections = Bookcollection.order("id").page(params[:page]).per(10)
+               @bookcollections = allBookCollections
+            end
+         elsif(type == "show") #Guest
+            userFound = User.find_by_vname(params[:user_id])
+            if(userFound)
+               bookcollectionFound = Bookcollection.find_by_title(params[:id])
+               if(bookcollectionFound)
+                  userMatch = (userFound.id == bookcollectionFound.user_id)
+                  if(userMatch)
+                     @bookcollection = bookcollectionFound
+                  else
+                     redirect_to root_path
+                  end
+               else
+                  render "public/404"
+               end
+            else
+               redirect_to root_path
+            end
+         elsif(type == "new") #Login only
+            logged_in = current_user
+            if(logged_in)
+               userFound = User.find_by_vname(params[:user_id])
+               if(userFound)
+                  userMatch = (logged_in.id == userFound.id)
+                  if(userMatch)
+                     newBookCollection = logged_in.bookcollections.new
+                     @bookcollection = newBookCollection
+                     @user = userFound
+                  else
+                     redirect_to root_path
+                  end
+               else
+                  render "public/404"
+               end
+            else
+               redirect_to root_path
+            end
+         elsif(type == "create") #Login only
+            logged_in = current_user
+            if(logged_in)
+               userFound = User.find_by_vname(logged_in.id)
+               if(userFound)
+                  userMatch = (logged_in.id == userFound.id)
+                  if(userMatch)
+                     newBookCollection = logged_in.bookcollections.new(params[:bookcollection])
+                     currentTime = Time.now
+                     newBookCollection.created_on = currentTime
+                     newBookCollection.user_id = logged_in.id
+                     @bookcollection = newBookCollection
+                     if(@bookcollection.save)
+                        @user = userFound
+                        flash[:success] = 'Series was successfully created.'
+                        redirect_to user_bookcollection_path(@bookcollection.user, @bookcollection)
+                     else
+                        render "new"
+                     end
+                  else
+                     redirect_to root_path
+                  end
+               else
+                  render "public/404"
+               end
+            else
+               redirect_to root_path
+            end
+         elsif(type == "edit") #Login and same user
+            logged_in = current_user
+            if(logged_in)
+               userFound = User.find_by_vname(logged_in.vname)
+               if(userFound)
+                  bookcollectionFound = Bookcollection.find_by_title(params[:id])
+                  if(bookcollectionFound)
+                     userMatch = ((userFound.id == bookcollectionFound.user_id) || userFound.admin)
+                     if(userMatch)
+                        @user = userFound
+                        @bookcollection = bookcollectionFound
+                     else
+                        redirect_to root_path
+                     end
+                  else
+                     render "public/404"
+                  end
+               else
+                  redirect_to root_path
+               end
+            else
+               redirect_to root_path
+            end
+         elsif(type == "update") #Login and same user
+            logged_in = current_user
+            if(logged_in)
+               userFound = User.find_by_vname(logged_in.vname)
+               if(userFound)
+                  bookcollectionFound = Bookcollection.find_by_title(params[:id])
+                  if(bookcollectionFound)
+                     userMatch = ((userFound.id == bookcollectionFound.user_id) || userFound.admin)
+                     if(userMatch)
+                        @bookcollection = bookcollectionFound
+                        if(@bookcollection.update_attributes(params[:bookcollection]))
+                           @user = userFound
+                           flash[:success] = 'Series was successfully updated.'
+                           redirect_to user_bookcollection_path(@user, @bookcollection)
+                        else
+                           render "edit"
+                        end
+                     else
+                        redirect_to root_path
+                     end
+                  else
+                     render "public/404"
+                  end
+               else
+                  redirect_to root_path
+               end
+            else
+               redirect_to root_path
+            end
+         elsif(type == "destroy") #Admin only
+            logged_in = current_user
+            if(logged_in)
+               if(logged_in.admin)
+                  bookcollectionFound = Bookcollection.find_by_title(params[:id])
+                  if(bookcollectionFound)
+                     userFound = User.find_by_vname(bookcollectionFound.user_id)
+                     @bookcollection = bookcollectionFound
+                     @bookcollection.destroy
+                     redirect_to bookcollections_url
+                  else
+                     render "public/404"
+                  end
+               else
+                  redirect_to root_path
+               end
+            else
+               redirect_to root_path
+            end
+         end
+      end
+end

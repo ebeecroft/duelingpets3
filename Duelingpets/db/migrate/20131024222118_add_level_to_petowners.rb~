@@ -1,0 +1,5 @@
+class AddLevelToPetowners < ActiveRecord::Migration
+  def change
+    add_column :petowners, :level, :integer, default: 1
+  end
+end

@@ -1,0 +1,26 @@
+<% provide(:title, "Maintenancemode: The home of the webmaster!") %>
+<% provide(:description, "A place where the admin can turn on and off the various attributes of the site.") %>
+<h1 class="pageheader">Listing maintenancemodes</h1>
+<br>
+<div class="pagebox"><%= paginate @maintenancemodes %></div>
+<br>
+<div class="pagetext">
+   <table>
+      <tr>
+         <th>Name</th>
+         <th>Created on</th>
+         <th>Maintenance on</th>
+         <th></th>
+      </tr>
+      <% @maintenancemodes.each do |maintenancemode| %>
+         <tr>
+            <td><%= maintenancemode.name %></td>
+            <td><%= distance_of_time_in_words_to_now maintenancemode.created_on %> ago&nbsp;&nbsp;</td>
+            <td><%= maintenancemode.maintenance_on %></td>
+            <td><%= button_to 'Edit', edit_maintenancemode_path(maintenancemode), method: :get %></td>
+         </tr>
+      <% end %>
+   </table>
+</div>
+<br>
+<p class="pagetext"><%= link_to 'New Maintenancemode', new_maintenancemode_path %></p>

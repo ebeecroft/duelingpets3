@@ -1,0 +1,4 @@
+class Usertype < ActiveRecord::Base
+  attr_accessible :privilege, :user_id
+  belongs_to :user
+end

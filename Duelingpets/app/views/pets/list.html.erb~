@@ -1,0 +1,57 @@
+<% provide(:title, "A collection of many different available pets!") %>
+<% provide(:description, "A place for the admin to see what pets and monsters are available.") %>
+<h1 class="pageheader">Pet List</h1>
+<br>
+<div class="pagebox"><%= paginate @pets %></div>
+<% @pets.each do |pet| %>
+   <br>
+   <div class="pagetext">
+      <div class="inner"><%= link_to pet.species_name, pet %></div>
+      <div class="inner"><%= button_to 'Edit', edit_pet_path(pet), method: :get %></div>
+      <div class="inner"><%= button_to 'Destroy', pet, method: :delete, data: { confirm: 'Are you sure?' } %></div>
+      <br>
+      <div class="inner"><%= image_tag pet.image_url(:thumb).to_s %></div>
+      <div class="inner">
+         <table>
+            <tr>
+               <td>Level: <%= pet.level %></td>
+            </tr>
+            <tr>
+               <td>Attack: <%= pet.atk %></td>
+            </tr>
+            <tr>
+               <td>Defense: <%= pet.def %></td>
+            </tr>
+            <tr>
+               <td>Speed: <%= pet.spd %></td>
+            </tr>
+            <tr>
+               <td>Health: <%= pet.hp %></td>
+            </tr>
+            <tr>
+               <td>Cost: <%= pet.cost %></td>
+            </tr>
+            <tr>
+               <td>Type:
+                  <% if pet.monster %>
+                     Monster
+                  <% else %>
+                     Pet
+                  <% end %>
+               </td>
+            </tr>
+            <tr>
+               <td>Reviewed: <%= pet.reviewed %></td>
+            </tr>
+            <tr>
+               <!--Remember to change this field when I implement the new fix-->
+               <td>Creator: <%= getType(pet.user) %><%= link_to pet.user.vname, user_path(findUser(pet.user_id)) %></td>
+            </tr>
+            <tr>
+               <td>Created: <%= distance_of_time_in_words_to_now pet.created_on %> ago</td>
+            </tr>
+         </table>
+      </div>
+      <p><%= pet.description %></p>
+   </div>
+<% end %>

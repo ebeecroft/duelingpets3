@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  pet_id: 1
+  pet_name: MyString
+  adopted_on: 2013-09-30 22:45:46
+
+two:
+  user_id: 1
+  pet_id: 1
+  pet_name: MyString
+  adopted_on: 2013-09-30 22:45:46

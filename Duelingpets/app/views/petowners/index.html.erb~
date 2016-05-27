@@ -1,0 +1,17 @@
+<% provide(:title, "Petowner: The place that holds all the pets users adopted!") %>
+<% provide(:keywords, "users, adopted, pets") %>
+<% provide(:description, "A list of all the pets the various users adopted during their travels.") %>
+<h1 class="pageheader">
+   <% if getOptional %>
+      <%= @user.vname %>'s pets
+   <% else %>
+      Listing petowners
+   <% end %>
+</h1>
+<br>
+<p class="pagetext">So that brings us to the close of this evening of events. *another audience member yells* Oh what was that? *repeats the question* Another member of the audience is wondering where do they see their pets that they purchased? Well those pets exist in the Mypets page which can be clicked by clicking the mypets link from the navigation bar. While you are there you will be able to see the status of your adopted pet which includes its experience, health, maxhealth, speed and various other stats. Oh yes there is also a picture of the pet because I heard that most of the users tend to be much more “visual thinkers”. *emphasizes visual by using hand expressions*</p>
+<br>
+<div class="pagebox"><%= paginate @petowners %></div>
+<br>
+<%= render 'petownerinfo' %>
+<div class="outer"></div>

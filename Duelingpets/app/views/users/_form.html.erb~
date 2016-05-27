@@ -1,0 +1,51 @@
+<%= form_for @user, :html => {:multipart => true} do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <br>
+  <!--<p class="pagetext">Virtual Name(Vname) is the only information seen by other users.</p>-->
+  <div class="pagetext">
+    <%= f.label :avatar %><br />
+    <%= f.file_field :avatar %>
+  </div>
+  <div class="pagetext">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name %>
+  </div>
+  <div class="pagetext">
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name %>
+  </div>
+  <div class="pagetext">
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </div>
+  <div class="pagetext">
+    <%= f.label :login_id, "Login Name" %><br />
+    <%= f.text_field :login_id %>
+  </div>
+  <div class="pagetext">
+    <%= f.label :vname, "Virtual Name" %><br />
+    <%= f.text_field :vname %>
+  </div>
+  <div class="pagetext">
+    <%= f.label :password %><br />
+    <%= f.password_field :password %>
+  </div>
+  <div class="pagetext">
+    <%= f.label :password_confirmation, "Confirmation" %><br />
+    <%= f.password_field :password_confirmation %>
+  </div>
+  <div class="pagetext">
+    <%= f.submit %>
+  </div>
+  <br>
+<% end %>

@@ -1,0 +1,53 @@
+namespace :db do
+   task populate: :environment do
+      image_location = "/home/eric/Desktop"
+
+      #Builds the pet species Rooling
+      rooling = Pet.create!(species_name: "Rooling",
+                          description: "A happy roo that bounces around in the forest as it hops on its large feet",
+                          image: File.open(File.join(image_location, 'Kangaroo_pictureEdit.png')),
+                          hp: 10,
+                          atk: 5,
+                          def: 5,
+                          spd: 10,
+                          monster: false)
+      rooling.level = 1
+      rooling.cost = 50
+      rooling.created_by = "mmole"
+      rooling.created_on = Time.now
+      rooling.reviewed = true
+      rooling.save
+
+      #Builds the pet species Hooty
+      hooty = Pet.create!(species_name: "Hooty",
+                          description: "A creature that hoots at the moon during a dark night",
+                          image: File.open(File.join(image_location, 'owl.jpg')),
+                          hp: 10,
+                          atk: 5,
+                          def: 10,
+                          spd: 5,
+                          monster: false)
+      hooty.level = 1
+      hooty.cost = 50
+      hooty.created_by = "mmole"
+      hooty.created_on = Time.now
+      hooty.reviewed = true
+      hooty.save
+
+      #Builds the pet species Stalk
+      stalk = Pet.create!(species_name: "Stalk",
+                          description: "A cat that roams the great jungle. It's eyes are as ferocious as its sharp teeth. Watch out for this one",
+                          image: File.open(File.join(image_location, 'owl.jpg')),
+                          hp: 10,
+                          atk: 10,
+                          def: 5,
+                          spd: 5,
+                          monster: false)
+      stalk.level = 1
+      stalk.cost = 50
+      stalk.created_by = "mmole"
+      stalk.created_on = Time.now
+      stalk.reviewed = true
+      stalk.save
+   end
+end

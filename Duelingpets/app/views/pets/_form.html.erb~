@@ -1,0 +1,66 @@
+<%= form_for @pet, :html => {:multipart => true} do |f| %>
+  <% if @pet.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@pet.errors.count, "error") %> prohibited this pet from being saved:</h2>
+
+      <ul>
+      <% @pet.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <br>
+  <div class="pagetext">
+    <%= f.label :species_name %><br />
+    <%= f.text_field :species_name %>
+  </div>
+  <br>
+  <div class="pagetext">
+    <%= f.file_field :image %>
+  </div>
+  <br>
+  <div class="pagetext">
+    <%= f.label :remote_image_url, "or image URL" %><br/>
+    <%= f.text_field :remote_image_url %>
+  </div>
+  <br>
+  <div class="pagetext">
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </div>
+  <br>
+  <div class="pagetext">
+    <%= f.label :monster %>?<br />
+    <%= f.check_box :monster %>
+  </div>
+  <br>
+  <div class="pagetext">
+    <%= f.label :hp %><br />
+    <%= f.text_field :hp %>
+  </div>
+  <br>
+  <div class="pagetext">
+    <%= f.label :atk %><br />
+    <%= f.text_field :atk %>
+  </div>
+  <br>
+  <div class="pagetext">
+    <%= f.label :def %><br />
+    <%= f.text_field :def %>
+  </div>
+  <br>
+  <div class="pagetext">
+    <%= f.label :spd %><br />
+    <%= f.text_field :spd %>
+  </div>
+  <br>
+  <div>
+  <p class="pagetext">Images submitted must be free from copyright restrictions, and appropriate for all ages. Inappropriate images will be removed and user privileges may be revoked. Please contact webmaster if you encounter inappropriate content.</p>
+  </div>
+  <br>
+  <div class="pagetext">
+    <%= f.submit %>
+  </div>
+  <br>
+<% end %>

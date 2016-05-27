@@ -1,0 +1,5 @@
+<% provide(:title, "Narrative: Edit your narrative here!") %>
+<% provide(:description, "Allows the users to change their narrative to the best of their abilities.") %>
+<h1 class="pagetextheader">Editing narrative</h1>
+<%= render 'form' %>
+<p class="pagetext"><%= link_to 'Back', maintopic_subtopic_path(@subtopic.maintopic, @subtopic) %></p>

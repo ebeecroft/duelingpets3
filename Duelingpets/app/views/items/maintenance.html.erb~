@@ -1,0 +1,7 @@
+<% provide(:title, "Item is currently under repairs!") %>
+<% provide(:keywords, "item, under, repair") %>
+<% provide(:description, "I am sorry to report that the item section is currently down. I am working on repairs right now.") %>
+<h1 class="pageheader">Item Maintenance Page</h1>
+<br>
+<p class="pagetext">The item pages are currently under repair to fix a bug. I am sorry for the inconvenience but it will be up
+and running again very shortly. In the meantime please feel free to check out the other features of my website.</p>

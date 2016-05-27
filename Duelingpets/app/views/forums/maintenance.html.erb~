@@ -1,0 +1,6 @@
+<% provide(:title, "Forum is currently under repairs!") %>
+<% provide(:keywords, "fight, under, repair") %>
+<% provide(:description, "I am sorry to report that the forum section is currently down. I am working on repairs right now.") %>
+<h1 class="pageheader">Forum Maintenance Page</h1>
+<br>
+<p class="pagetext">The forum pages are currently under repair due to a new bug that was found. I appologize for the inconvenience and will have this feature up and running again very soon. In the meantime feel free to explore some of the other features of my website. :)</p>

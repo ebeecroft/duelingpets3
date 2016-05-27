@@ -1,0 +1,5 @@
+<% provide(:title, "Book: Create new books here!") %>
+<% provide(:description, "Books are a fun way for users to generate their own fanfiction or add on to others.") %>
+<h1 class="pagetextheader">New book</h1>
+<%= render 'form' %>
+<p class="pagetext"><%= link_to 'Back', user_sbook_path(@sbook.user, @sbook) %></p>

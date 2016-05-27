@@ -1,0 +1,11 @@
+<% if current_user %>
+   <%= form_tag(new_user_petowner_path(current_user), method: "get") do %>
+      <!--NewUser/Petowner-->
+      <%= render 'petinfo' %>
+      <!--This button should be centered-->
+      <div class="pagetext"><%= submit_tag("Adopt Selected Pet") %></div>
+   <% end %>
+<% else %>
+   <!--Guest-->
+   <%= render 'petinfo' %>
+<% end %>

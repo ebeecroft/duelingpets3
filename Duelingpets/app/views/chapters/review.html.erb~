@@ -1,0 +1,19 @@
+<% provide(:title, "Chapter: A place to review uploaded chapters!") %>
+<% provide(:description, "The place where one can review unprocessed chapters and add it to the approved chapter section.") %>
+<h1 class="pageheader">Chapters to be reviewed</h1>
+<br>
+<div class="pagebox"><%= paginate @chapters %></div>
+<% @chapters.each do |chapter| %>
+   <br>
+   <div class="pagetext">
+      <div class="inner"><%= link_to chapter.title, sbook_book_path(chapter.book.sbook, chapter.book) %></div>
+      <div class="inner"><%= button_to 'Approve', chapters_review1_path(:chapter_id=>chapter.id), method: :post %></div>
+      <div class="inner"><%= button_to 'Deny', chapters_review2_path(:chapter_id=>chapter.id), method: :post %></div>
+      <p><%= chapter.document_url %></p>
+      <pre class="storyformat"><%= chapter.story %></pre>
+      <p>Created on: <%= chapter.created_on.strftime("%B-%d-%Y") %></p>
+      <p>Author: <%= link_to chapter.user.vname, user_path(chapter.user) %></p>
+      <p>Book: <%= link_to chapter.book.title, sbook_book_path(chapter.book.sbook, chapter.book) %></p>
+      <p>Gchapter: <%= chapter.gchapter.title %></p>
+   </div>
+<% end %>

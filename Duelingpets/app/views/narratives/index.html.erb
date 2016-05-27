@@ -1,0 +1,15 @@
+<% provide(:title, "Narrative: The place that holds all the users narratives!") %>
+<% provide(:description, "A listing of all the narratives created for the admin to view.") %>
+<h1 class="pageheader">Listing Narratives</h1>
+<br>
+<div class="pagebox"><%= paginate @narratives %></div>
+<% @narratives.each do |narrative| %>
+   <br>
+   <div class="pagetext">
+      <div class="inner">I belong to <%= narrative.subtopic.topicname %> subtopic</div>
+      <div class="inner"><%= button_to 'Edit', edit_subtopic_narrative_path(narrative.subtopic, narrative), method: :get %></div>
+      <div class="inner"><%= button_to 'Destroy', [narrative.subtopic, narrative], method: :delete, data: { confirm: 'Are you sure?' } %></div>
+      <p>by: <%= getType(narrative.user) %><%= link_to narrative.user.vname, user_path(narrative.user) %></p>
+      <pre class="storyformat">Story: <%= narrative.story %></pre>
+   </div>
+<% end %>

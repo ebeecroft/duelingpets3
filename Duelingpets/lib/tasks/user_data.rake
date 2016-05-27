@@ -1,0 +1,37 @@
+namespace :db do
+   task populate: :environment do
+      #Admin
+      admin = User.create!(first_name: "Monty",
+                           last_name: "Mole",
+                           email: "mmole@funhill.com",
+                           login_id: "Monty",
+                           vname: "mmole",
+                           password: "Mole12",
+                           password_confirmation: "Mole12")
+      admin.toggle!(:admin)
+      admin.joined_on = Time.now
+      admin.save
+
+      #Pet Creator
+      creator = User.create!(first_name: "Pet",
+                           last_name: "Creator",
+                           email: "petcreator@duelingpets.net",
+                           login_id: "Create",
+                           vname: "petcreator",
+                           password: "petcreator",
+                           password_confirmation: "petcreator")
+      creator.joined_on = Time.now
+      creator.save
+
+      #Forum Owner
+      owner = User.create!(first_name: "Forum",
+                           last_name: "Owner",
+                           email: "forumowner@duelingpets.net",
+                           login_id: "Forum",
+                           vname: "forumowner",
+                           password: "forumowner",
+                           password_confirmation: "forumowner")
+      owner.joined_on = Time.now
+      owner.save
+   end
+end
