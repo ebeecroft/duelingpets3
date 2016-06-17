@@ -12,10 +12,12 @@
   <% end %>
   <br>
   <!--<p class="pagetext">Virtual Name(Vname) is the only information seen by other users.</p>-->
-  <div class="pagetext">
-    <%= f.label :avatar %><br />
-    <%= f.file_field :avatar %>
-  </div>
+  <% if object == "Edit" %>
+     <div class="pagetext">
+       <%= f.label :avatar %><br />
+       <%= f.file_field :avatar %>
+     </div>
+  <% end %>
   <div class="pagetext">
     <%= f.label :first_name %><br />
     <%= f.text_field :first_name %>

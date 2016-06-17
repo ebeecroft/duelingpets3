@@ -23,21 +23,21 @@ module StartHelper
 
    private
       def getOnline
-         allUsers = Sessionkey.all
-         onlineUsers = allUsers.select{|key| key.remember_token != "NULL"}
+         allUsers = Onlineuser.all
+         onlineUsers = allUsers.select{|status| status.signed_in_at != nil && status.signed_out_at == nil}
          value = onlineUsers.count
          return value
       end
 
       def getOffline
-         allUsers = Sessionkey.all
-         offlineUsers = allUsers.select{|key| key.remember_token == "NULL"}
+         allUsers = Onlineuser.all
+         offlineUsers = allUsers.select{|status| status.signed_in_at == nil || (status.signed_in_at != nil && status.signed_out_at != nil)}
          value = offlineUsers.count
          return value
       end
 
       def getTotal
-         allUsers = Sessionkey.all
+         allUsers = Onlineuser.all
          total = allUsers.count
          return total
       end
@@ -55,7 +55,8 @@ module StartHelper
          currentTime = Time.now
          week = allUsers.select{|user| (currentTime - user.joined_on) <= 1.week}
          value = week.count
-         return value
+         signups = value - getDaySignups
+         return signups
       end
 
       def getMonthSignups
@@ -63,7 +64,8 @@ module StartHelper
          currentTime = Time.now
          month = allUsers.select{|user| (currentTime - user.joined_on) <= 1.month}
          value = month.count
-         return value
+         signups = value - getWeekSignups - getDaySignups
+         return signups
       end
 
       def getYearSignups
@@ -71,11 +73,8 @@ module StartHelper
          currentTime = Time.now
          year = allUsers.select{|user| (currentTime - user.joined_on) <= 1.year}
          value = year.count
-         return value
-      end
-
-      def tutorial
-         user_forum_path("forumowner", "tutorial")
+         signups = value - getMonthSignups - getWeekSignups - getDaySignups
+         return signups
       end
 
       def switch(type)

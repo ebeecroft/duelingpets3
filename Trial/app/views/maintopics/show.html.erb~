@@ -13,7 +13,7 @@
          <div class="inner"><%= button_to 'Edit', edit_maintopic_subtopic_path(@maintopic, subtopic), method: :get %></div>
          <div class="inner"><%= button_to 'Destroy', [@maintopic, subtopic], method: :delete, data: { confirm: 'Are you sure?' } %></div>
       <% end %>
-      <p>by: <%= link_to subtopic.user.vname, user_path(subtopic.user) %></p>
+      <p>by: <%= getType(subtopic.user) %><%= link_to subtopic.user.vname, user_path(subtopic.user) %></p>
    </div>
    <br>
 <% end %>

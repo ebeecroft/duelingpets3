@@ -1,3 +1,4 @@
 class Onlineuser < ActiveRecord::Base
-  attr_accessible :last_visited, :signed_in_at, :signed_out_at, :user_id
+  attr_accessible :user_id
+  belongs_to :user
 end

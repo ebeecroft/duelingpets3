@@ -14,6 +14,13 @@
          <div class="inner"><%= button_to 'Destroy', [@maintopic, subtopic], method: :delete, data: { confirm: 'Are you sure?' } %></div>
       <% end %>
       <p>by: <%= getType(subtopic.user) %><%= link_to subtopic.user.vname, user_path(subtopic.user) %></p>
+      <p>Status: <%= getStatus(subtopic.user) %>
+         <% if getStatus(subtopic.user) != "Online" %>
+            <% if getTime(subtopic.user) %>
+               for <%= distance_of_time_in_words_to_now getTime(subtopic.user) %>
+            <% end %>
+         <% end %>
+      </p>
    </div>
    <br>
 <% end %>

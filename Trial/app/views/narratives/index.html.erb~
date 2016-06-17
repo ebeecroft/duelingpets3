@@ -9,7 +9,7 @@
       <div class="inner">I belong to <%= narrative.subtopic.topicname %> subtopic</div>
       <div class="inner"><%= button_to 'Edit', edit_subtopic_narrative_path(narrative.subtopic, narrative), method: :get %></div>
       <div class="inner"><%= button_to 'Destroy', [narrative.subtopic, narrative], method: :delete, data: { confirm: 'Are you sure?' } %></div>
-      <p>by: <%= link_to narrative.user.vname, user_path(narrative.user) %></p>
+      <p>by: <%= getType(narrative.user) %><%= link_to narrative.user.vname, user_path(narrative.user) %></p>
       <pre class="storyformat">Story: <%= narrative.story %></pre>
    </div>
 <% end %>

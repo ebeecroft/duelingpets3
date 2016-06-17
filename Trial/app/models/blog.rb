@@ -1,3 +1,7 @@
 class Blog < ActiveRecord::Base
-  attr_accessible :created_on, :description, :maintenance, :title, :user_id
+  attr_accessible :title, :description
+  belongs_to :user
+  has_many :replies, :foreign_key => "blog_id", :dependent => :destroy
+  validates :title, presence: true
+  validates :description, presence: true
 end

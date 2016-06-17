@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>A new comment has arrived from: <%= @comment.from_user.vname %></h1>
+    <p>
+       Message: <%= @comment.message %>
+    </p>
+    <p>
+       In order to reply to this comment please click on the other user's
+       comment to access their profile. Next fill in the message box
+       in the comment section below and click the submit button to send
+       your reply to the other user.
+    </p>
+    <p>
+      To view this comment on your account, just follow this link: <%= @url %>.
+    </p>
+    <p>Thank you for utilizing the communication room!</p>
+  </body>
+</html>

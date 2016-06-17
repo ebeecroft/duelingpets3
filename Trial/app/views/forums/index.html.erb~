@@ -15,6 +15,6 @@
    <p class="pagetext"><%= link_to forum.name, user_forum_path(forum.user.vname, forum) %></p>
    <p class="pagetext"><%= forum.description %></p>
    <% if !getOptional %>
-      <p class="pagetext"><%= link_to forum.user.vname, user_path(forum.user) %></p>
+      <p class="pagetext"><%= getType(forum.user) %><%= link_to forum.user.vname, user_path(forum.user) %></p>
    <% end %>
 <% end %>

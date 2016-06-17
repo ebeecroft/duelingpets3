@@ -10,7 +10,7 @@
       <div class="inner"><%= button_to 'Edit', edit_user_forum_path(forum.user, forum), method: :get %></div>
       <div class="inner"><%= button_to 'Destroy', [forum.user, forum], method: :delete, data: { confirm: 'Are you sure?' } %></div>
       <br>
-      <p>Owner: <%= link_to forum.user.vname, user_path(forum.user) %></p>
+      <p>Owner: <%= getType(forum.user) %><%= link_to forum.user.vname, user_path(forum.user) %></p>
       <p><%= forum.description %></p>
    </div>
    <br>

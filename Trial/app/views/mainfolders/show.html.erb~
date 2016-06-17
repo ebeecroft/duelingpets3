@@ -13,20 +13,24 @@
 <p class="pagetext"><%= @mainfolder.description %></p>
 <br>
 <div class="pagebox"><%= paginate @subfolders %></div>
-<% @subfolders.each do |subfolder| %>
-   <br>
-   <div class="pagetext">
-      <div class="inner"><%= link_to subfolder.name, mainfolder_subfolder_path(@mainfolder, subfolder) %></div>
-      <% if current_user && (current_user.id == subfolder.user_id || current_user.admin) %>
-         <div class="inner"><%= button_to 'Edit', edit_mainfolder_subfolder_path(@mainfolder, subfolder), method: :get %></div>
-         <div class="inner"><%= button_to 'Destroy', [@mainfolder, subfolder], method: :delete, data: { confirm: 'Are you sure?' } %></div>
+<div class="pagetext">
+   <% @subfolders.each_with_index do |subfolder, index| %>
+      <div class="container">
+         <div class="inner"><%= link_to subfolder.name, mainfolder_subfolder_path(@mainfolder, subfolder) %></div>
+         <% if current_user && (current_user.id == subfolder.user_id || current_user.admin) %>
+            <div class="inner"><%= button_to 'Edit', edit_mainfolder_subfolder_path(@mainfolder, subfolder), method: :get %></div>
+            <div class="inner"><%= button_to 'Destroy', [@mainfolder, subfolder], method: :delete, data: { confirm: 'Are you sure?' } %></div>
+         <% end %>
+         <p><%= image_tag getArtwork(subfolder) %></p>
+         <p>Created on: <%= subfolder.created_on.strftime("%B-%d-%Y") %></p>
+         <p>Owner: <%= getType(subfolder.user) %><%= link_to subfolder.user.vname, user_path(subfolder.user) %></p>
+         <p>Collaboration: <%= subfolder.collab_mode %></p>
+      </div>
+      <% if ((index + 1) % 3) == 0 %>         
+         <br>
+         <br>
       <% end %>
-      <p><%= image_tag getArtwork(subfolder) %></p>
-      <p>Created on: <%= subfolder.created_on.strftime("%B-%d-%Y") %></p>
-      <p>Owner: <%= link_to subfolder.user.vname, user_path(subfolder.user) %></p>
-      <p>Collaboration: <%= subfolder.collab_mode %></p>
-   </div>
-<% end %>
+   <% end %>
 <br>
 <% if current_user %>
    <p class="pagetext"><%= link_to "New Subfolder", new_mainfolder_subfolder_path(@mainfolder) %></p>

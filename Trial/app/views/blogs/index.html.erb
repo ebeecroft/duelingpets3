@@ -1,31 +1,29 @@
-<h1>Listing blogs</h1>
-
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Description</th>
-    <th>Created on</th>
-    <th>User</th>
-    <th>Maintenance</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
+<% provide(:title, "Blog: The place that holds all the blogs users created!") %>
+<% provide(:keywords, "writing, news, journals") %>
+<% provide(:description, "All of the available blogs for the users to display their news.") %>
+<h1 class="pageheader">
+   <% if getOptional %>
+      <%= @user.vname %>'s blogs
+   <% else %>
+      Listing blogs
+   <% end %>
+</h1>
+<br>
+<div class="pagebox"><%= paginate @blogs %></div>
 <% @blogs.each do |blog| %>
-  <tr>
-    <td><%= blog.title %></td>
-    <td><%= blog.description %></td>
-    <td><%= blog.created_on %></td>
-    <td><%= blog.user_id %></td>
-    <td><%= blog.maintenance %></td>
-    <td><%= link_to 'Show', blog %></td>
-    <td><%= link_to 'Edit', edit_blog_path(blog) %></td>
-    <td><%= link_to 'Destroy', blog, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+   <br>
+   <p class="pagetext"><%= link_to blog.title, user_blog_path(blog.user.vname, blog) %></p>
+   <p class="pagetext">Created on: <%= blog.created_on.strftime("%B-%d-%Y") %></p>
+   <p class="pagetext"><%= blog.description %></p>
+   <% if !getOptional %>
+      <p class="pagetext">Owner: <%= getType(blog.user) %><%= link_to blog.user.vname, user_path(blog.user) %></p>
+      <p class="pagetext">Status: <%= getStatus(blog.user) %>
+         <% if getStatus(blog.user) != "Online" %>
+            <% if getTime(blog.user) %>
+               for <%= distance_of_time_in_words_to_now getTime(blog.user) %>
+            <% end %>
+         <% end %>
+      </p>
+      <!--Add the online status here too-->
+   <% end %>
 <% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Blog', new_blog_path %>

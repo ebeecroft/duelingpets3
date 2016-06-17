@@ -31,22 +31,26 @@ module UsersHelper
    end
 
    private
-      def getStatus(userFound)
-         status = Sessionkey.find_by_user_id(userFound.id)
-         value = "Offline"
-         if(status.remember_token != "NULL")
-            value = "Online"
+      def getStatus(user)
+         status = "Offline"
+         onlineUserFound = Onlineuser.find_by_user_id(user.id)
+         if(onlineUserFound.signed_in_at)
+            if(!onlineUserFound.signed_out_at)
+               status = "Online"
+            else
+               status = "Offline"
+            end
          end
-         return value
+         return status
       end
 
-      def getAvatar(userFound)
-         currentAvatar = "No avatar available"
-         avatarFound = userFound.avatar_url(:thumb)
-         if(avatarFound)
-           currentAvatar = avatarFound
-         end
-         return currentAvatar
+      def getTime(user)
+         value = ""
+         onlineUserFound = Onlineuser.find_by_user_id(user.id)
+         #if(getStatus(onlineUserFound) != "Online")
+            value = onlineUserFound.signed_out_at
+         #end
+         return value
       end
 
       def getCreated
@@ -108,6 +112,9 @@ module UsersHelper
                @scount = userFound.sbooks.count
                @gcount = userFound.mainfolders.count
                @ccount = commentCount
+               @bcount = userFound.blogs.count
+               onlineUserFound = Onlineuser.find_by_user_id(userFound.id) #Ignore this for right now
+               @onlineuser = onlineUserFound
                @user = userFound
             else
                render "public/404"
@@ -137,6 +144,12 @@ module UsersHelper
                newUserType.privilege = "User"
                @usertype = newUserType
                @usertype.save
+               #Create onlineuser
+               newOnlineUser = Onlineuser.new(params[:onlineuser])
+               newOnlineUser.user_id = newMember.id
+               newOnlineUser.signed_in_at = currentTime
+               @onlineuser = newOnlineUser
+               @onlineuser.save
                #Login the user
                sign_in newMember
                flash[:success] = "Welcome to the Duelingpets Website #{@user.vname}!"

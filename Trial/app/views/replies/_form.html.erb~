@@ -15,7 +15,7 @@
     <%= f.label :message %><br />
     <%= f.text_area :message %>
   </div>
-  <div class="pagetext">
+  <div class="actions">
     <%= f.submit %>
   </div>
   <br>

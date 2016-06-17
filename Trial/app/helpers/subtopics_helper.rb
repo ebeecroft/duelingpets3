@@ -35,6 +35,28 @@ module SubtopicsHelper
    end
 
    private
+      def getStatus(user)
+         status = "Offline"
+         onlineUserFound = Onlineuser.find_by_user_id(user.id)
+         if(onlineUserFound.signed_in_at)
+            if(!onlineUserFound.signed_out_at)
+               status = "Online"
+            else
+               status = "Offline"
+            end
+         end
+         return status
+      end
+
+      def getTime(user)
+         value = ""
+         onlineUserFound = Onlineuser.find_by_user_id(user.id)
+         #if(getStatus(onlineUserFound) != "Online")
+            value = onlineUserFound.signed_out_at
+         #end
+         return value
+      end
+
       def getType(user)
          if(user.admin)
             value = "$"

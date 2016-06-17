@@ -14,4 +14,12 @@ class UserMailer < ActionMailer::Base
       @url = "http://www.duelingpets.net/signin"
       mail(to: @user.email, subject: "Password Recovery System", from: "recovery@duelingpets.net")
    end
+
+   def send_message(comment)
+      @comment = comment
+      @url = "http://www.duelingpets.net/users/#{@comment.to_user.vname}"
+      if(@comment.to_user.vname != @comment.from_user.vname)
+         mail(to: comment.to_user.email, subject: "A New Comment has arrived at the Palace")
+      end
+   end
 end

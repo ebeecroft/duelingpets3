@@ -1,4 +1,4 @@
-<%= form_for(@blog) do |f| %>
+<%= form_for([@user, @blog]) do |f| %>
   <% if @blog.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@blog.errors.count, "error") %> prohibited this blog from being saved:</h2>
@@ -10,28 +10,17 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
+  <br>
+  <div class="pagetext">
     <%= f.label :title %><br />
     <%= f.text_field :title %>
   </div>
-  <div class="field">
+  <div class="pagetext">
     <%= f.label :description %><br />
     <%= f.text_area :description %>
   </div>
-  <div class="field">
-    <%= f.label :created_on %><br />
-    <%= f.datetime_select :created_on %>
-  </div>
-  <div class="field">
-    <%= f.label :user_id %><br />
-    <%= f.number_field :user_id %>
-  </div>
-  <div class="field">
-    <%= f.label :maintenance %><br />
-    <%= f.check_box :maintenance %>
-  </div>
-  <div class="actions">
+  <div class="pagetext">
     <%= f.submit %>
   </div>
+  <br>
 <% end %>

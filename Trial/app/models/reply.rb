@@ -1,3 +1,6 @@
 class Reply < ActiveRecord::Base
-  attr_accessible :blog_id, :created_on, :maintenance, :message, :user_id
+   attr_accessible :message
+   belongs_to :user
+   belongs_to :blog
+   validates :message, presence: true
 end

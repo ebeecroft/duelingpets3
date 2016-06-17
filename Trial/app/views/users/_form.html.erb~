@@ -12,7 +12,6 @@
   <% end %>
   <br>
   <!--<p class="pagetext">Virtual Name(Vname) is the only information seen by other users.</p>-->
-  <br>
   <div class="pagetext">
     <%= f.label :avatar %><br />
     <%= f.file_field :avatar %>

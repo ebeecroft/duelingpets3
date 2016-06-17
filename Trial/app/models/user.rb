@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
    has_one :sessionkey, :foreign_key => "user_id", :dependent => :destroy
    has_one :usertype, :foreign_key => "user_id", :dependent => :destroy
    has_one :pouch, :foreign_key => "user_id", :dependent => :destroy
+   has_one :onlineuser, :foreign_key => "user_id", :dependent => :destroy
 
    #Art section
    has_many :mainfolders, :foreign_key => "user_id", :dependent => :destroy
@@ -35,6 +36,8 @@ class User < ActiveRecord::Base
    #User features
    has_many :petowners, :foreign_key => "user_id", :dependent => :destroy
    has_many :inventories, :foreign_key => "user_id", :dependent => :destroy
+   has_many :blogs, :foreign_key => "user_id", :dependent => :destroy
+   has_many :replies, :foreign_key => "user_id", :dependent => :destroy
 
    #validates :first_name, presence: true
    VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

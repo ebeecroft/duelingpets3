@@ -6,9 +6,10 @@
    <% else %>
       <p>Name: <%= @user.first_name %></p>
    <% end %>
-   <div class="userspacing">Vname: <%= getType %><%= @user.vname %></div>
+   <div class="userspacing">Vname: <%= getType(@user) %><%= @user.vname %></div>
    <div class="inner">Joined on: <%= @user.joined_on.strftime("%B-%d-%Y") %></div>
    <% if current_user && (current_user.id == @user.id || current_user.admin?) %>
       <p>Money: <%= @pouch.amount %></p>
    <% end %>
+   <p>Status: <%= getStatus(@user) %></p>
 </div>

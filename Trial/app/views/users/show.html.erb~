@@ -1,6 +1,6 @@
 <% provide(:title, "User: Where users can see all of their wonderful creations!") %>
 <% provide(:keywords, "pets, series, artwork") %>
-<% provide(:description, "A place where users can showcase their talent to the world at large.") %>
+<% provide(:description, "The users home for all their art, writing, and pets.") %>
 <!--For the divs in show come back to them later-->
 <div class="pagetext">
    <div class="inner"><%= getType(@user) %><%= @user.vname %></div>
@@ -20,6 +20,18 @@
    <p class="pagetext">Pets</p>
    <p class="pagetext"><%= link_to 'My pets', user_petowners_path(@user) %></p>
 <% end %>
+<% if @bcount > 0 || (current_user && current_user.id == @user.id) %>
+   <br>
+   <p class="pagetext">Blog</p>
+<% end %>
+<div class="pagetext">
+   <% if @bcount > 0 %>
+      <div class="inner"><%= link_to 'My Blogs', user_blogs_path(@user) %></div>
+   <% end %>
+   <% if current_user && current_user.id == @user.id %>
+      <div class="inner"><%= link_to 'New Blog', new_user_blog_path(@user) %></div>
+   <% end %>
+</div>
 <!--Forum section-->
 <% if @fcount > 0 || (current_user && current_user.id == @user.id) %>
    <br>
@@ -74,6 +86,12 @@
                <div class="inner"><%= button_to "Delete", [@user, comment], :confirm => "Are you sure?", :method => :delete %></div>
             <% end %>
             <pre class="storyformat"><%= comment.message %></pre>
+            <p>Status: <%= getStatus(comment.from_user) %>
+            <% if getStatus(comment.from_user) != "Online" %>
+               <% if getTime(comment.from_user) %>
+                  for <%= distance_of_time_in_words_to_now getTime(comment.from_user) %>
+               <% end %>
+            <% end %><% getTime %></p>
          </div>
       <% end %>
       <br>
