@@ -1,0 +1,33 @@
+<%= form_for(@onlineuser) do |f| %>
+  <% if @onlineuser.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@onlineuser.errors.count, "error") %> prohibited this onlineuser from being saved:</h2>
+
+      <ul>
+      <% @onlineuser.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :signed_in_at %><br />
+    <%= f.datetime_select :signed_in_at %>
+  </div>
+  <div class="field">
+    <%= f.label :last_visited %><br />
+    <%= f.datetime_select :last_visited %>
+  </div>
+  <div class="field">
+    <%= f.label :signed_out_at %><br />
+    <%= f.datetime_select :signed_out_at %>
+  </div>
+  <div class="field">
+    <%= f.label :user_id %><br />
+    <%= f.number_field :user_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

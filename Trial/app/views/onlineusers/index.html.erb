@@ -1,0 +1,29 @@
+<h1>Listing onlineusers</h1>
+
+<table>
+  <tr>
+    <th>Signed in at</th>
+    <th>Last visited</th>
+    <th>Signed out at</th>
+    <th>User</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @onlineusers.each do |onlineuser| %>
+  <tr>
+    <td><%= onlineuser.signed_in_at %></td>
+    <td><%= onlineuser.last_visited %></td>
+    <td><%= onlineuser.signed_out_at %></td>
+    <td><%= onlineuser.user_id %></td>
+    <td><%= link_to 'Show', onlineuser %></td>
+    <td><%= link_to 'Edit', edit_onlineuser_path(onlineuser) %></td>
+    <td><%= link_to 'Destroy', onlineuser, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Onlineuser', new_onlineuser_path %>

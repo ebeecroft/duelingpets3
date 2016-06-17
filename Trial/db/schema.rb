@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160515025807) do
+ActiveRecord::Schema.define(:version => 20160617035906) do
 
   create_table "artworks", :force => true do |t|
     t.string   "title"
@@ -24,6 +24,16 @@ ActiveRecord::Schema.define(:version => 20160515025807) do
     t.datetime "created_at",                      :null => false
     t.datetime "updated_at",                      :null => false
     t.string   "art"
+  end
+
+  create_table "blogs", :force => true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.datetime "created_on"
+    t.integer  "user_id"
+    t.boolean  "maintenance", :default => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
   end
 
   create_table "books", :force => true do |t|
@@ -170,6 +180,15 @@ ActiveRecord::Schema.define(:version => 20160515025807) do
     t.boolean  "maintenance", :default => false
   end
 
+  create_table "onlineusers", :force => true do |t|
+    t.datetime "signed_in_at"
+    t.datetime "last_visited"
+    t.datetime "signed_out_at"
+    t.integer  "user_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
   create_table "petowners", :force => true do |t|
     t.integer  "user_id"
     t.integer  "pet_id"
@@ -217,6 +236,16 @@ ActiveRecord::Schema.define(:version => 20160515025807) do
   end
 
   add_index "pouches", ["user_id"], :name => "index_pouches_on_user_id", :unique => true
+
+  create_table "replies", :force => true do |t|
+    t.text     "message"
+    t.integer  "blog_id"
+    t.integer  "user_id"
+    t.datetime "created_on"
+    t.boolean  "maintenance", :default => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+  end
 
   create_table "sbooks", :force => true do |t|
     t.string   "name"

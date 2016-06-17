@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Signed in at:</b>
+  <%= @onlineuser.signed_in_at %>
+</p>
+
+<p>
+  <b>Last visited:</b>
+  <%= @onlineuser.last_visited %>
+</p>
+
+<p>
+  <b>Signed out at:</b>
+  <%= @onlineuser.signed_out_at %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @onlineuser.user_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_onlineuser_path(@onlineuser) %> |
+<%= link_to 'Back', onlineusers_path %>
