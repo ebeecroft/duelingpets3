@@ -30,12 +30,12 @@ module CusersHelper
       @sessionkey.save
 
       #Change status to online
-      onlineUserFound = Onlineuser.find_by_user_id(user.id)
-      onlineUserFound.signed_in_at = currentTime
-      onlineUserFound.last_visited = nil
-      onlineUserFound.signed_out_at = nil
-      @onlineuser = onlineUserFound
-      @onlineuser.save
+#      onlineUserFound = Onlineuser.find_by_user_id(user.id)
+#      onlineUserFound.signed_in_at = currentTime
+#      onlineUserFound.last_visited = nil
+#      onlineUserFound.signed_out_at = nil
+#      @onlineuser = onlineUserFound
+#      @onlineuser.save
 
       cookies[:remember_token] = { :value => keyFound.remember_token, :expires => tokenTime } #The working solution now
       self.current_user = user
@@ -71,11 +71,11 @@ module CusersHelper
       @sessionkey.save
 
       #Change status to offline
-      onlineUserFound = Onlineuser.find_by_user_id(current_user.id)
-      onlineUserFound.last_visited = nil
-      onlineUserFound.signed_out_at = currentTime
-      @onlineuser = onlineUserFound
-      @onlineuser.save
+#      onlineUserFound = Onlineuser.find_by_user_id(current_user.id)
+#      onlineUserFound.last_visited = nil
+#      onlineUserFound.signed_out_at = currentTime
+#      @onlineuser = onlineUserFound
+#      @onlineuser.save
 
       #Delete cookie last
       cookies.delete(:remember_token)
