@@ -10,7 +10,19 @@ Trial::Application.routes.draw do
       resources :forums #Builds everything 
       resources :sbooks #Builds everything
       resources :mainfolders #Builds everything
+      resources :blogs #Builds everything
    end
+
+   #Builds the blogs
+   get '/blogs/maintenance' => 'blogs#maintenance'
+   get 'blogs/list' => 'blogs#list'
+   resources :blogs, :only =>[:index] do
+      resources :replies, :except =>[:index, :show]
+   end
+
+   #Builds the replies
+   get '/replies/maintenance' => 'replies#maintenance'
+   resources :replies, :only =>[:index]
 
    #Builds the mainfolders
    get '/mainfolders/maintenance' => 'mainfolders#maintenance'
@@ -151,14 +163,13 @@ Trial::Application.routes.draw do
    #Builds the staff
    resources :usertypes, :except =>[:show, :destroy] #Only builds index, new, create, edit and update actions
 
+   #Builds the user status
+   resources :onlineusers, :only =>[:index, :new, :create]
+
    #Controls page visibility
    resources :maintenancemodes, :except =>[:show, :destroy] #Builds everything except show and destroy
 
    #Root pages
    get 'maintenance' => "start#maintenance"
-#   get 'about' => "start#about"
-#   get 'update' => "start#update"
-#   get 'contact' => "start#contact"
-#   post 'create_adoption', to: "petowners#create"
    root :to => "start#home"
 end

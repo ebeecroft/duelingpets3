@@ -90,7 +90,7 @@ Trial::Application.routes.draw do
    post 'pets/review2' => 'pets#deny'
 
    #Base pets route
-   resources :pets #Builds everything for pets
+   resources :pets, :except => [:index, :show, :new, :create, :update, :edit, :destory] #Builds everything for pets
 
    #Builds the item actions
    get '/items/maintenance' => 'items#maintenance'
