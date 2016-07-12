@@ -11,7 +11,7 @@ Trial::Application.routes.draw do
       resources :sbooks #Builds everything
       resources :mainfolders #Builds everything
       resources :blogs #Builds everything
-      resources :pets, :only =>[:new, :create, :edit, :update]
+      resources :pets, :except =>[:index, :show, :new, :create, :edit, :update, :destroy]
    end
 
    #Builds the blogs
@@ -91,7 +91,7 @@ Trial::Application.routes.draw do
    post 'pets/review2' => 'pets#deny'
 
    #Base pets route
-   resources :pets, :only => [:index, :show] #Builds everything for pets
+   resources :pets, :except =>[:index, :show, :new, :create, :edit, :update, :destroy] #Builds everything for pets
 
    #Builds the item actions
    get '/items/maintenance' => 'items#maintenance'

@@ -11,6 +11,7 @@ Trial::Application.routes.draw do
       resources :sbooks #Builds everything
       resources :mainfolders #Builds everything
       resources :blogs #Builds everything
+      resources :pets, :except =>[:index, :show, :new, :create, :edit, :update, :destroy]
    end
 
    #Builds the blogs
