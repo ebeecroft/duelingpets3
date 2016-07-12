@@ -1,4 +1,4 @@
-<%= form_for @pet, :html => {:multipart => true} do |f| %>
+<%= form_for [@user, @pet], :html => {:multipart => true} do |f| %>
   <% if @pet.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@pet.errors.count, "error") %> prohibited this pet from being saved:</h2>
@@ -56,7 +56,7 @@
   </div>
   <br>
   <div>
-  <p class="pagetext">Images submitted must be free from copyright restrictions, and appropriate for all ages. Inappropriate images will be removed and user privileges may be revoked. Please contact webmaster if you encounter inappropriate content.</p>
+  <p class="pagetext">Images submitted must be free from copyright restrictions, and appropriate for all ages. Inappropriate images will be removed and user privileges may be revoked. Please contact webmaster if you encounter inappropriate content. Also any pets that are uploaded to this site must go through a review process before it can appear on the adopt and monster pages.</p>
   </div>
   <br>
   <div class="pagetext">
