@@ -48,7 +48,7 @@
 </div>
 <br>
 <% if getPetType2(@pet.monster) %>
-   <div class="pagetext"><%= link_to 'Back', pets_path %></div>
-<% else %>
    <div class="pagetext"><%= link_to 'Back', pets_monsters_path %></div>
+<% else %>
+   <div class="pagetext"><%= link_to 'Back', pets_path %></div>
 <% end %>
