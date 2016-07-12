@@ -201,6 +201,7 @@ module PetsHelper
             logged_in = current_user
             if(logged_in)
                newPet = Pet.new
+               @user = logged_in
                @pet = newPet
             else
                redirect_to root_path
@@ -213,6 +214,7 @@ module PetsHelper
                errorFlag = validator(newPet.hp, newPet.atk, newPet.def, newPet.spd)
                if(errorFlag)
                   @pet = newPet
+                  @user = logged_in
                   render "new"
                else
                   #Need to calculate the pet's cost and level
@@ -225,6 +227,7 @@ module PetsHelper
                   newPet.user_id = logged_in.id
                   #Add the pet to the database
                   @pet = newPet
+                  @user = logged_in
                   if(@pet.save)
                      PetMailer.review_pet(@pet).deliver
                      flash[:success] = "#{@pet.species_name} is currently being reviewed please check back later."
@@ -243,6 +246,7 @@ module PetsHelper
                if(petFound)
                   userMatch = ((logged_in.id == petFound.user_id) || logged_in.admin)
                   if(userMatch)
+                     @user = logged_in
                      @pet = petFound
                   else
                      redirect_to root_path
