@@ -21,5 +21,5 @@
 <br>
 <!--Prevents a visting user from creating a pet if not logged in -->
 <% if !current_user.nil? %>
-   <p class="pagetext"><%= link_to 'Create a New Pet', new_user_pet_path %></p>
+   <p class="pagetext"><%= link_to 'Create a New Pet', new_user_pet_path(current_user) %></p>
 <% end %>
