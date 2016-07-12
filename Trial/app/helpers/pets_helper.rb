@@ -266,25 +266,25 @@ module PetsHelper
                   #Check for error here
                   errorFlag = validator(petFound.hp, petFound.atk, petFound.def, petFound.spd)
                   if(!errorFlag)
-                     @user = logged_in
-                     @pet = petFound
-                     if(@pet.update_attributes(params[:pet])) #@pet.update_attributes(params[:pet])
-                        #Save the hp, atk, def and spd first
-                        #Save the pet cost, and level
-                        userMatch = ((logged_in.id == petFound.user_id) || logged_in.admin)
-                        if(userMatch)
-                           string_array = calculator(@pet.hp, @pet.atk, @pet.def, @pet.spd)
-                           petCost, petLevel = string_array.map { |str| str.to_i}
-                           @pet.cost = petCost
-                           @pet.level = petLevel
-                           @pet.save
+                     userMatch = ((logged_in.id == petFound.user_id) || logged_in.admin)
+                     if(userMatch)
+                        @user = logged_in
+                        @pet = petFound
+                        string_array = calculator(@pet.hp, @pet.atk, @pet.def, @pet.spd)
+                        petCost, petLevel = string_array.map { |str| str.to_i}
+                        @pet.cost = petCost
+                        @pet.level = petLevel
+                        if(@pet.update_attributes(params[:pet])) #@pet.update_attributes(params[:pet])
+                           #Save the hp, atk, def and spd first
+                           #Save the pet cost, and level
+                           #@pet.save
                            flash[:success] = 'Pet was successfully updated.'
                            redirect_to @pet
                         else
-                           redirect_to root_path
+                           render "edit"
                         end
                      else
-                        render "edit"
+                        redirect_to root_path
                      end
                   else
                      render "edit"
