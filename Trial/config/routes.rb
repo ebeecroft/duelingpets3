@@ -1,5 +1,11 @@
 Trial::Application.routes.draw do
 
+  resources :preplies
+
+
+  resources :pms
+
+
    #Builds the users actions and the nested actions
    get '/users/maintenance' => 'users#maintenance'
    resources :users, :except => [:new] do #builds everything except new

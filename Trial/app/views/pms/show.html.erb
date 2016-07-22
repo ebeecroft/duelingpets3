@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @pm.title %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @pm.description %>
+</p>
+
+<p>
+  <b>Created on:</b>
+  <%= @pm.created_on %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @pm.user_id %>
+</p>
+
+<p>
+  <b>From user:</b>
+  <%= @pm.from_user_id %>
+</p>
+
+<p>
+  <b>Maintenance:</b>
+  <%= @pm.maintenance %>
+</p>
+
+
+<%= link_to 'Edit', edit_pm_path(@pm) %> |
+<%= link_to 'Back', pms_path %>

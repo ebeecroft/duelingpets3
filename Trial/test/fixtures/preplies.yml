@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  message: MyText
+  created_on: 2016-07-22 05:09:29
+  pm_id: 1
+  user_id: 1
+  maintenance: false
+
+two:
+  message: MyText
+  created_on: 2016-07-22 05:09:29
+  pm_id: 1
+  user_id: 1
+  maintenance: false

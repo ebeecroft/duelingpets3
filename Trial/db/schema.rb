@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160617035906) do
+ActiveRecord::Schema.define(:version => 20160722050929) do
 
   create_table "artworks", :force => true do |t|
     t.string   "title"
@@ -228,6 +228,17 @@ ActiveRecord::Schema.define(:version => 20160617035906) do
     t.integer  "user_id"
   end
 
+  create_table "pms", :force => true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.datetime "created_on"
+    t.integer  "user_id"
+    t.integer  "from_user_id"
+    t.boolean  "maintenance",  :default => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+  end
+
   create_table "pouches", :force => true do |t|
     t.integer  "amount",     :default => 200
     t.integer  "user_id"
@@ -236,6 +247,16 @@ ActiveRecord::Schema.define(:version => 20160617035906) do
   end
 
   add_index "pouches", ["user_id"], :name => "index_pouches_on_user_id", :unique => true
+
+  create_table "preplies", :force => true do |t|
+    t.text     "message"
+    t.datetime "created_on"
+    t.integer  "pm_id"
+    t.integer  "user_id"
+    t.boolean  "maintenance", :default => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+  end
 
   create_table "replies", :force => true do |t|
     t.text     "message"

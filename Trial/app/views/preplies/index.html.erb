@@ -1,0 +1,31 @@
+<h1>Listing preplies</h1>
+
+<table>
+  <tr>
+    <th>Message</th>
+    <th>Created on</th>
+    <th>Pm</th>
+    <th>User</th>
+    <th>Maintenance</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @preplies.each do |preply| %>
+  <tr>
+    <td><%= preply.message %></td>
+    <td><%= preply.created_on %></td>
+    <td><%= preply.pm_id %></td>
+    <td><%= preply.user_id %></td>
+    <td><%= preply.maintenance %></td>
+    <td><%= link_to 'Show', preply %></td>
+    <td><%= link_to 'Edit', edit_preply_path(preply) %></td>
+    <td><%= link_to 'Destroy', preply, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Preply', new_preply_path %>
