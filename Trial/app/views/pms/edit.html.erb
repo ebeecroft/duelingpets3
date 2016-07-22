@@ -1,6 +1,5 @@
-<h1>Editing pm</h1>
-
+<% provide(:title, "PM: Edit your pm here!") %>
+<% provide(:description, "Allows the users to change their pm to the best of their abilities.") %>
+<h1 class="pagetextheader">Editing pm</h1>
 <%= render 'form' %>
-
-<%= link_to 'Show', @pm %> |
-<%= link_to 'Back', pms_path %>
+<p class="pagetext"><%= link_to 'Back', user_pm_path(@pm.user, @pm) %></p>

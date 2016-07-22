@@ -7,13 +7,32 @@
    <% if current_user && current_user.id == @user.id %>
       <div class="inner"><%= button_to 'Edit', edit_user_path(@user), method: :get %></div>
    <% end %>
-   <p><%= image_tag @user.avatar_url(:thumb).to_s %></p>
+   <p><%= image_tag getAvatar(@user) %></p>
 </div>
 <%= render 'userinfo' %>
 <br>
 <p class="pagetextheader">Pets created: <%= getCreated %></p>
 <br>
 <p class="pagetextheader">Pets owned: <%= getOwned %></p>
+<!--PM section-->
+<% if current_user %>
+   <% if @pmtcount > 0 || (current_user.id != @user.id) %>
+      <br>
+      <p class="pagetext">Private Message</p>
+   <% end %>
+   <div class="pagetext">
+   <% if current_user.id == @user.id %>
+      <% if @pmicount > 0 %>
+         <div class="inner"><%= link_to 'Inbox', pms_inbox_path %></div>
+      <% end %>
+      <% if @pmocount > 0 %>
+         <div class="inner"><%= link_to 'Outbox', pms_outbox_path %></div>
+      <% end %>
+   <% else %>
+      <div class="inner"><%= link_to 'New PM', new_user_pm_path(@user) %></div>
+   <% end %>
+   </div>
+<% end %>
 <!--Pet section-->
 <% if @pcount > 0 %>
    <br>

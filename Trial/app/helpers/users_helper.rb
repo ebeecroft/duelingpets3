@@ -31,6 +31,15 @@ module UsersHelper
    end
 
    private
+      def getAvatar(userFound)
+         currentAvatar = "No avatar available"
+         avatarFound = userFound.avatar_url(:thumb)
+         if(avatarFound)
+            currentAvatar = avatarFound
+         end
+         return currentAvatar
+      end
+
       def getStatus(user)
          status = "Offline"
          onlineUserFound = Onlineuser.find_by_user_id(user.id)
@@ -115,6 +124,12 @@ module UsersHelper
                @bcount = userFound.blogs.count
                onlineUserFound = Onlineuser.find_by_user_id(userFound.id) #Ignore this for right now
                @onlineuser = onlineUserFound
+               allPm = Pm.all
+               outbox = allPm.select{|pm| pm.from_user_id == userFound.id}
+               inbox = allPm.select{|pm| pm.user_id == userFound.id}
+               @pmtcount = (inbox.count + outbox.count)
+               @pmicount = inbox.count
+               @pmocount = outbox.count
                @user = userFound
             else
                render "public/404"

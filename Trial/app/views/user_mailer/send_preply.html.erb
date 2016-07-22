@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>A new preply has arrived from: <%= @preply.user.vname %></h1>
+    <p>
+       Message: <%= @preply.message %>
+    </p>
+    <p>
+       In order to reply to this preply please click on your
+       inbox to access your messages. Next click on the message to 
+       view it and then finally click the preply link to create a new preply.
+       Once you fill in the message and submit you replied to the preply.
+    </p>
+    <p>
+      To view this preply on your account, just follow this link: <%= @url %>.
+    </p>
+    <p>Thank you for utilizing the communication room!</p>
+  </body>
+</html>

@@ -1,6 +1,5 @@
-<h1>Editing preply</h1>
-
+<% provide(:title, "PReply: Edit your preply here!") %>
+<% provide(:description, "Allows the users to change their preply to the best of their abilities.") %>
+<h1 class="pagetextheader">Editing preply</h1>
 <%= render 'form' %>
-
-<%= link_to 'Show', @preply %> |
-<%= link_to 'Back', preplies_path %>
+<p class="pagetext"><%= link_to 'Back', user_pm_path(@pm.from_user, @pm) %></p>

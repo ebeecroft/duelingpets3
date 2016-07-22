@@ -1,31 +1,23 @@
-<h1>Listing preplies</h1>
-
-<table>
-  <tr>
-    <th>Message</th>
-    <th>Created on</th>
-    <th>Pm</th>
-    <th>User</th>
-    <th>Maintenance</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
+<% provide(:title, "A collection of many different available preplies!") %>
+<% provide(:description, "A place for the admin to see what preplies are available.") %>
+<h1 class="pageheader">PReplies list</h1>
+<br>
+<div class="pagebox"><%= paginate @preplies %></div>
 <% @preplies.each do |preply| %>
-  <tr>
-    <td><%= preply.message %></td>
-    <td><%= preply.created_on %></td>
-    <td><%= preply.pm_id %></td>
-    <td><%= preply.user_id %></td>
-    <td><%= preply.maintenance %></td>
-    <td><%= link_to 'Show', preply %></td>
-    <td><%= link_to 'Edit', edit_preply_path(preply) %></td>
-    <td><%= link_to 'Destroy', preply, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+   <br>
+   <div class="pagetext">
+      <p>Belongs to pm: <%= link_to prely.pm.title, user_pm_path(@pm.from_user, @pm) %></p>
+      <div class="inner"><%= preply.message %></div>
+      <div class="inner"><%= button_to 'Edit', edit_pm_reply_path(preply.pm, preply), method: :get %></div>
+      <div class="inner"><%= button_to 'Destroy', [preply.pm, preply], method: :delete, data: { confirm: 'Are you sure?' } %></div>
+      <p>Created on: <%= preply.created_on.strftime("%B-%d-%Y") %></p>
+      <p>Owner: <%= getType(preply.user) %><%= link_to preply.user.vname, user_path(preply.user) %></p>
+      <p>Status: <%= getStatus(preply.user) %>
+         <% if getStatus(preply.user) != "Online" %>
+            <% if getTime(preply.user) %>
+               for <%= distance_of_time_in_words_to_now getTime(preply.user) %>
+            <% end %>
+         <% end %>
+      </p>
+   </div>
 <% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Preply', new_preply_path %>
