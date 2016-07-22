@@ -41,9 +41,8 @@ module OnlineusersHelper
          return status
       end
 
-      def getTime(user)
+      def getTime(onlineUserFound)
          value = ""
-         onlineUserFound = Onlineuser.find_by_user_id(user.id)
          #if(getStatus(onlineUserFound) != "Online")
             value = onlineUserFound.signed_out_at
          #end

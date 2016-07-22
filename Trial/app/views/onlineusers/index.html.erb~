@@ -13,8 +13,8 @@
       <% @onlineusers.each do |onlineuser| %>
          <tr>
             <td><%= link_to onlineuser.user.vname, onlineuser.user %>&nbsp;&nbsp;</td>
-            <td><%= getStatus(onlineuser) %>
-                <% if getStatus(onlineuser) != "Online" %>
+            <td><%= getStatus(onlineuser.user) %>
+                <% if getStatus(onlineuser.user) != "Online" %>
                    <% if getTime(onlineuser) %>
                       <%= distance_of_time_in_words_to_now getTime(onlineuser) %> ago
                    <% end %>
