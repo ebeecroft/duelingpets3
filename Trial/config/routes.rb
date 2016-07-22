@@ -1,11 +1,5 @@
 Trial::Application.routes.draw do
 
-  resources :preplies
-
-
-  resources :pms
-
-
    #Builds the users actions and the nested actions
    get '/users/maintenance' => 'users#maintenance'
    resources :users, :except => [:new] do #builds everything except new
@@ -17,8 +11,36 @@ Trial::Application.routes.draw do
       resources :sbooks #Builds everything
       resources :mainfolders #Builds everything
       resources :blogs #Builds everything
+#      resources :mainplaylists #Builds everything
+      resources :pms, :except =>[:index] #Builds everything
       resources :pets, :except =>[:index, :show]
    end
+
+   #Builds pm
+   get 'pms/inbox' => 'pms#inbox'
+   get 'pms/outbox' => 'pms#outbox'
+   resources :pms, :only =>[:index] do
+      resources :preplies, :except =>[:index, :show]
+   end
+
+   #Builds preplies
+   resources :preplies, :only =>[:index]
+
+   #Builds the mainplaylist
+#   resources :mainplaylists, :only =>[:index] do
+#      resources :subplaylists, :except =>[:index]
+#   end
+
+   #Builds the subplaylist
+#   resources :subplaylists, :only =>[:index] do
+#      resources :movies, :except =>[:index]
+#   end
+
+   #Builds the movies
+#   get '/movies/review' => 'movies#review' #has to be before the pets controller
+#   post 'movies/review1' => 'movies#approve'
+#   post 'movies/review2' => 'movies#deny'
+#   resources :movies, :only =>[:index]
 
    #Builds the blogs
    get '/blogs/maintenance' => 'blogs#maintenance'
