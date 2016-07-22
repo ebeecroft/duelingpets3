@@ -1,83 +1,39 @@
 class PmsController < ApplicationController
-  # GET /pms
-  # GET /pms.json
-  def index
-    @pms = Pm.all
+   include PmsHelper
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @pms }
-    end
-  end
+   def index
+      mode "index"
+   end
 
-  # GET /pms/1
-  # GET /pms/1.json
-  def show
-    @pm = Pm.find(params[:id])
+   def show
+      mode "show"
+   end
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @pm }
-    end
-  end
+   def new
+      mode "new"
+   end
 
-  # GET /pms/new
-  # GET /pms/new.json
-  def new
-    @pm = Pm.new
+   def edit
+      mode "edit"
+   end
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @pm }
-    end
-  end
+   def create
+      mode "create"
+   end
 
-  # GET /pms/1/edit
-  def edit
-    @pm = Pm.find(params[:id])
-  end
+   def update
+      mode "update"
+   end
 
-  # POST /pms
-  # POST /pms.json
-  def create
-    @pm = Pm.new(params[:pm])
+   def destroy
+      mode "destroy"
+   end
 
-    respond_to do |format|
-      if @pm.save
-        format.html { redirect_to @pm, notice: 'Pm was successfully created.' }
-        format.json { render json: @pm, status: :created, location: @pm }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @pm.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+   def inbox
+      mode "inbox"
+   end
 
-  # PUT /pms/1
-  # PUT /pms/1.json
-  def update
-    @pm = Pm.find(params[:id])
-
-    respond_to do |format|
-      if @pm.update_attributes(params[:pm])
-        format.html { redirect_to @pm, notice: 'Pm was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @pm.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /pms/1
-  # DELETE /pms/1.json
-  def destroy
-    @pm = Pm.find(params[:id])
-    @pm.destroy
-
-    respond_to do |format|
-      format.html { redirect_to pms_url }
-      format.json { head :no_content }
-    end
-  end
+   def outbox
+      mode "outbox"
+   end
 end

@@ -39,6 +39,10 @@ class User < ActiveRecord::Base
    has_many :blogs, :foreign_key => "user_id", :dependent => :destroy
    has_many :replies, :foreign_key => "user_id", :dependent => :destroy
 
+   #PM
+   has_many :pms, :foreign_key => "user_id", :dependent => :destroy
+   has_many :preplies, :foreign_key => "user_id", :dependent => :destroy
+
    #validates :first_name, presence: true
    VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
    VALID_NAME_REGEX = /\A[a-z][a-z][a-z]+\z/i
@@ -49,8 +53,8 @@ class User < ActiveRecord::Base
    validates :email, presence: true, format: { with: VALID_EMAIL_REGEX}
    validates :login_id, presence: true, format: { with: VALID_VNAME_REGEX}, uniqueness: { case_sensitive: false}
    validates :vname, presence: true, format: { with: VALID_VNAME_REGEX}, uniqueness: { case_sensitive: false}
-   validates :password, length: {minimum: 6}, format: { with: VALID_PASSWORD_REGEX}
-   validates :password_confirmation, presence: true, format: { with: VALID_PASSWORD_REGEX}
+   validates :password, length: {minimum: 6}#, format: { with: VALID_PASSWORD_REGEX}
+   validates :password_confirmation, presence: true #, format: { with: VALID_PASSWORD_REGEX}
 
    def to_param
       vname

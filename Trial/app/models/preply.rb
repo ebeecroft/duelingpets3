@@ -1,3 +1,6 @@
 class Preply < ActiveRecord::Base
-  attr_accessible :created_on, :maintenance, :message, :pm_id, :user_id
+   attr_accessible :message
+   belongs_to :user
+   belongs_to :pm
+   validates :message, presence: true
 end

@@ -22,4 +22,33 @@ class UserMailer < ActionMailer::Base
          mail(to: comment.to_user.email, subject: "A New Comment has arrived at the Palace")
       end
    end
+
+   def send_pm(pm)
+      @pm = pm
+      @url = "http://www.duelingpets.net/pms/inbox"
+      if(@pm.to_user.vname != @pm.from_user.vname)
+         mail(to: pm.to_user.email, subject: "A New PM has arrived at the Palace")
+      end
+   end
+
+   def send_preply(preply)
+      @preply = preply
+      @url = "http://www.duelingpets.net/pms/inbox"
+      owner = @preply.user.vname
+      sender = @preply.pm.to_user.vname
+      reciever = @preply.pm.from_user.vname
+      
+      if(sender != reciever)
+         emailUser = nil
+         if(owner == sender)
+            emailUser = @preply.pm.from_user.email
+         end
+         if(owner == reciever)
+            emailUser = @preply.pm.to_user.email
+         end
+         if(emailUser != nil)
+            mail(to: emailUser, subject: "A New PReply has arrived at the Palace")
+         end
+      end
+   end
 end
