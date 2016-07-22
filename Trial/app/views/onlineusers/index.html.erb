@@ -16,7 +16,7 @@
             <td><%= getStatus(onlineuser.user) %>
                 <% if getStatus(onlineuser.user) != "Online" %>
                    <% if getTime(onlineuser.user) %>
-                      <%= distance_of_time_in_words_to_now getTime(onlineuser) %> ago
+                      <%= distance_of_time_in_words_to_now getTime(onlineuser.user) %> ago
                    <% end %>
                 <% end %>
             </td>
