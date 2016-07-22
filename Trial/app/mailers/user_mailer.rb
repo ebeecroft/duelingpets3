@@ -35,16 +35,16 @@ class UserMailer < ActionMailer::Base
       @preply = preply
       @url = "http://www.duelingpets.net/pms/inbox"
       owner = @preply.user.vname
-      sender = @preply.pm.to_user.vname
-      reciever = @preply.pm.from_user.vname
+      reciever = @preply.pm.to_user.vname
+      sender = @preply.pm.from_user.vname
       
       if(sender != reciever)
          emailUser = nil
          if(owner == sender)
-            emailUser = @preply.pm.from_user.email
+            emailUser = @preply.pm.to_user.email
          end
          if(owner == reciever)
-            emailUser = @preply.pm.to_user.email
+            emailUser = @preply.pm.from_user.email
          end
          if(emailUser != nil)
             mail(to: emailUser, subject: "A New PReply has arrived at the Palace")
