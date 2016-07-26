@@ -104,7 +104,7 @@ module PrepliesHelper
                         @pm = pmFound
                         flash[:success] = "PReply #{@preply.message} was successfully created."
                         UserMailer.send_preply(@preply).deliver
-                        redirect_to user_pm_path(@pm.to_user, @pm)
+                        redirect_to pms_outbox_path #user_pm_path(@pm.to_user, @pm)
                      else
                         render "new"
                      end
@@ -153,7 +153,7 @@ module PrepliesHelper
                         if(@preply.update_attributes(params[:preply]))
                            @pm = pmFound
                            flash[:success] = 'PReply was successfully updated.'
-                           redirect_to user_pm_path(@pm.to_user, @pm)
+                           redirect_to pms_outbox_path #user_pm_path(@pm.to_user, @pm)
                         else
                            render "edit"
                         end
