@@ -54,6 +54,9 @@ module SessionsHelper
                      if(typeFound.privilege == "Banned" && !userFound.admin)
                         flash.now[:error] = 'Your account has been banned'
                         render 'new'
+                     elsif(typeFound.privilege == "Review" && !userFound.admin)
+                        flash.now[:error] = 'Your account has not been activated yet'
+                        render 'new'
                      else
                         sign_in userFound
                         redirect_to userFound

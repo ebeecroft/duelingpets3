@@ -156,19 +156,27 @@ module UsersHelper
                #Create usertype
                newUserType = Usertype.new(params[:usertype])
                newUserType.user_id = newMember.id
-               newUserType.privilege = "User"
+               newUserType.privilege = "Review"
                @usertype = newUserType
                @usertype.save
                #Create onlineuser
                newOnlineUser = Onlineuser.new(params[:onlineuser])
                newOnlineUser.user_id = newMember.id
-               newOnlineUser.signed_in_at = currentTime
+               #newOnlineUser.signed_in_at = currentTime
                @onlineuser = newOnlineUser
                @onlineuser.save
+               #Create accountkey
+               newAccountKey = Accountkey.new(params[:accountkey])
+               newAccountKey.token = SecureRandom.urlsafe_base64
+               newAccountKey.user_id = newMember.id
+               @accounttoken = newAccountKey.token
+               @accountkey = newAccountKey
+               @accountkey.save
+               #newAccountKey.exx
                #Login the user
-               sign_in newMember
+               #sign_in newMember
                flash[:success] = "Welcome to the Duelingpets Website #{@user.vname}!"
-               UserMailer.welcome_email(@user).deliver
+               UserMailer.welcome_email(@user, @accounttoken).deliver
                redirect_to @user
             else
                render "new"
