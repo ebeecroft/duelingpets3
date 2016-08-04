@@ -22,6 +22,7 @@ class User < ActiveRecord::Base
    has_one :usertype, :foreign_key => "user_id", :dependent => :destroy
    has_one :pouch, :foreign_key => "user_id", :dependent => :destroy
    has_one :onlineuser, :foreign_key => "user_id", :dependent => :destroy
+   has_one :accountkey, :foreign_key => "user_id", :dependent => :destroy
 
    #Art section
    has_many :mainfolders, :foreign_key => "user_id", :dependent => :destroy

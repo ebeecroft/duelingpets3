@@ -1,8 +1,5 @@
 Trial::Application.routes.draw do
 
-  resources :accountkeys
-
-
    #Builds the users actions and the nested actions
    get '/users/maintenance' => 'users#maintenance'
    resources :users, :except => [:new] do #builds everything except new
@@ -183,7 +180,11 @@ Trial::Application.routes.draw do
    #Creates the recovery routes
    resources :passwordrecoveries, :only =>[:create] #Only create
 
+   #Creates the authentication routes
+   resources :authentications, :only =>[:create]
+
    #Login pages + user signup
+   get '/verify' => 'authentications#new'
    get '/recover' => 'passwordrecoveries#new'
    get '/signup' => 'users#new'
    get '/signin' => 'sessions#new'
@@ -200,6 +201,9 @@ Trial::Application.routes.draw do
 
    #Controls page visibility
    resources :maintenancemodes, :except =>[:show, :destroy] #Builds everything except show and destroy
+
+   #Builds accountkey authentication pages
+   resources :accountkeys, :only => [:index, :new, :create]
 
    #Root pages
    get 'maintenance' => "start#maintenance"

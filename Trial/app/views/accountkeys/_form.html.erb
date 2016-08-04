@@ -10,20 +10,13 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
+  <br>
+  <div class="pagetext">
     <%= f.label :user_id %><br />
     <%= f.number_field :user_id %>
   </div>
-  <div class="field">
-    <%= f.label :token %><br />
-    <%= f.text_field :token %>
-  </div>
-  <div class="field">
-    <%= f.label :activated %><br />
-    <%= f.check_box :activated %>
-  </div>
-  <div class="actions">
+  <div class="pagetext">
     <%= f.submit %>
   </div>
+  <br>
 <% end %>

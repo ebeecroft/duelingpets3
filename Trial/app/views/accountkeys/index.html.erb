@@ -1,27 +1,24 @@
-<h1>Listing accountkeys</h1>
-
-<table>
-  <tr>
-    <th>User</th>
-    <th>Token</th>
-    <th>Activated</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @accountkeys.each do |accountkey| %>
-  <tr>
-    <td><%= accountkey.user_id %></td>
-    <td><%= accountkey.token %></td>
-    <td><%= accountkey.activated %></td>
-    <td><%= link_to 'Show', accountkey %></td>
-    <td><%= link_to 'Edit', edit_accountkey_path(accountkey) %></td>
-    <td><%= link_to 'Destroy', accountkey, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
-
+<% provide(:title, "Accountkey: A way to keep bad users out!") %>
+<% provide(:description, "A place where the admin can view all of the valid user tokens.") %>
+<h1 class="pageheader">Listing accountkeys</h1>
+<br>
+<div class="pagetext">
+   <table>
+      <tr>
+         <th>User</th>
+         <th>Token</th>
+         <th>Expiration</th>
+         <th>Activated</th>
+      </tr>
+      <% @accountkeys.each do |accountkey| %>
+         <tr>
+            <td><%= accountkey.user.vname %>&nbsp;&nbsp;</td>
+            <td><%= accountkey.token %>&nbsp;&nbsp;</td>
+            <td><%= accountkey.expiration %>&nbsp;&nbsp;</td>
+            <td><%= accountkey.activated %></td>
+         </tr>
+      <% end %>
+   </table>
+</div>
 <br />
-
-<%= link_to 'New Accountkey', new_accountkey_path %>
+<p class="pagetext"><%= link_to 'New Accountkey', new_accountkey_path %></p>

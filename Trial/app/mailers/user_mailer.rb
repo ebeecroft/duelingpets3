@@ -1,7 +1,8 @@
 class UserMailer < ActionMailer::Base
    default from: "do-not-reply@duelingpets.net"
 
-   def welcome_email(user)
+   def welcome_email(user, token)
+      @accounttoken = token
       @user = user
       @url = "http://www.duelingpets.net/signin"
       mail(to: @user.email, subject: "Welcome to the World of Duelingpets")

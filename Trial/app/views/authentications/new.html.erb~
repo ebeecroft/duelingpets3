@@ -1,0 +1,12 @@
+<% provide(:title, "Authentication: User verification!") %>
+<% provide(:keywords, "user, account, verification") %>
+<% provide(:description, "Verifies your user account.") %>
+<h1 class="pagetextheader">Verify your account</h1>
+<br>
+<%= form_for(:session, url: authentications_path) do |f| %><!--Has to have session-->
+   <div class="pagetext">
+      <p><%= f.label :login_id, "Login Name" %></p>
+      <p><%= f.text_field :login_id %></p>
+      <p><%= f.submit "Verify Account" %></p>
+   </div>
+<% end %>
