@@ -7,14 +7,12 @@
       <tr>
          <th>User</th>
          <th>Token</th>
-         <th>Expiration</th>
          <th>Activated</th>
       </tr>
       <% @accountkeys.each do |accountkey| %>
          <tr>
             <td><%= accountkey.user.vname %>&nbsp;&nbsp;</td>
             <td><%= accountkey.token %>&nbsp;&nbsp;</td>
-            <td><%= accountkey.expiration %>&nbsp;&nbsp;</td>
             <td><%= accountkey.activated %></td>
          </tr>
       <% end %>
