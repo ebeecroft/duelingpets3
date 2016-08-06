@@ -51,8 +51,12 @@ module CusersHelper
       #This structure needs to change
       tokenFound = cookies[:remember_token]
       if(tokenFound)
-         key = Sessionkey.find_by_remember_token(cookies[:remember_token])
-         @current_user ||= User.find_by_id(key.user_id)
+         keyFound = Sessionkey.find_by_remember_token(cookies[:remember_token])
+         if(keyFound)
+            @current_user ||= User.find_by_id(keyFound.user_id)
+         else
+            @current_user
+         end
       else
          @current_user
       end
