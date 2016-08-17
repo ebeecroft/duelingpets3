@@ -1,0 +1,42 @@
+<% provide(:title, "Item: A place to review uploaded items!") %>
+<% provide(:description, "The place where one can review unprocessed items and add it to the approved item section.") %>
+<h1 class="pageheader">Items to be reviewed</h1>
+<br>
+<div class="pagebox"><%= paginate @items %></div>
+<% @items.each do |item| %>
+   <br>
+   <div class="pagetext">
+      <div class="inner"><%= link_to item.name, item %></div>
+      <div class="inner"><%= button_to 'Approve', items_review1_path(:item_id=>item.id), method: :post %></div>
+      <div class="inner"><%= button_to 'Deny', items_review2_path(:item_id=>item.id), method: :post %></div>
+      <br>
+      <div class="inner"><%= image_tag item.ipicture_url(:thumb).to_s %></div>
+      <div class="inner">
+         <table>
+            <tr>
+               <td>Attack: <%= item.atk %></td>
+            </tr>
+            <tr>
+               <td>Defense: <%= item.def %></td>
+            </tr>
+            <tr>
+               <td>Speed: <%= item.spd %></td>
+            </tr>
+            <tr>
+               <td>Health: <%= item.hp %></td>
+            </tr>
+            <tr>
+               <td>Cost: <%= item.cost %></td>
+            </tr>
+            <tr>
+               <!--Remember to change this field when I implement the new fix-->
+               <td>Creator: <%= getType(item.user) %><%= link_to item.user.vname, user_path(item.user) %></td>
+            </tr>
+            <tr>
+               <td>Created: <%= distance_of_time_in_words_to_now item.created_on %> ago</td>
+            </tr>
+         </table>
+      </div>
+      <p><%= item.description %></p>
+   </div>
+<% end %>

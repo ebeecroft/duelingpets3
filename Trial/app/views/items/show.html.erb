@@ -8,6 +8,7 @@
    <div class="inner"><%= button_to 'Destroy', @item, method: :delete, data: { confirm: 'Are you sure?' } %></div>
    <p><%= image_tag @item.ipicture_url(:thumb).to_s %></p>
    <p>Created on: <%= @item.created_on.strftime("%B-%d-%Y") %></p>
+   <p>Creator: <%= @item.user.vname %></p>
    <p>Description: <%= @item.description %></p>
    <br>
    <p><%= link_to 'Back', items_path %></p>

@@ -59,14 +59,45 @@ module ItemsHelper
          return value
       end
 
+      def itemApproved
+         itemFound = Item.find_by_id(params[:item_id])
+         if(itemFound)
+            itemFound.reviewed = true
+            pouch = Pouch.find_by_user_id(itemFound.user_id)
+            pointsForItem = 3
+            pouch.amount += pointsForItem
+            @pouch = pouch
+            @pouch.save
+            @item = itemFound
+            @item.save
+            ItemMailer.item_approved(@item, pointsForItem).deliver
+            redirect_to items_review_path
+         else
+            render "public/404"
+         end
+      end
+
+      def itemDenied
+         itemFound = Item.find_by_id(params[:item_id])
+         if(itemFound)
+            #Retrieve the user who owns this pet first
+            #userEmail = petFound.user.email
+            #Send mail to user with link to edit the pet they sent
+            @item = itemFound
+            ItemMailer.item_denied(@item).deliver
+            redirect_to items_review_path
+         else
+            render "public/404"
+         end
+      end
+
       def switch(type)
          if(type == "index") #Guest Access needed
             itemCount = 0
-            items = Item.order("id").page(params[:page]).per(10)
-            items.each do |item|
-               itemCount += 1
-            end
-            @items = items
+            allItems = Item.all
+            reviewedItems = allItems.select{|item| item.reviewed}
+            itemCount = reviewedItems.count
+            @items = Kaminari.paginate_array(reviewedItems).page(params[:page]).per(9) #reviewedItems
             @count = itemCount
          elsif(type == "show") #Guest Access needed
             itemFound = Item.find_by_name(params[:id])
@@ -75,47 +106,48 @@ module ItemsHelper
             else
                render "public/404"
             end
-         elsif(type == "new") #Admin Only
+         elsif(type == "new") #Login Only
             logged_in = current_user
             if(logged_in)
-               if(logged_in.admin)
-                  newItem = Item.new
-                  @item = newItem
+               newItem = Item.new
+               @item = newItem
+            else
+               redirect_to root_url
+            end
+         elsif(type == "create") #Login Only
+            logged_in = current_user
+            if(logged_in)
+               newItem = Item.new(params[:item])
+               newItem.user_id = logged_in.id
+               hpCost = 3 * newItem.hp
+               atkCost = 3 * newItem.atk
+               defCost = 3 * newItem.def
+               spdCost = 3 * newItem.spd
+               baseCost = 3
+               newItem.cost = hpCost + atkCost + defCost + spdCost + baseCost
+               currentTime = Time.now
+               newItem.created_on = currentTime
+               @item = newItem
+               if(@item.save)
+                  ItemMailer.review_item(@item).deliver
+                  flash[:success] = 'Item was successfully created.'
+                  redirect_to @item
                else
-                  redirect_to root_url
+                  render "new"
                end
             else
                redirect_to root_url
             end
-         elsif(type == "create") #Admin Only
-            logged_in = current_user
-            if(logged_in)
-               if(logged_in.admin)
-                  newItem = Item.new(params[:item])
-                  currentTime = Time.now
-                  newItem.created_on = currentTime
-                  @item = newItem
-                  if(@item.save)
-                     flash[:success] = 'Item was successfully created.'
-                     redirect_to @item
-                  else
-                     render "new"
-                  end
-               else
-                  redirect_to root_url
-               end
-            else
-               redirect_to root_url
-            end
-         elsif(type == "edit") #Admin Only
+         elsif(type == "edit") #Login and same user
             logged_in = current_user
             if(logged_in)
                itemFound = Item.find_by_name(params[:id])
                if(itemFound)
-                  if(logged_in.admin)
+                  userMatch = ((logged_in.id == itemFound.user_id) || logged_in.admin)
+                  if(userMatch)
                      @item = itemFound
                   else
-                     redirect_to root_url
+                     redirect_to root_path
                   end
                else
                   render "public/404"
@@ -123,12 +155,19 @@ module ItemsHelper
             else
                redirect_to root_url
             end
-         elsif(type == "update") #Admin Only
+         elsif(type == "update") #Login Only
             logged_in = current_user
             if(logged_in)
                itemFound = Item.find_by_name(params[:id])
                if(itemFound)
-                  if(logged_in.admin)
+                  userMatch = ((logged_in.id == itemFound.user_id) || logged_in.admin)
+                  if(userMatch)
+                     hpCost = 3 * itemFound.hp
+                     atkCost = 3 * itemFound.atk
+                     defCost = 3 * itemFound.def
+                     spdCost = 3 * itemFound.spd
+                     baseCost = 3
+                     itemFound.cost = hpCost + atkCost + defCost + spdCost + baseCost
                      @item = itemFound
                      if(@item.update_attributes(params[:item]))
                         flash[:success] = 'Item was successfully updated.'
@@ -137,7 +176,7 @@ module ItemsHelper
                         render "edit"
                      end
                   else
-                     redirect_to root_url
+                     redirect_to root_path
                   end
                else
                   render "public/404"
@@ -159,6 +198,58 @@ module ItemsHelper
                   end
                else
                   render "public/404"
+               end
+            else
+               redirect_to root_path
+            end
+         elsif(type == "review")
+            logged_in = current_user
+            if(logged_in)
+               if(logged_in.admin)
+                  allItems = Item.all
+                  itemsToReview = allItems.select{|item| !item.reviewed}
+                  @items = Kaminari.paginate_array(itemsToReview).page(params[:page]).per(10)
+               else
+                  typeFound = Usertype.find_by_user_id(logged_in.id)
+                  if(typeFound.privilege == "Reviewer")
+                     allItems = Item.all
+                     itemsToReview = allItems.select{|item| !item.reviewed}
+                     @items = Kaminari.paginate_array(itemsToReview).page(params[:page]).per(10)
+                  else
+                     redirect_to root_path
+                  end
+               end
+            else
+               redirect_to root_path
+            end
+         elsif(type == "approve")
+            logged_in = current_user
+            if(logged_in)
+               if(logged_in.admin)
+                  itemApproved
+               else
+                  typeFound = Usertype.find_by_user_id(logged_in.id)
+                  if(typeFound.privilege == "Reviewer")
+                     itemApproved
+                  else
+                     redirect_to root_path
+                  end
+               end
+            else
+               redirect_to root_path
+            end
+         elsif(type == "deny")
+            logged_in = current_user
+            if(logged_in)
+               if(logged_in.admin)
+                  itemDenied
+               else
+                  typeFound = Usertype.find_by_user_id(logged_in.id)
+                  if(typeFound.privilege == "Reviewer")
+                     itemDenied
+                  else
+                     redirect_to root_path
+                  end
                end
             else
                redirect_to root_path

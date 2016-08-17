@@ -123,6 +123,9 @@ Trial::Application.routes.draw do
 
    #Builds the item actions
    get '/items/maintenance' => 'items#maintenance'
+   get '/items/review' => 'items#review' #has to be before the pets controller
+   post 'items/review1' => 'items#approve'
+   post 'items/review2' => 'items#deny'
    resources :items #Builds everything for items
 
    #Builds the equips and fights actions

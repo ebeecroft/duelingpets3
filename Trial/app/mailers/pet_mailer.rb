@@ -16,13 +16,13 @@ class PetMailer < ActionMailer::Base
    def pet_approved(pet, points)
       @pet = pet
       @points = points
-      @url = "http://www.duelingpets.net/pets/#{@pet.id}"
+      @url = "http://www.duelingpets.net/users/#{@pet.user.vname}/pets/#{@pet.species_name}"
       mail(to: pet.user.email, subject: "Your Pet was Approved")
    end
 
    def pet_denied(pet)
       @pet = pet
-      @url = "http://www.duelingpets.net/pets/#{@pet.id}/edit"
+      @url = "http://www.duelingpets.net/users/#{@pet.user.vname}/pets/#{@pet.species_name}/edit"
       mail(to: pet.user.email, subject: "Your Pet was Denied")
    end
 end

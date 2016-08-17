@@ -29,6 +29,18 @@ class ItemsController < ApplicationController
      mode "destroy"
    end
 
+   def review
+      mode "review"
+   end
+
+   def approve
+      mode "approve"
+   end
+
+   def deny
+      mode "deny"
+   end
+
    def maintenance
    end
 end
