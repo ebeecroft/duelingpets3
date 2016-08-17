@@ -4,8 +4,20 @@
 <p id="notice"><%= notice %></p>
 <div class="pagetext">
    <div class="inner">Name: <%= @item.name %></div>
-   <div class="inner"><%= button_to 'Edit', edit_item_path(@item), method: :get %></div>
-   <div class="inner"><%= button_to 'Destroy', @item, method: :delete, data: { confirm: 'Are you sure?' } %></div>
+   <div class="inner">
+      <% if current_user %>
+         <% if current_user.id == @pet.user_id || current_user.admin %>
+            <%= button_to 'Edit', edit_item_path(@item), method: :get %>
+         <% end %>
+      <% end %>
+   </div>
+   <div class="inner">
+      <% if current_user %>
+         <% if current_user.admin %>
+            <%= button_to 'Destroy', @item, method: :delete, data: { confirm: 'Are you sure?' } %>
+         <% end %>
+      <% end %>
+   </div>
    <p><%= image_tag @item.ipicture_url(:thumb).to_s %></p>
    <p>Created on: <%= @item.created_on.strftime("%B-%d-%Y") %></p>
    <p>Creator: <%= @item.user.vname %></p>
