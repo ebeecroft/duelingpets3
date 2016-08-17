@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160804043249) do
+ActiveRecord::Schema.define(:version => 20160817035050) do
 
   create_table "accountkeys", :force => true do |t|
     t.integer  "user_id"
@@ -147,6 +147,8 @@ ActiveRecord::Schema.define(:version => 20160804043249) do
     t.string   "type"
     t.boolean  "manyuses",    :default => false
     t.boolean  "maintenance", :default => false
+    t.integer  "user_id"
+    t.boolean  "reviewed",    :default => false
   end
 
   create_table "mainfolders", :force => true do |t|
