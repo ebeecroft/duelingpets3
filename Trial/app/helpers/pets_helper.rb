@@ -94,7 +94,8 @@ module PetsHelper
       end
 
       def petType(type)
-         allPets = Pet.all
+         allPets = Pet.order("created_on desc") #originall all
+#.order("created_on desc")
          reviewedPets = allPets.select{|pet| pet.reviewed}
          if(type == "pet")
             pets = reviewedPets.select{|pet| !pet.monster}

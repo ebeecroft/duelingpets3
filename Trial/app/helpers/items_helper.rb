@@ -94,7 +94,7 @@ module ItemsHelper
       def switch(type)
          if(type == "index") #Guest Access needed
             itemCount = 0
-            allItems = Item.all
+            allItems = Item.order("created_on desc")
             reviewedItems = allItems.select{|item| item.reviewed}
             itemCount = reviewedItems.count
             @items = Kaminari.paginate_array(reviewedItems).page(params[:page]).per(9) #reviewedItems
@@ -119,12 +119,16 @@ module ItemsHelper
             if(logged_in)
                newItem = Item.new(params[:item])
                newItem.user_id = logged_in.id
-               hpCost = 3 * newItem.hp
-               atkCost = 3 * newItem.atk
-               defCost = 3 * newItem.def
-               spdCost = 3 * newItem.spd
-               baseCost = 3
-               newItem.cost = hpCost + atkCost + defCost + spdCost + baseCost
+               cost = 0
+               if((newItem.hp && newItem.atk) && (newItem.def && newItem.spd))
+                  hpCost = 3 * newItem.hp
+                  atkCost = 3 * newItem.atk
+                  defCost = 3 * newItem.def
+                  spdCost = 3 * newItem.spd
+                  baseCost = 3
+                  cost = hpCost + atkCost + defCost + spdCost + baseCost
+               end
+               newItem.cost = cost
                currentTime = Time.now
                newItem.created_on = currentTime
                @item = newItem
@@ -162,12 +166,16 @@ module ItemsHelper
                if(itemFound)
                   userMatch = ((logged_in.id == itemFound.user_id) || logged_in.admin)
                   if(userMatch)
-                     hpCost = 3 * itemFound.hp
-                     atkCost = 3 * itemFound.atk
-                     defCost = 3 * itemFound.def
-                     spdCost = 3 * itemFound.spd
-                     baseCost = 3
-                     itemFound.cost = hpCost + atkCost + defCost + spdCost + baseCost
+                     cost = 0
+                     if((itemFound.hp && itemFound.atk) && (itemFound.def && itemFound.spd))
+                        hpCost = 3 * itemFound.hp
+                        atkCost = 3 * itemFound.atk
+                        defCost = 3 * itemFound.def
+                        spdCost = 3 * itemFound.spd
+                        baseCost = 3
+                        cost = hpCost + atkCost + defCost + spdCost + baseCost
+                     end
+                     itemFound.cost = cost
                      @item = itemFound
                      if(@item.update_attributes(params[:item]))
                         flash[:success] = 'Item was successfully updated.'

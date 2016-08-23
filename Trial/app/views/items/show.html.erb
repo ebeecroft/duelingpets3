@@ -20,7 +20,7 @@
    </div>
    <p><%= image_tag @item.ipicture_url(:thumb).to_s %></p>
    <p>Created on: <%= @item.created_on.strftime("%B-%d-%Y") %></p>
-   <p>Creator: <%= @item.user.vname %></p>
+   <p>Creator: <%= getType(@item.user) %><%= link_to @item.user.vname, user_path(@item.user) %></p>
    <p>Description: <%= @item.description %></p>
    <br>
    <p><%= link_to 'Back', items_path %></p>
