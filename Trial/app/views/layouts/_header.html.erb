@@ -13,7 +13,7 @@
          <div class="navigationspacing"><%#= link_to "Suggestions", new_suggestion_path %></div>
          <div class="navigationspacing"><%#= link_to "Shop", items_path %></div>
       <% end %>
-      <div class="navigationspacing"><%#= link_to "News", blogs_path %></div>
+      <div class="navigationspacing"><%= link_to "News", blogs_path %></div>
       <% if current_user %>
          <div class="navigationspacing"><%#= link_to "My Inventory", user_inventories_path(current_user.vname) %></div>
          <div class="navigationspacing"><%#= link_to "Fight Monsters", pets_monsters_path %></div>
