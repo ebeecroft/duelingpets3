@@ -9,6 +9,7 @@
       <% if !current_user %>
          <div class="navigationspacing"><%= link_to "Forgot Password", recover_path %></div>
          <div class="navigationspacing"><%= link_to "Forum", forums_path %></div>
+         <div class="navigationspacing"><%= link_to "Suggestions", new_suggestion_path %></div>
       <% else %>
          <div class="navigationspacing"><%= link_to "Suggestions", new_suggestion_path %></div>
          <div class="navigationspacing"><%#= link_to "Shop", items_path %></div>
