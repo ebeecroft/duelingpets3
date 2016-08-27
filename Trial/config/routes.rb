@@ -192,6 +192,7 @@ Trial::Application.routes.draw do
    get '/signup' => 'users#new'
    get '/signin' => 'sessions#new'
    match '/logout' => 'sessions#destroy', via: :delete #has to be a match condition
+   get '/sitemap' => 'start#sitemap'
 
    #Builds the sessionkey
    resources :sessionkeys, :only =>[:index] #Only index

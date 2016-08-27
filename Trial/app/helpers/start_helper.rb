@@ -83,6 +83,7 @@ module StartHelper
 
       def switch(type)
          if(type == "home") #Guest
+         elsif(type == "sitemap") #Guest
          end
       end
 end

@@ -4,4 +4,8 @@ class StartController < ApplicationController
    def home
       mode "home"
    end
+
+   def sitemap
+      mode "sitemap"
+   end
 end
