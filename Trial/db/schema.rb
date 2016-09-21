@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160921024541) do
+ActiveRecord::Schema.define(:version => 20160921053800) do
 
   create_table "accountkeys", :force => true do |t|
     t.integer  "user_id"
@@ -316,6 +316,9 @@ ActiveRecord::Schema.define(:version => 20160921024541) do
     t.boolean  "maintenance", :default => false
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
+    t.string   "ogg"
+    t.string   "mp3"
+    t.string   "wav"
   end
 
   create_table "subfolders", :force => true do |t|
