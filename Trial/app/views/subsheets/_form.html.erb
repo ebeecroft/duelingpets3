@@ -1,0 +1,45 @@
+<%= form_for(@subsheet) do |f| %>
+  <% if @subsheet.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@subsheet.errors.count, "error") %> prohibited this subsheet from being saved:</h2>
+
+      <ul>
+      <% @subsheet.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :created_on %><br />
+    <%= f.datetime_select :created_on %>
+  </div>
+  <div class="field">
+    <%= f.label :user_id %><br />
+    <%= f.number_field :user_id %>
+  </div>
+  <div class="field">
+    <%= f.label :mainsheet_id %><br />
+    <%= f.number_field :mainsheet_id %>
+  </div>
+  <div class="field">
+    <%= f.label :collab_mode %><br />
+    <%= f.check_box :collab_mode %>
+  </div>
+  <div class="field">
+    <%= f.label :maintenance %><br />
+    <%= f.check_box :maintenance %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

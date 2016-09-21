@@ -1,0 +1,31 @@
+<h1>Listing mainsheets</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Created on</th>
+    <th>User</th>
+    <th>Maintenance</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @mainsheets.each do |mainsheet| %>
+  <tr>
+    <td><%= mainsheet.name %></td>
+    <td><%= mainsheet.description %></td>
+    <td><%= mainsheet.created_on %></td>
+    <td><%= mainsheet.user_id %></td>
+    <td><%= mainsheet.maintenance %></td>
+    <td><%= link_to 'Show', mainsheet %></td>
+    <td><%= link_to 'Edit', edit_mainsheet_path(mainsheet) %></td>
+    <td><%= link_to 'Destroy', mainsheet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Mainsheet', new_mainsheet_path %>

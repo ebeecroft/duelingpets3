@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @sound.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @sound.description %>
+</p>
+
+<p>
+  <b>Created on:</b>
+  <%= @sound.created_on %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @sound.user_id %>
+</p>
+
+<p>
+  <b>Subsheet:</b>
+  <%= @sound.subsheet_id %>
+</p>
+
+<p>
+  <b>Reviewed:</b>
+  <%= @sound.reviewed %>
+</p>
+
+<p>
+  <b>Maintenance:</b>
+  <%= @sound.maintenance %>
+</p>
+
+
+<%= link_to 'Edit', edit_sound_path(@sound) %> |
+<%= link_to 'Back', sounds_path %>

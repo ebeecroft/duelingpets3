@@ -1,0 +1,35 @@
+<h1>Listing subsheets</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Created on</th>
+    <th>User</th>
+    <th>Mainsheet</th>
+    <th>Collab mode</th>
+    <th>Maintenance</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @subsheets.each do |subsheet| %>
+  <tr>
+    <td><%= subsheet.name %></td>
+    <td><%= subsheet.description %></td>
+    <td><%= subsheet.created_on %></td>
+    <td><%= subsheet.user_id %></td>
+    <td><%= subsheet.mainsheet_id %></td>
+    <td><%= subsheet.collab_mode %></td>
+    <td><%= subsheet.maintenance %></td>
+    <td><%= link_to 'Show', subsheet %></td>
+    <td><%= link_to 'Edit', edit_subsheet_path(subsheet) %></td>
+    <td><%= link_to 'Destroy', subsheet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Subsheet', new_subsheet_path %>

@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @subsheet.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @subsheet.description %>
+</p>
+
+<p>
+  <b>Created on:</b>
+  <%= @subsheet.created_on %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @subsheet.user_id %>
+</p>
+
+<p>
+  <b>Mainsheet:</b>
+  <%= @subsheet.mainsheet_id %>
+</p>
+
+<p>
+  <b>Collab mode:</b>
+  <%= @subsheet.collab_mode %>
+</p>
+
+<p>
+  <b>Maintenance:</b>
+  <%= @subsheet.maintenance %>
+</p>
+
+
+<%= link_to 'Edit', edit_subsheet_path(@subsheet) %> |
+<%= link_to 'Back', subsheets_path %>

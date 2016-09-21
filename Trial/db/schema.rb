@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160817035050) do
+ActiveRecord::Schema.define(:version => 20160921024541) do
 
   create_table "accountkeys", :force => true do |t|
     t.integer  "user_id"
@@ -161,6 +161,16 @@ ActiveRecord::Schema.define(:version => 20160817035050) do
     t.datetime "updated_at",                     :null => false
   end
 
+  create_table "mainsheets", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_on"
+    t.integer  "user_id"
+    t.boolean  "maintenance", :default => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+  end
+
   create_table "maintenancemodes", :force => true do |t|
     t.string   "name"
     t.datetime "created_on"
@@ -296,6 +306,18 @@ ActiveRecord::Schema.define(:version => 20160817035050) do
     t.datetime "updated_at",     :null => false
   end
 
+  create_table "sounds", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_on"
+    t.integer  "user_id"
+    t.integer  "subsheet_id"
+    t.boolean  "reviewed",    :default => false
+    t.boolean  "maintenance", :default => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+  end
+
   create_table "subfolders", :force => true do |t|
     t.string   "name"
     t.text     "description"
@@ -306,6 +328,18 @@ ActiveRecord::Schema.define(:version => 20160817035050) do
     t.boolean  "maintenance",   :default => false
     t.datetime "created_at",                       :null => false
     t.datetime "updated_at",                       :null => false
+  end
+
+  create_table "subsheets", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_on"
+    t.integer  "user_id"
+    t.integer  "mainsheet_id"
+    t.boolean  "collab_mode",  :default => false
+    t.boolean  "maintenance",  :default => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
   end
 
   create_table "subtopics", :force => true do |t|
