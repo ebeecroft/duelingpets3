@@ -1,40 +1,44 @@
+<% provide(:title, "Subsheet: The place where users audio gets uploaded to!") %>
+<% provide(:keywords, "user, audio, uploaded") %>
+<% provide(:description, "Breaks down users music into nice folders.") %>
 <p id="notice"><%= notice %></p>
-
-<p>
-  <b>Name:</b>
-  <%= @subsheet.name %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%= @subsheet.description %>
-</p>
-
-<p>
-  <b>Created on:</b>
-  <%= @subsheet.created_on %>
-</p>
-
-<p>
-  <b>User:</b>
-  <%= @subsheet.user_id %>
-</p>
-
-<p>
-  <b>Mainsheet:</b>
-  <%= @subsheet.mainsheet_id %>
-</p>
-
-<p>
-  <b>Collab mode:</b>
-  <%= @subsheet.collab_mode %>
-</p>
-
-<p>
-  <b>Maintenance:</b>
-  <%= @subsheet.maintenance %>
-</p>
-
-
-<%= link_to 'Edit', edit_subsheet_path(@subsheet) %> |
-<%= link_to 'Back', subsheets_path %>
+<h1 class="pageheader"><%= @subsheet.name %></h1>
+<br>
+<p class="pagetext"><%= @subsheet.description %></p>
+<br>
+<div class="pagebox"><%= paginate @sounds %></div>
+<!--Container--->
+<!--Title of Artwork First-->
+<!--Author on the bottom-->
+<!--End of Container-->
+<!--Should eventually change order for processing of art images--->
+<br>
+<div class="pagetext">
+   <% @sounds.each_with_index do |sound, index| %>
+      <div class="container">
+         <div class="inner">
+            <div class="inner"><%= link_to sound.name, subsheet_sound_path(@subsheet, sound) %></div>
+            <% if current_user && (current_user.id == sound.user_id || current_user.admin? )%>
+               <div class="inner"><%= button_to 'Edit', edit_subsheet_sound_path(@subsheet, sound), method: :get %></div>
+               <div class="inner"><%= button_to 'Destroy', [@subsheet, sound], method: :delete, data: { confirm: 'Are you sure?' } %></div>
+            <% end %>
+            <p><%= audio_tag sound.ogg_url.to_s, :controls => true %></p>
+            <p><%= audio_tag sound.mp3_url.to_s, :controls => true %></p>
+            <p><%= audio_tag sound.wav_url.to_s, :controls => true %></p>
+         </div>
+         <br>
+         <p>Created on: <%= sound.created_on.strftime("%B-%d-%Y") %></p>
+         <p>Annoucer: <%= getType(sound.user) %><%= link_to sound.user.vname, user_path(sound.user) %></p>
+      </div>
+      <% if ((index + 1) % 3) == 0 %>
+         <br>
+         <br>
+      <% end %>
+   <% end %>
+</div>
+<br>
+<% if current_user %>
+   <p class="pagetext"><%= link_to "New Sound", new_subsheet_sound_path(@subsheet) %></p>
+   <br>
+<% end %>
+<p class="pagetext"><%= link_to 'Back', user_mainsheet_path(@mainsheet.user.vname, @subsheet.mainsheet.name) %></p>

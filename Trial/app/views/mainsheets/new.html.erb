@@ -1,5 +1,5 @@
-<h1>New mainsheet</h1>
-
+<% provide(:title, "Mainsheet: Create new radios here!") %>
+<% provide(:description, "Where new radios are created by the user.") %>
+<h1 class="pagetextheader">New mainsheet</h1>
 <%= render 'form' %>
-
-<%= link_to 'Back', mainsheets_path %>
+<p class="pagetext"><%= link_to 'Back', mainsheets_path %></p>

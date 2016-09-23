@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Your audio <%= @sound.name %> was not approved.</h1>
+    <p>
+      The reason that this audio was denied access onto
+      the site was either because the audio itself was
+      empty, or the audio was found to be inappropriate.
+    </p>
+    <p>
+      If you can revise the audio that was just sent
+      then maybe it will be able to be approved the next
+      time around. Its no big deal and the review team
+      would be happy to point you into the right direction
+      for your audio to be processed.
+    </p>
+    <p>
+      To edit this audio just follow this link: <%= @url %>.
+      Once there just click the edit button to edit your
+      audio.
+    </p>
+    <p>Your friends the Review Team</p>
+  </body>
+</html>

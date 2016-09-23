@@ -1,0 +1,20 @@
+<% provide(:title, "Sound: A place to review uploaded sounds!") %>
+<% provide(:description, "The place where one can review unprocessed sounds and add them to the approved sound section.") %>
+<h1 class="pageheader">Sounds to be reviewed</h1>
+<br>
+<div class="pagebox"><%= paginate @sounds %></div>
+<% @sounds.each do |sound| %>
+   <br>
+   <div class="pagetext">
+      <div class="inner"><%= link_to sound.name, subsheet_sound_path(sound.subsheet, sound) %></div>
+      <div class="inner"><%= button_to 'Approve', sounds_review1_path(:sound_id=>sound.id), method: :post %></div>
+      <div class="inner"><%= button_to 'Deny', sounds_review2_path(:sound_id=>sound.id), method: :post %></div>
+      <p><%= audio_tag sound.ogg_url.to_s, :controls => true %></p>
+      <p><%= audio_tag sound.mp3_url.to_s, :controls => true %></p>
+      <p><%= audio_tag sound.wav_url.to_s, :controls => true %></p>
+      <p>Created: <%= distance_of_time_in_words_to_now sound.created_on %> ago</td>
+      <p><%= sound.description %></p>
+      <p>Annoucer: <%= getType(sound.user) %><%= link_to sound.user.vname, user_path(sound.user.vname) %></p>
+      <p>Subsheet: <%= link_to sound.subsheet.name, mainsheet_subsheet_path(sound.subsheet.mainsheet, sound.subsheet) %></p>
+   </div>
+<% end %>

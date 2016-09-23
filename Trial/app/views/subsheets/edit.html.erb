@@ -1,6 +1,5 @@
-<h1>Editing subsheet</h1>
-
+<% provide(:title, "Subsheet: Edit your subsheet here!") %>
+<% provide(:description, "Allows the users to edit their subsheet to the best of their abilities.") %>
+<h1 class="pagetextheader">Editing subsheet</h1>
 <%= render 'form' %>
-
-<%= link_to 'Show', @subsheet %> |
-<%= link_to 'Back', subsheets_path %>
+<p class="pagetext"><%= link_to 'Back', mainsheet_subsheet_path(@mainsheet, @subsheet) %></p>

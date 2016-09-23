@@ -1,6 +1,5 @@
-<h1>Editing mainsheet</h1>
-
+<% provide(:title, "Mainsheet: Edit your radio here!") %>
+<% provide(:description, "Allows the users to edit their radios to the best of their abilities.") %>
+<h1 class="pagetextheader">Editing mainsheet</h1>
 <%= render 'form' %>
-
-<%= link_to 'Show', @mainsheet %> |
-<%= link_to 'Back', mainsheets_path %>
+<p class="pagetext"><%= link_to 'Back', user_mainsheet_path(@mainsheet.user, @mainsheet) %></p>

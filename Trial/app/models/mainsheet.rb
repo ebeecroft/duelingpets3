@@ -1,3 +1,9 @@
 class Mainsheet < ActiveRecord::Base
-  attr_accessible :created_on, :description, :maintenance, :name, :user_id
+   attr_accessible :name, :description
+   has_many :subsheets, :foreign_key => "mainsheet_id", :dependent => :destroy
+   belongs_to :user
+
+   def to_param
+      name
+   end
 end

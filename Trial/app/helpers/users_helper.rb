@@ -31,6 +31,56 @@ module UsersHelper
    end
 
    private
+      def getAgeGroup(userFound)
+         group = ""
+         string_array = userFound.birthday.split("/")
+         month, day, year = string_array.map { |str| str.to_i}
+         value1 = month / 12
+         value2 = day / 365
+         value3 = year + value1 + value2
+         #convertedValue = value3.to_datetime
+         currentTime = Time.now.to_i
+#         string_array2 = currentTime.split("-")
+#         year2, month2, day2 = string_array2.map { |str| str.to_i}
+#         value4 = month2 / 12
+#         value5 = day / 365
+#         value6 = year2 + value5 + value4
+#         value4 = (currentTime - convertedValue)
+         #raise "Current value 4 is: #{value4}"
+         age = currentTime - value3 #(value6 - value3)
+         if(age >= 7 && age <= 10)
+            group = "Newborn"
+         elsif(age >= 11 && age <= 14)
+            group = "Toddler"
+         elsif(age >= 15 && age <= 18)
+            group = "Kid"
+         elsif(age >= 19 && age <= 22)
+            group = "Teen"
+         elsif(age >= 23 && age <= 26)
+            group = "Young Adult"
+         elsif(age > 26)
+            group = "Adult"
+         else
+            group = "Underaged"
+         end
+         return group
+      end
+
+      def getAge(userFound)
+         currentTime = Time.now
+         age = 10
+         if(userFound.birthday)
+            string_array = userFound.birthday.split("/")
+            month, day, year = string_array.map { |str| str.to_i}
+            value = year
+            age = userFound.birthday 
+            #petCost, petLevel = string_array.map { |str| str.to_i}
+            #Need to split on slashes and dash 
+            #age = (currentTime - userFound.birthday) / 1.year #currentTime - userFound.birthday
+         end
+         return age
+      end
+
       def getAvatar(userFound)
          currentAvatar = "No avatar available"
          avatarFound = userFound.avatar_url(:thumb)
@@ -122,6 +172,7 @@ module UsersHelper
                @gcount = userFound.mainfolders.count
                @ccount = commentCount
                @bcount = userFound.blogs.count
+               @rcount = userFound.mainsheets.count
                onlineUserFound = Onlineuser.find_by_user_id(userFound.id) #Ignore this for right now
                @onlineuser = onlineUserFound
                allPm = Pm.all

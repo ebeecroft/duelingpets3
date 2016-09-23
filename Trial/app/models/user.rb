@@ -5,6 +5,11 @@ class User < ActiveRecord::Base
    before_save { |user| user.email = user.email.downcase }
    before_save { |user| user.first_name = user.first_name.humanize }
 
+   #Radio section
+   has_many :mainsheets, :foreign_key => "user_id", :dependent => :destroy
+   has_many :subsheets, :foreign_key => "user_id", :dependent => :destroy
+   has_many :sounds, :foreign_key => "user_id", :dependent => :destroy
+
    #Forum section
    has_many :forums, :foreign_key => "user_id", :dependent => :destroy
    has_many :tcontainers, :foreign_key => "user_id", :dependent => :destroy
@@ -39,7 +44,7 @@ class User < ActiveRecord::Base
    has_many :inventories, :foreign_key => "user_id", :dependent => :destroy
    has_many :blogs, :foreign_key => "user_id", :dependent => :destroy
    has_many :replies, :foreign_key => "user_id", :dependent => :destroy
-   has_many :itmes, :foreign_key => "user_id", :dependent => :destroy
+   has_many :items, :foreign_key => "user_id", :dependent => :destroy
 
    #PM
    has_many :pms, :foreign_key => "user_id", :dependent => :destroy

@@ -1,4 +1,4 @@
-<%= form_for(@sound) do |f| %>
+<%= form_for([@subsheet, @sound]) do |f| %>
   <% if @sound.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@sound.errors.count, "error") %> prohibited this sound from being saved:</h2>
@@ -10,36 +10,44 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
+  <br>
+  <div class="pagetext">
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>
-  <div class="field">
+  <br>
+  <p class="pagetext">Ogg files</p>
+  <div class="pagetext">
+    <%= f.file_field :ogg %>
+  </div>
+  <div class="pagetext">
+    <%= f.label :remote_ogg_url, "or Ogg URL" %><br/>
+    <%= f.text_field :remote_ogg_url %>
+  </div>
+  <br>
+  <p class="pagetext">Mp3 files</p>
+  <div class="pagetext">
+    <%= f.file_field :mp3 %>
+  </div>
+  <div class="pagetext">
+    <%= f.label :remote_mp3_url, "or Mp3 URL" %><br/>
+    <%= f.text_field :remote_mp3_url %>
+  </div>
+  <br>
+  <p class="pagetext">Wav files</p>
+  <div class="pagetext">
+    <%= f.file_field :wav %>
+  </div>
+  <div class="pagetext">
+    <%= f.label :remote_wav_url, "or Wav URL" %><br/>
+    <%= f.text_field :remote_wav_url %>
+  </div>
+  <div class="pagetext">
     <%= f.label :description %><br />
     <%= f.text_area :description %>
   </div>
-  <div class="field">
-    <%= f.label :created_on %><br />
-    <%= f.datetime_select :created_on %>
-  </div>
-  <div class="field">
-    <%= f.label :user_id %><br />
-    <%= f.number_field :user_id %>
-  </div>
-  <div class="field">
-    <%= f.label :subsheet_id %><br />
-    <%= f.number_field :subsheet_id %>
-  </div>
-  <div class="field">
-    <%= f.label :reviewed %><br />
-    <%= f.check_box :reviewed %>
-  </div>
-  <div class="field">
-    <%= f.label :maintenance %><br />
-    <%= f.check_box :maintenance %>
-  </div>
-  <div class="actions">
+  <div class="pagetext">
     <%= f.submit %>
   </div>
+  <br>
 <% end %>

@@ -2,7 +2,11 @@
    <a class="skip" href="#main">Skip to main content</a>
    <a class="skip" href="#navigationbox">Skip to navigation</a>
 </div>
-<div class="backgroundbox"><%= image_tag("http://static.duelingpets.net/banner/duelingpetsbanner.jpeg", class: "banner") %></div>
+<% if Rails.env.development? %>
+   <div class="backgroundbox"><%= image_tag("/banner/duelingpetsbanner.jpeg", class: "banner") %></div>
+<% elsif Rails.env.production? %>
+   <div class="backgroundbox"><%= image_tag("http://static.duelingpets.net/banner/duelingpetsbanner.jpeg", class: "banner") %></div>
+<% end %>
 <div class="logo"><%= link_to "DuelingPets.net", root_path %></div>
 <div class="profilebar"><%= profile %></div>
 <br>
@@ -29,6 +33,7 @@
       <% end %>
       <div class="navigationspacing"><%= link_to "Stories", sbooks_path %></div>
       <div class="navigationspacing"><%= link_to "Gallery", mainfolders_path %></div>
+      <div class="navigationspacing"><%= link_to "Radios", mainsheets_path %></div>
    </div>
 </div>
 <%= timeleft %>

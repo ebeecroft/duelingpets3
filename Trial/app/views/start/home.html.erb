@@ -6,6 +6,11 @@
 <!--Need to indent this-->
 <p class="pagetext">At Dueling Pets, we offer users of our site the ability to not only join in pet vs monster fights, but to also have a chance to exercise their creativity when it comes to creating a pet or monster. Now for some of you, creating a pet may not be an option, but that is okay. We also offer users a chance to engage in telling stories or engaging in role plays on our forum. For the pet owners we offer several items from our shop to be used with your pet. These range from battle equipment to potions that can be purchased in the store, each of which will have some form of cost and will be deducted from your DP pouch upon initial purchase.</p>
 <!--End indent-->
+<% if Rails.env.development? %>
+   <div class="mascotbox"><%= image_tag("/mascot/duelingpetsmascotbattirothebat.jpeg", class: "mascot") %></div>
+<% elsif Rails.env.production? %>
+   <div class="mascotbox"><%= image_tag("http://static.duelingpets.net/mascot/duelingpetsmascotbattirothebat.jpeg", class: "mascot") %></div>
+<% end %>
 <br>
 <p class="pagetext">Amount of users Online: <%= getOnline %></p>
 <p class="pagetext">Amount of users Offline: <%= getOffline %></p>
@@ -25,7 +30,6 @@
       <!--End indent-->
    <% end %>
 <% end %>
-
 <% if !current_user %>
    <!--Need to indent-->
    <br>
@@ -36,6 +40,5 @@
    <!--End indent-->
 <% end %>
 <br>
-<div class="mascotbox"><%= image_tag("http://static.duelingpets.net/mascot/duelingpetsmascotbattirothebat.jpeg", class: "mascot") %></div>
 <br>
 <p class="pagetext"><%= link_to "Sitemap", sitemap_path %></p>

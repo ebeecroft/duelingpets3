@@ -1,40 +1,14 @@
+<% provide(:title, "Sound: The place for really good music, sound effects and speech.") %>
+<% provide(:keywords, "music, speech, sound") %>
+<% provide(:description, "Where users can take the time to listen to good quality music, speech and sound effects.") %>
 <p id="notice"><%= notice %></p>
-
-<p>
-  <b>Name:</b>
-  <%= @sound.name %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%= @sound.description %>
-</p>
-
-<p>
-  <b>Created on:</b>
-  <%= @sound.created_on %>
-</p>
-
-<p>
-  <b>User:</b>
-  <%= @sound.user_id %>
-</p>
-
-<p>
-  <b>Subsheet:</b>
-  <%= @sound.subsheet_id %>
-</p>
-
-<p>
-  <b>Reviewed:</b>
-  <%= @sound.reviewed %>
-</p>
-
-<p>
-  <b>Maintenance:</b>
-  <%= @sound.maintenance %>
-</p>
-
-
-<%= link_to 'Edit', edit_sound_path(@sound) %> |
-<%= link_to 'Back', sounds_path %>
+<h1 class="pageheader"><%= @sound.name %></h1>
+<br>
+<p class="pagetext"><%= audio_tag(@sound.ogg_url.to_s, :controls => true) %></p>
+<p class="pagetext"><%= audio_tag(@sound.mp3_url.to_s, :controls => true) %></p>
+<p class="pagetext"><%= audio_tag(@sound.wav_url.to_s, :controls => true) %></p>
+<p class="pagetext"><%= @sound.description %></p>
+<p class="pagetext">Created on: <%= @sound.created_on.strftime("%B-%d-%Y") %></p>
+<p class="pagetext">Announcer: <%= getType(@sound.user) %><%= link_to @sound.user.vname, user_path(@sound.user) %></p>
+<br>
+<p class="pagetext"><%= link_to 'Back', mainsheet_subsheet_path(@subsheet.mainsheet, @sound.subsheet) %></p>

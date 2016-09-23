@@ -1,35 +1,20 @@
-<h1>Listing subsheets</h1>
-
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Created on</th>
-    <th>User</th>
-    <th>Mainsheet</th>
-    <th>Collab mode</th>
-    <th>Maintenance</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @subsheets.each do |subsheet| %>
-  <tr>
-    <td><%= subsheet.name %></td>
-    <td><%= subsheet.description %></td>
-    <td><%= subsheet.created_on %></td>
-    <td><%= subsheet.user_id %></td>
-    <td><%= subsheet.mainsheet_id %></td>
-    <td><%= subsheet.collab_mode %></td>
-    <td><%= subsheet.maintenance %></td>
-    <td><%= link_to 'Show', subsheet %></td>
-    <td><%= link_to 'Edit', edit_subsheet_path(subsheet) %></td>
-    <td><%= link_to 'Destroy', subsheet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+<% provide(:title, "Subsheet: The place that holds all the users subsheets!") %>
+<% provide(:description, "A listing of all the subsheets created for the admin to view.") %>
+<h1 class="pageheader">Listing Subsheets</h1>
+<br>
+<div class="pagebox"><%= paginate @subsheets %></div>
+<% @subsheets.each do |subsheets| %>
+   <br>
+   <div class="pagetext">
+      <p>I belong to <%= link_to subsheets.mainsheet.name, user_mainsheet_path(subsheet.mainsheet.user, subsheet.mainsheet) %></p>
+      <div class="inner">Subsheet: <%= link_to subsheet.name, mainsheet_subsheet_path(subsheet.mainsheet, subsheet) %></div>
+      <% if current_user && (current_user.id == subsheet.user_id || current_user.admin? )%>
+         <div class="inner"><%= button_to 'Edit', edit_mainsheet_subsheet_path(subsheet.mainsheet, subsheet), method: :get %></div>
+         <div class="inner"><%= button_to 'Destroy', [subsheet.mainsheet, subsheet], method: :delete, data: { confirm: 'Are you sure?' } %></div>
+      <% end %>
+      <p>Created on: <%= subsheet.created_on.strftime("%B-%d-%Y") %></p>
+      <p><%= subsheet.description %></p>
+      <p>By: <%= getType(subsheet.user) %><%= link_to subsheet.user.vname, user_path(subsheet.user) %></p>
+      <p>Collaboration: <%= subsheet.collab_mode %></p>
+   </div>
 <% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Subsheet', new_subsheet_path %>

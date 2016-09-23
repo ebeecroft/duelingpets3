@@ -1,5 +1,5 @@
-<h1>New subsheet</h1>
-
+<% provide(:title, "Subsheet: Create new subsheets here!") %>
+<% provide(:description, "Ways for users to categorize their radios.") %>
+<h1 class="pagetextheader">New subsheet</h1>
 <%= render 'form' %>
-
-<%= link_to 'Back', subsheets_path %>
+<p class="pagetext"><%= link_to 'Back', user_mainsheet_path(@mainsheet.user, @mainsheet) %></p>
