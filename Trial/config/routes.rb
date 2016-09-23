@@ -1,14 +1,5 @@
 Trial::Application.routes.draw do
 
-  resources :sounds
-
-
-  resources :subsheets
-
-
-  resources :mainsheets
-
-
    #Builds the users actions and the nested actions
    get '/users/maintenance' => 'users#maintenance'
    resources :users, :except => [:new] do #builds everything except new
@@ -23,7 +14,27 @@ Trial::Application.routes.draw do
 #      resources :mainplaylists #Builds everything
       resources :pms, :except =>[:index] #Builds everything
       resources :pets, :except =>[:index, :show]
+      resources :mainsheets
    end
+
+   #Builds the mainsheets
+   get '/mainsheets/maintenance' => 'mainsheets#maintenance'
+   resources :mainsheets, :only =>[:index] do
+      resources :subsheets, :except =>[:index]
+   end
+
+   #Builds the subsheets
+   get '/subsheets/maintenance' => 'subsheets#maintenance'
+   resources :subsheets, :only =>[:index] do
+      resources :sounds, :except =>[:index]
+   end
+
+   #Builds the audio
+   get '/sounds/maintenance' => 'sounds#maintenance'
+   get '/sounds/review' => 'sounds#review' #has to be before the pets controller
+   post 'sounds/review1' => 'sounds#approve'
+   post 'sounds/review2' => 'sounds#deny'
+   resources :sounds, :only =>[:index]
 
    #Builds pm
    get 'pms/inbox' => 'pms#inbox'
