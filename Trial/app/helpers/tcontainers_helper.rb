@@ -83,7 +83,7 @@ module TcontainersHelper
          elsif(type == "new") #Login only
             logged_in = current_user
             if(logged_in)
-               forumFound = Forum.find_by_id(params[:forum_id])
+               forumFound = Forum.find_by_name(params[:forum_id])
                if(forumFound)
                   newTcontainer = forumFound.tcontainers.new
                   @forum = forumFound
@@ -97,7 +97,7 @@ module TcontainersHelper
          elsif(type == "create") #Login only
             logged_in = current_user
             if(logged_in)
-               forumFound = Forum.find_by_id(params[:forum_id])
+               forumFound = Forum.find_by_name(params[:forum_id])
                if(forumFound)
                   newTcontainer = forumFound.tcontainers.new(params[:tcontainer])
                   newTcontainer.user_id = logged_in.id
@@ -122,7 +122,7 @@ module TcontainersHelper
             if(logged_in)
                tcontainerFound = Tcontainer.find_by_id(params[:id])
                if(tcontainerFound)
-                  userMatch = (logged_in.id == tcontainerFound.user_id)
+                  userMatch = ((tcontainerFound.user_id == logged_in.id) || logged_in.admin)
                   if(userMatch)
                      forumFound = Forum.find_by_id(tcontainerFound.forum_id)
                      if(forumFound)
@@ -145,7 +145,7 @@ module TcontainersHelper
             if(logged_in)
                tcontainerFound = Tcontainer.find_by_id(params[:id])
                if(tcontainerFound)
-                  userMatch = (logged_in.id == tcontainerFound.user_id)
+                  userMatch = ((tcontainerFound.user_id == logged_in.id) || logged_in.admin)
                   if(userMatch)
                      forumFound = Forum.find_by_id(tcontainerFound.forum_id)
                      if(forumFound)
