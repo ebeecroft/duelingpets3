@@ -13,8 +13,8 @@
    <% end %>
    <p>Status: <%= getStatus(@user) %>
       <% if getStatus(@user) != "Online" %>
-         <% if getTime(@user) %>
-            for <%= distance_of_time_in_words_to_now getTime(@user) %>
+         <% if getTime(@user, getStatus(@user)) %>
+            for <%= distance_of_time_in_words_to_now getTime(@user, getStatus(@user)) %>
          <% end %>
       <% end %>
    </p>

@@ -1,5 +1,5 @@
-<h1>New blacklistedname</h1>
-
+<% provide(:title, "Blacklistedname: Add new names to the blacklist!") %>
+<% provide(:description, "New names are added to the blacklist.") %>
+<h1 class="pagetextheader">New blacklistedname</h1>
 <%= render 'form' %>
-
-<%= link_to 'Back', blacklistednames_path %>
+<p class="pagetext"><%= link_to 'Back', blacklistednames_path %></p>

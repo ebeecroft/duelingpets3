@@ -1,25 +1,19 @@
-<h1>Listing blacklisteddomains</h1>
-
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Domain only</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
+<% provide(:title, "Blacklisteddomain: The place that holds all the blacklisteddomains!") %>
+<% provide(:description, "A listing of all the bot domains blacklisted for the admin to view.") %>
+<h1 class="pageheader">Listing blacklisteddomains</h1>
+<br>
+<div class="pagebox"><%= paginate @blacklisteddomains %></div>
+<br>
+<p class="pagetext">Domain</p>
 <% @blacklisteddomains.each do |blacklisteddomain| %>
-  <tr>
-    <td><%= blacklisteddomain.name %></td>
-    <td><%= blacklisteddomain.domain_only %></td>
-    <td><%= link_to 'Show', blacklisteddomain %></td>
-    <td><%= link_to 'Edit', edit_blacklisteddomain_path(blacklisteddomain) %></td>
-    <td><%= link_to 'Destroy', blacklisteddomain, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+   <br>
+   <div class=pagetext>
+      <div class="inner"><%= blacklisteddomain.name %></div><tr>
+      <div class="inner"><%= button_to 'Edit', edit_blacklisteddomain_path(blacklisteddomain), method: :get %></div>
+      <div class="inner"><%= button_to 'Destroy', blacklisteddomain, method: :delete, data: { confirm: 'Are you sure?' } %></div>
+      <p>Domain only? <%= blacklisteddomain.domain_only %></p>
+   </div>
 <% end %>
 </table>
-
-<br />
-
-<%= link_to 'New Blacklisteddomain', new_blacklisteddomain_path %>
+<br>
+<p class="pagetext"><%= link_to 'New Blacklisteddomain', new_blacklisteddomain_path %></p>

@@ -95,7 +95,15 @@ module UsersHelper
          onlineUserFound = Onlineuser.find_by_user_id(user.id)
          if(onlineUserFound.signed_in_at)
             if(!onlineUserFound.signed_out_at)
-               status = "Online"
+               if(onlineUserFound.last_visited == nil)
+                  status = "Online"
+               else
+                  if((currentTime - onlineUserFound.last_visited) > 30.minutes)
+                     status = "Inactive"
+                  else
+                     status = "Online"
+                  end
+               end
             else
                status = "Offline"
             end
@@ -103,12 +111,14 @@ module UsersHelper
          return status
       end
 
-      def getTime(user)
+      def getTime(user, status)
          value = ""
          onlineUserFound = Onlineuser.find_by_user_id(user.id)
-         #if(getStatus(onlineUserFound) != "Online")
+         if(status == "Inactive")
+            value = onlineUserFound.last_visited
+         else
             value = onlineUserFound.signed_out_at
-         #end
+         end
          return value
       end
 
@@ -158,6 +168,13 @@ module UsersHelper
                redirect_to root_path
             end
          elsif(type == "show") #Guest access
+            logged_in = current_user
+            if(logged_in)
+               cstatus = Onlineuser.find_by_user_id(logged_in.id)
+               cstatus.last_visited = Time.now
+               @cstatus = cstatus
+               @cstatus.save
+            end
             userFound = User.find_by_vname(params[:id])
             if(userFound)
                @pouch = Pouch.find_by_id(userFound.id)
@@ -189,48 +206,90 @@ module UsersHelper
             @user = User.new
          elsif(type == "create") #Guest access
             newMember = User.new(params[:user])
-            currentTime = Time.now
-            newMember.joined_on = currentTime
-            @user = newMember
-            if(@user.save)
-               #Create the pouch
-               newPouch = Pouch.new(params[:pouch])
-               newPouch.user_id = newMember.id
-               @pouch = newPouch
-               @pouch.save
-               #Create the key
-               newKey = Sessionkey.new(params[:sessionkey])
-               newKey.remember_token = "NULL"
-               newKey.user_id = newMember.id
-               @sessionkey = newKey
-               @sessionkey.save
-               #Create usertype
-               newUserType = Usertype.new(params[:usertype])
-               newUserType.user_id = newMember.id
-               newUserType.privilege = "Review"
-               @usertype = newUserType
-               @usertype.save
-               #Create onlineuser
-               newOnlineUser = Onlineuser.new(params[:onlineuser])
-               newOnlineUser.user_id = newMember.id
-               #newOnlineUser.signed_in_at = currentTime
-               @onlineuser = newOnlineUser
-               @onlineuser.save
-               #Create accountkey
-               newAccountKey = Accountkey.new(params[:accountkey])
-               newAccountKey.token = SecureRandom.urlsafe_base64
-               newAccountKey.user_id = newMember.id
-               @accounttoken = newAccountKey.token
-               @accountkey = newAccountKey
-               @accountkey.save
-               #newAccountKey.exx
-               #Login the user
-               #sign_in newMember
-               flash[:success] = "Welcome to the Duelingpets Website #{@user.vname}!"
-               UserMailer.welcome_email(@user, @accounttoken).deliver
-               redirect_to @user
-            else
+            #Blacklist setup
+            blacklistedNames = Blacklistedname.all
+            firstnameMatch = blacklistedNames.select{|blacklistedName| blacklistedName.name.downcase == newMember.first_name.downcase}
+            lastnameMatch = blacklistedNames.select{|blacklistedName| blacklistedName.name.downcase == newMember.last_name.downcase}
+            login_idMatch = blacklistedNames.select{|blacklistedName| blacklistedName.name.downcase == newMember.login_id.downcase}
+            vnameMatch = blacklistedNames.select{|blacklistedName| blacklistedName.name.downcase == newMember.vname.downcase}
+            #Email setup
+            name, domain = newMember.email.split("@")
+            blacklistedDomains = Blacklisteddomain.all
+            domain_only = blacklistedDomains.select{|blacklistedDomain| blacklistedDomain.domain_only}
+            #Email specific
+            specificMatch = "false"
+            domainOnlyMatch = domain_only.select{|blacklisted_domain| blacklisted_domain.name.downcase == domain.downcase}
+            if(domainOnlyMatch.count == 0)
+               domain_specific = blacklistedDomains.select{|blacklistedDomain| !blacklistedDomain.domain_only}
+               domainSpecificMatch = domain_specific.select{|blacklisted_domain| blacklisted_domain.name.downcase == domain.downcase}
+               nameMatch = blacklistedNames.select{|blacklistedName| blacklistedName.name.downcase == name.downcase}
+               if(nameMatch.count > 0 && domainSpecificMatch.count > 0)
+                  specificMatch = "true"
+               end
+            end
+
+            #Verify if the member attributes is not blacklisted
+            if(firstnameMatch.count > 0 || lastnameMatch.count > 0 || vnameMatch.count > 0 || login_idMatch.count > 0 || domainOnlyMatch.count > 0 || specificMatch == "true")
+               if(firstnameMatch.count > 0)
+                  flash.now[:herror] = "The firstname #{newMember.first_name} is blacklisted!"
+               end
+               if(lastnameMatch.count > 0)
+                  flash.now[:aerror] = "The lastname #{newMember.last_name} is blacklisted!"
+               end
+               if(login_idMatch.count > 0)
+                  flash.now[:derror] = "The login_id #{newMember.login_id} is blacklisted!"
+               end
+               if(vnameMatch.count > 0)
+                  flash.now[:serror] = "The vname #{newMember.vname} is blacklisted!"
+               end
+               if(domainOnlyMatch.count > 0)
+                  flash.now[:error] = "The domain #{domain} is blacklisted!"
+               end
+               if(specificMatch == "true")
+                  flash.now[:error] = "The email #{newMember.email} is blacklisted!"
+               end
+               @user = newMember
                render "new"
+            else
+               currentTime = Time.now
+               newMember.joined_on = currentTime
+               @user = newMember
+               if(@user.save)
+                  #Create the pouch
+                  newPouch = Pouch.new(params[:pouch])
+                  newPouch.user_id = newMember.id
+                  @pouch = newPouch
+                  @pouch.save
+                  #Create the key
+                  newKey = Sessionkey.new(params[:sessionkey])
+                  newKey.remember_token = "NULL"
+                  newKey.user_id = newMember.id
+                  @sessionkey = newKey
+                  @sessionkey.save
+                  #Create usertype
+                  newUserType = Usertype.new(params[:usertype])
+                  newUserType.user_id = newMember.id
+                  newUserType.privilege = "Review"
+                  @usertype = newUserType
+                  @usertype.save
+                  #Create onlineuser
+                  newOnlineUser = Onlineuser.new(params[:onlineuser])
+                  newOnlineUser.user_id = newMember.id
+                  @onlineuser = newOnlineUser
+                  @onlineuser.save
+                  #Create accountkey
+                  newAccountKey = Accountkey.new(params[:accountkey])
+                  newAccountKey.token = SecureRandom.urlsafe_base64
+                  newAccountKey.user_id = newMember.id
+                  @accounttoken = newAccountKey.token
+                  @accountkey = newAccountKey
+                  @accountkey.save
+                  flash[:success] = "Welcome to the Duelingpets Website #{@user.vname}!"
+                  UserMailer.welcome_email(@user, @accounttoken).deliver
+                  redirect_to @user
+               else
+                  render "new"
+               end
             end
          elsif(type == "edit") #Login only and same user
             logged_in = current_user

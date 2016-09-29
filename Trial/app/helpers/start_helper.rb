@@ -22,10 +22,33 @@ module StartHelper
    end
 
    private
+      def registrationStatus
+         maintenancemode = Maintenancemode.find_by_id(2)
+         status = ""
+         if(maintenancemode.maintenance_on)
+            status = "Closed"
+         end
+         return status
+      end
       def getOnline
          allUsers = Onlineuser.all
+#         @onlineusers = allUsers
+#         fresh_when @onlineusers.maximum(:created_at)
          onlineUsers = allUsers.select{|status| status.signed_in_at != nil && status.signed_out_at == nil}
-         value = onlineUsers.count
+         inactiveTime = 30.minutes
+         activeUsers = onlineUsers.select{|status| status.last_visited == nil || (status.last_visited != nil && (currentTime - status.last_visited) < inactiveTime)}
+#         @onlineusers = onlineUsers
+#         fresh_when last_modified: @onlineusers
+         value = activeUsers.count
+         return value
+      end
+
+      def getInactive
+         allUsers = Onlineuser.all
+         onlineUsers = allUsers.select{|status| status.signed_in_at != nil && status.signed_out_at == nil}
+         inactiveTime = 30.minutes
+         inactiveUsers = onlineUsers.select{|status| status.last_visited != nil && ((currentTime - status.last_visited) > inactiveTime)}
+         value = inactiveUsers.count
          return value
       end
 
@@ -84,6 +107,17 @@ module StartHelper
       def switch(type)
          if(type == "home") #Guest
          elsif(type == "sitemap") #Guest
+         elsif(type == "active") #Login only
+            logged_in = current_user
+            if(logged_in)
+               allUsers = Onlineuser.all
+               onlineUsers = allUsers.select{|status| status.signed_in_at != nil && status.signed_out_at == nil}
+               inactiveTime = 30.minutes
+               activeUsers = onlineUsers.select{|status| status.last_visited == nil || (status.last_visited != nil && (currentTime - status.last_visited) < inactiveTime)}
+               @onlineusers = Kaminari.paginate_array(activeUsers).page(params[:page]).per(10)
+            else
+               redirect_to root_path
+            end
          end
       end
 end

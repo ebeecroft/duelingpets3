@@ -8,8 +8,6 @@
       <meta name="viewport" content="width=device-width,initial-scale=1">
       <% if Rails.env.development? %>
          <%= stylesheet_link_tag "application.css", :media => "all" %>
-      <% elsif Rails.env.production? %>
-         <%= stylesheet_link_tag "http://static.duelingpets.net/assets/application.css", :media => "none" %>
       <% end %>
       <%= csrf_meta_tags %>
    </head>

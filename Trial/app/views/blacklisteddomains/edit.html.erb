@@ -1,6 +1,5 @@
-<h1>Editing blacklisteddomain</h1>
-
+<% provide(:title, "Blacklisteddomain: Edit your blacklisteddomains here!") %>
+<% provide(:description, "Allows the admin to edit the domains on the blacklist.") %>
+<h1 class="pagetextheader">Editing blacklisteddomain</h1>
 <%= render 'form' %>
-
-<%= link_to 'Show', @blacklisteddomain %> |
-<%= link_to 'Back', blacklisteddomains_path %>
+<p class="pagetext"><%= link_to 'Back', blacklisteddomains_path %></p>

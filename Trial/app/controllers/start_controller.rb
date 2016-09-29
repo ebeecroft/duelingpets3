@@ -8,4 +8,8 @@ class StartController < ApplicationController
    def sitemap
       mode "sitemap"
    end
+
+   def active
+      mode "active"
+   end
 end

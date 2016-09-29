@@ -1,11 +1,5 @@
 Trial::Application.routes.draw do
 
-  resources :blacklisteddomains
-
-
-  resources :blacklistednames
-
-
    #Builds the users actions and the nested actions
    get '/users/maintenance' => 'users#maintenance'
    resources :users, :except => [:new] do #builds everything except new
@@ -219,6 +213,11 @@ Trial::Application.routes.draw do
    get '/signin' => 'sessions#new'
    match '/logout' => 'sessions#destroy', via: :delete #has to be a match condition
    get '/sitemap' => 'start#sitemap'
+   get '/active' => 'start#active'
+
+   #Bot control section
+   resources :blacklisteddomains, :except =>[:show]
+   resources :blacklistednames, :except =>[:show]
 
    #Builds the sessionkey
    resources :sessionkeys, :only =>[:index] #Only index
@@ -239,3 +238,4 @@ Trial::Application.routes.draw do
    get 'maintenance' => "start#maintenance"
    root :to => "start#home"
 end
+
