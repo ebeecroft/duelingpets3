@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @blacklisteddomain.name %>
+</p>
+
+<p>
+  <b>Domain only:</b>
+  <%= @blacklisteddomain.domain_only %>
+</p>
+
+
+<%= link_to 'Edit', edit_blacklisteddomain_path(@blacklisteddomain) %> |
+<%= link_to 'Back', blacklisteddomains_path %>

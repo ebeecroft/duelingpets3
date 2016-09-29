@@ -1,0 +1,23 @@
+<h1>Listing blacklistednames</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @blacklistednames.each do |blacklistedname| %>
+  <tr>
+    <td><%= blacklistedname.name %></td>
+    <td><%= link_to 'Show', blacklistedname %></td>
+    <td><%= link_to 'Edit', edit_blacklistedname_path(blacklistedname) %></td>
+    <td><%= link_to 'Destroy', blacklistedname, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Blacklistedname', new_blacklistedname_path %>
