@@ -26,8 +26,8 @@
       <p>Created on: <%= reply.created_on.strftime("%B-%d-%Y") %></p>
       <p>Status: <%= getStatus(reply.user) %>
          <% if getStatus(reply.user) != "Online" %>
-            <% if getTime(reply.user) %>
-               for <%= distance_of_time_in_words_to_now getTime(reply.user) %>
+            <% if getTime(reply.user, getStatus(reply.user)) %>
+               for <%= distance_of_time_in_words_to_now getTime(reply.user, getStatus(reply.user)) %>
             <% end %>
          <% end %>
       </p>

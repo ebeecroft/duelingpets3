@@ -16,8 +16,8 @@
 <p class="pagetext">Owner: <%= getType(@pm.from_user) %><%= link_to @pm.from_user.vname, user_path(@pm.from_user) %></p>
 <p class="pagetext">Status: <%= getStatus(@pm.from_user) %>
    <% if getStatus(@pm.from_user) != "Online" %>
-      <% if getTime(@pm.from_user) %>
-         for <%= distance_of_time_in_words_to_now getTime(@pm.from_user) %>
+      <% if getTime(@pm.from_user, getStatus(@pm.from_user)) %>
+         for <%= distance_of_time_in_words_to_now getTime(@pm.from_user, getStatus(@pm.from_user)) %>
       <% end %>
    <% end %>
 </p>
@@ -35,8 +35,8 @@
       <p>Owner: <%= getType(preply.user) %><%= link_to preply.user.vname, user_path(preply.user) %></p>
       <p>Status: <%= getStatus(preply.user) %>
          <% if getStatus(preply.user) != "Online" %>
-            <% if getTime(preply.user) %>
-               for <%= distance_of_time_in_words_to_now getTime(preply.user) %>
+            <% if getTime(preply.user, getStatus(preply.user)) %>
+               for <%= distance_of_time_in_words_to_now getTime(preply.user, getStatus(preply.user)) %>
             <% end %>
          <% end %>
       </p>

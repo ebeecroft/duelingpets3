@@ -32,8 +32,8 @@
                         <p>By: <%= link_to maintopic.user.vname, user_path(maintopic.user) %></p>
                         <p>Status: <%= getStatus(maintopic.user) %>
                            <% if getStatus(maintopic.user) != "Online" %>
-                              <% if getTime(maintopic.user) %>
-                                 for <%= distance_of_time_in_words_to_now getTime(maintopic.user) %>
+                              <% if getTime(maintopic.user, getStatus(maintopic.user)) %>
+                                 for <%= distance_of_time_in_words_to_now getTime(maintopic.user, getStatus(maintopic.user)) %>
                               <% end %>
                            <% end %>
                         </p>

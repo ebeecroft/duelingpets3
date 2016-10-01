@@ -14,8 +14,8 @@
          <p>by: <%= getType(@subtopic.user) %><%= link_to @subtopic.user.vname, user_path(@subtopic.user) %></p>
          <p>Status: <%= getStatus(@subtopic.user) %>
             <% if getStatus(@subtopic.user) != "Online" %>
-               <% if getTime(@subtopic.user) %>
-                  for <%= distance_of_time_in_words_to_now getTime(@subtopic.user) %>
+               <% if getTime(@subtopic.user, getStatus(@subtopic.user)) %>
+                  for <%= distance_of_time_in_words_to_now getTime(@subtopic.user, getStatus(@subtopic.user)) %>
                <% end %>
             <% end %>
          </p>
@@ -35,8 +35,8 @@
       <p>by: <%= getType(narrative.user) %><%= link_to narrative.user.vname, user_path(narrative.user) %></p>
       <p>Status: <%= getStatus(narrative.user) %>
          <% if getStatus(narrative.user) != "Online" %>
-            <% if getTime(narrative.user) %>
-               for <%= distance_of_time_in_words_to_now getTime(narrative.user) %>
+            <% if getTime(narrative.user, getStatus(narrative.user)) %>
+               for <%= distance_of_time_in_words_to_now getTime(narrative.user, getStatus(narrative.user)) %>
             <% end %>
          <% end %>
       </p>

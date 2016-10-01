@@ -121,8 +121,8 @@
             <pre class="storyformat"><%= comment.message %></pre>
             <p>Status: <%= getStatus(comment.from_user) %>
                <% if getStatus(comment.from_user) != "Online" %>
-                  <% if getTime(comment.from_user) %>
-                     for <%= distance_of_time_in_words_to_now getTime(comment.from_user) %>
+                  <% if getTime(comment.from_user, getStatus(comment.from_user)) %>
+                     for <%= distance_of_time_in_words_to_now getTime(comment.from_user, getStatus(comment.from_user)) %>
                   <% end %>
                <% end %>
             </p>

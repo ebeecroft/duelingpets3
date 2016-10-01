@@ -19,8 +19,8 @@
       <p class="pagetext">Owner: <%= getType(blog.user) %><%= link_to blog.user.vname, user_path(blog.user) %></p>
       <p class="pagetext">Status: <%= getStatus(blog.user) %>
          <% if getStatus(blog.user) != "Online" %>
-            <% if getTime(blog.user) %>
-               for <%= distance_of_time_in_words_to_now getTime(blog.user) %>
+            <% if getTime(blog.user, getStatus(blog.user)) %>
+               for <%= distance_of_time_in_words_to_now getTime(blog.user, getStatus(blog.user)) %>
             <% end %>
          <% end %>
       </p>
