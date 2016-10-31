@@ -1,6 +1,15 @@
 module CusersHelper
 #A current user helper
 
+   def getPoints
+      logged_in = current_user
+      value = 0
+      if(logged_in)
+         value = logged_in.pouch.amount
+      end
+      return value
+   end
+
    #Mandatory
    def expires
       keyFound = Sessionkey.find_by_user_id(current_user.id)

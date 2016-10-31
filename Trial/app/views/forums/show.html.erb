@@ -1,6 +1,7 @@
 <% provide(:title, "Forum: The users social community!") %>
 <% provide(:keywords, "forum, users, social, community") %>
 <% provide(:description, "Where users to get together to socialize, roleplay or even chat.") %>
+<% provide(:style, ".pagebox{text-align:center;}.containerbox{border: 1px solid;}") %>
 <p id="notice"><%= notice %></p>
 <h1 class="pageheader">
    <div class="inner"><%= @forum.name %></div>
@@ -29,7 +30,7 @@
                      <% tcontainer.maintopics.each do |maintopic| %>
                         <p><%= link_to maintopic.topicname, tcontainer_maintopic_path(tcontainer, maintopic) %></p>
                         <p><%= maintopic.description %></p>
-                        <p>By: <%= link_to maintopic.user.vname, user_path(maintopic.user) %></p>
+                        <p>By: <%= getType(maintopic.user) %><%= link_to maintopic.user.vname, user_path(maintopic.user) %></p>
                         <p>Status: <%= getStatus(maintopic.user) %>
                            <% if getStatus(maintopic.user) != "Online" %>
                               <% if getTime(maintopic.user, getStatus(maintopic.user)) %>

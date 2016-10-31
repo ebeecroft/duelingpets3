@@ -91,6 +91,13 @@ module MainfoldersHelper
                @mainfolders = allMainfolders
             end
          elsif(type == "show") #Guest
+            logged_in = current_user
+            if(logged_in)
+               cstatus = Onlineuser.find_by_user_id(logged_in.id)
+               cstatus.last_visited = Time.now
+               @cstatus = cstatus
+               @cstatus.save
+            end
             mainfolderFound = Mainfolder.find_by_name(params[:id])
             if(mainfolderFound)
                userFound = User.find_by_vname(params[:user_id])

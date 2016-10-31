@@ -101,12 +101,14 @@ module InventoriesHelper
                         @icount = inventoryCount
                         if(@icount > 0)
                            userPets = logged_in.petowners
+                           amount = 0
                            if(userPets.count > 0)
                               petsAvailable = userPets.select{|pet| !pet.in_battle}
+                              amount = petsAvailable.count
                               @mypets = petsAvailable
-                              @petCount = @mypets.count
                               @selectpet = logged_in.petowners.minimum(:id)
                            end
+                           @petCount = amount
                         end
                      else
                         redirect_to root_path
@@ -144,13 +146,23 @@ module InventoriesHelper
                         else
                            newInventory = userFound.inventories.new(params[:inventory])
                            newInventory.item_id = itemFound.id
+                           itemPouch = Pouch.find_by_user_id(itemFound.user_id)
+                           profit = 0
+                           if(itemFound.cost >= 12)
+                              if(itemFound.user_id != logged_in.id)
+                                 profit = (itemFound.cost * 0.20)
+                              end
+                           end
                            @inventory = newInventory
+                           itemPouch.amount += profit
+                           @ipouch = itemPouch
                            #Stores the inventory in the database if successful
                            if(@inventory.save)
                               pouchFound.amount = amountLeft
                               @pouch = pouchFound
                               @pouch.save
                               @user = userFound
+                              @ipouch.save
                               redirect_to user_inventories_path(@user)
                            else
                               redirect_to root_path

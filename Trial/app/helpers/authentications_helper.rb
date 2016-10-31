@@ -40,7 +40,7 @@ module AuthenticationsHelper
                   redirect_to verify_path
                end
             else
-               flash[:info] = "Invalid login id or token!"
+               flash[:error] = "Invalid login id or token!"
                redirect_to verify_path
             end
          end

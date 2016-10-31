@@ -1,3 +1,4 @@
+<% provide(:style, ".userspacing{display:inline-block;padding-right:3%;}") %>
 <div class="pagetext">
    <% if current_user && (current_user.id == @user.id || current_user.admin?) %>
       <div class="userspacing">First name: <%= @user.first_name %></div>

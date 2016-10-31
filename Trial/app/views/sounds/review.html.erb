@@ -1,5 +1,6 @@
 <% provide(:title, "Sound: A place to review uploaded sounds!") %>
 <% provide(:description, "The place where one can review unprocessed sounds and add them to the approved sound section.") %>
+<% provide(:style, ".pagebox{text-align:center;}") %>
 <h1 class="pageheader">Sounds to be reviewed</h1>
 <br>
 <div class="pagebox"><%= paginate @sounds %></div>

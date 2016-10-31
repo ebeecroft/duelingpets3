@@ -1,22 +1,29 @@
+<% provide(:style, ".errorheader{text-align: left;font-weight: bold;padding: 5px 5px 5px 15px;font-size: 12px;
+margin: -7px;margin-bottom: 0px;background-color: #c00;color: #fff;}") %>
+<% provide(:style, ".errorslisted{font-size: 12px;list-style: square;}") %>
+<% provide(:style, "#error_explanation{width: 450px;border: 2px solid red;padding: 7px;padding-bottom: 0;
+margin-bottom: 20px;background-color: #f0f0f0;") %>
 <%= form_for([@blog, @reply]) do |f| %>
-  <% if @reply.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@reply.errors.count, "error") %> prohibited this reply from being saved:</h2>
+   <% if @reply.errors.any? %>
+      <div class="pagetext">
+         <div id="error_explanation">
+            <h2 class="errorheader"><%= pluralize(@reply.errors.count, "error") %> prohibited this reply from being saved:</h2>
 
-      <ul>
-      <% @reply.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <br>
-  <div class="pagetext">
-    <%= f.label :message %><br />
-    <%= f.text_area :message %>
-  </div>
-  <div class="pagetext">
-    <%= f.submit %>
-  </div>
-  <br>
+            <ul class="errorslisted">
+               <% @reply.errors.full_messages.each do |msg| %>
+                  <li class="errorslisted"><%= msg %></li>
+               <% end %>
+            </ul>
+         </div>
+      </div>
+   <% end %>
+   <br>
+   <div class="pagetext">
+      <%= f.label :message %><br />
+      <%= f.text_area :message %>
+   </div>
+   <div class="pagetext">
+      <%= f.submit %>
+   </div>
+   <br>
 <% end %>

@@ -1,5 +1,6 @@
 <% provide(:title, "Pet: A place to review uploaded pets!") %>
 <% provide(:description, "The place where one can review unprocessed pets and add it to the approved pet section.") %>
+<% provide(:style, ".pagebox{text-align:center;}") %>
 <h1 class="pageheader">Pets to be reviewed</h1>
 <br>
 <div class="pagebox"><%= paginate @pets %></div>

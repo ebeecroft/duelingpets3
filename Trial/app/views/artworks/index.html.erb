@@ -1,5 +1,6 @@
 <% provide(:title, "Artwork: Where all art is collected as a whole.") %>
 <% provide(:description, "A place where the admin can view all the art that has been collected.") %>
+<% provide(:style, ".pagebox{text-align:center;}") %>
 <h1 class="pageheader">Listing Artworks</h1>
 <br>
 <div class="pagebox"><%= paginate @artworks %></div>

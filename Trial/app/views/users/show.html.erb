@@ -1,7 +1,8 @@
 <% provide(:title, "User: Where users can see all of their wonderful creations!") %>
 <% provide(:keywords, "pets, series, artwork") %>
 <% provide(:description, "The users home for all their art, writing, and pets.") %>
-<!--For the divs in show come back to them later-->
+<% provide(:style, ".pagetextheader{padding-left: 3%;padding-right: 3%;font-size: 24px;font-weight: bold;}
+.pagebox{text-align:center;}.storyformat{white-space:pre-wrap;}") %>
 <div class="pagetext">
    <div class="inner"><%= getType(@user) %><%= @user.vname %></div>
    <% if current_user && current_user.id == @user.id %>
@@ -11,92 +12,84 @@
 </div>
 <%= render 'userinfo' %>
 <br>
-<p class="pagetextheader">Pets created: <%= getCreated %></p>
-<br>
-<p class="pagetextheader">Pets owned: <%= getOwned %></p>
-<!--PM section-->
-<% if current_user %>
-   <% if @pmtcount > 0 || (current_user.id != @user.id) %>
-      <br>
-      <p class="pagetext">Private Message</p>
-   <% end %>
-   <div class="pagetext">
-   <% if current_user.id == @user.id %>
-      <% if @pmicount > 0 %>
-         <div class="inner"><%= link_to 'Inbox', pms_inbox_path %></div>
-      <% end %>
-      <% if @pmocount > 0 %>
-         <div class="inner"><%= link_to 'Outbox', pms_outbox_path %></div>
-      <% end %>
-   <% else %>
-      <div class="inner"><%= link_to 'New PM', new_user_pm_path(@user) %></div>
-   <% end %>
-   </div>
-<% end %>
-<!--Pet section-->
-<% if @pcount > 0 %>
+<div class="pagetextheader">
+   <p>Pets created: <%= getCreated %></p>
    <br>
-   <p class="pagetext">Pets</p>
-   <p class="pagetext"><%= link_to 'My pets', user_petowners_path(@user) %></p>
-<% end %>
-<!--Radio section-->
-<% if @rcount > 0 || (current_user && current_user.id == @user.id) %>
-   <br>
-   <p class="pagetext">Radio</p>
-<% end %>
+   <p>Pets owned: <%= getOwned %></p>
+</div>
 <div class="pagetext">
+   <!--PM section-->
+   <% if current_user %>
+      <% if @pmtcount > 0 || (current_user.id != @user.id) %>
+         <br>
+         <p>Private Message</p>
+      <% end %>
+      <% if current_user.id == @user.id %>
+         <% if @pmicount > 0 %>
+            <div class="inner"><%= link_to 'Inbox', pms_inbox_path %></div>
+         <% end %>
+         <% if @pmocount > 0 %>
+            <div class="inner"><%= link_to 'Outbox', pms_outbox_path %></div>
+         <% end %>
+      <% else %>
+         <div class="inner"><%= link_to 'New PM', new_user_pm_path(@user) %></div>
+      <% end %>
+   <% end %>
+   <!--Pet section-->
+   <% if @pcount > 0 %>
+      <br>
+      <p>Pets</p>
+      <p><%= link_to 'My pets', user_petowners_path(@user) %></p>
+   <% end %>
+   <!--Radio section-->
+   <% if @rcount > 0 || (current_user && current_user.id == @user.id) %>
+      <br>
+      <p>Radio</p>
+   <% end %>
    <% if @rcount > 0 %>
       <div class="inner"><%= link_to 'My Radios', user_mainsheets_path(@user) %></div>
    <% end %>
    <% if current_user && current_user.id == @user.id %>
       <div class="inner"><%= link_to 'New Radio', new_user_mainsheet_path(@user) %></div>
    <% end %>
-</div>
-<!--Blog section-->
-<% if @bcount > 0 || (current_user && current_user.id == @user.id) %>
-   <br>
-   <p class="pagetext">Blog</p>
-<% end %>
-<div class="pagetext">
+   <!--Blog section-->
+   <% if @bcount > 0 || (current_user && current_user.id == @user.id) %>
+      <br>
+      <p>Blog</p>
+   <% end %>
    <% if @bcount > 0 %>
       <div class="inner"><%= link_to 'My Blogs', user_blogs_path(@user) %></div>
    <% end %>
    <% if current_user && current_user.id == @user.id %>
       <div class="inner"><%= link_to 'New Blog', new_user_blog_path(@user) %></div>
    <% end %>
-</div>
-<!--Forum section-->
-<% if @fcount > 0 || (current_user && current_user.id == @user.id) %>
-   <br>
-   <p class="pagetext">Forum</p>
-<% end %>
-<div class="pagetext">
+   <!--Forum section-->
+   <% if @fcount > 0 || (current_user && current_user.id == @user.id) %>
+      <br>
+      <p>Forum</p>
+   <% end %>
    <% if @fcount > 0 %>
       <div class="inner"><%= link_to 'My Forums', user_forums_path(@user) %></div>
    <% end %>
    <% if current_user && current_user.id == @user.id %>
       <div class="inner"><%= link_to 'New Forum', new_user_forum_path(@user) %></div>
    <% end %>
-</div>
-<!--Writing section-->
-<% if @scount > 0 || (current_user && current_user.id == @user.id) %>
-   <br>
-   <p class="pagetext">Series</p>
-<% end %>
-<div class="pagetext">
+   <!--Writing section-->
+   <% if @scount > 0 || (current_user && current_user.id == @user.id) %>
+      <br>
+      <p>Series</p>
+   <% end %>
    <% if @scount > 0 %>
       <div class="inner"><%= link_to 'My Series', user_sbooks_path(@user) %></div>
    <% end %>
    <% if current_user && current_user.id == @user.id %>
       <div class="inner"><%= link_to 'New Series', new_user_sbook_path(@user) %></div>
    <% end %>
-</div>
-<!--Gallery list should be here-->
-<% if @gcount > 0 || (current_user && current_user.id == @user.id) %>
-   <br>
-   <p class="pagetext">Galleries</p>
-<% end %>
-<div class="pagetext">
+   <!--Gallery list should be here-->
+   <% if @gcount > 0 || (current_user && current_user.id == @user.id) %>
+      <br>
+      <p>Galleries</p>
+   <% end %>
    <% if @gcount > 0 %>
       <div class="inner"><%= link_to 'My Galleries', user_mainfolders_path(@user) %></div>
    <% end %>
@@ -132,8 +125,10 @@
    <% end %>
    <p class="pagetextheader">Add Comment</p>
    <%= form_for [@user, Comment.new] do |form| %>
-      <p class="pagetext"><%= form.label :message %></p>
-      <p class="pagetext"><%= form.text_area :message, :placeholder => "Enter some text" %></p>
-      <p class="pagetext"><%= form.submit %></p>
+      <div class="pagetext">
+         <p><%= form.label :message %></p>
+         <p><%= form.text_area :message, :placeholder => "Enter some text" %></p>
+         <p><%= form.submit %></p>
+      </div>
    <% end %>
 <% end %>

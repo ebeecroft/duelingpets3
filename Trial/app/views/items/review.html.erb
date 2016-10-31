@@ -1,5 +1,6 @@
 <% provide(:title, "Item: A place to review uploaded items!") %>
 <% provide(:description, "The place where one can review unprocessed items and add it to the approved item section.") %>
+<% provide(:style, ".pagebox{text-align:center;}") %>
 <h1 class="pageheader">Items to be reviewed</h1>
 <br>
 <div class="pagebox"><%= paginate @items %></div>

@@ -1,6 +1,8 @@
 <% provide(:title, "Duelingpets: A kid friendly virtual pet site!") %>
 <% provide(:keywords, "virtual, pet") %>
 <% provide(:description, "Duelingpets is a kid friendly virtual pet site that allows users to create their own pets, art, and stories.") %>
+<% provide(:style, ".mascot{width: 75%;} .mascotbox{text-align:center;}") %>
+<% provide(:robots, "index, follow") %>
 <h1 id="main" tabindex="-1" class="pageheader">Welcome to the Dueling Pets Home Page!</h1>
 <br>
 <!--Need to indent this-->
@@ -12,32 +14,36 @@
    <br>
 <% end %>
 <!--Need to detect that the user registration is closed here-->
-<p class="pagetext">Battiro the bat mascot welcomes you to Duelingpets the virtual pet site. This particular virtual pet site
+<div class="pagetext">
+   <p>Battiro the bat mascot welcomes you to Duelingpets the virtual pet site. This particular virtual pet site
 offers users the chance to create their very own pets, monsters and even items. This is a very rare as most pet sites don't 
 utilize the users creativity in creating pets and monsters. On top of this we also have our very own art gallery, stories,
 and audio section.</p>
-<br>
-<p class="pagetext">We have a great forum structure that allows the community to grow to a very large size by utilizing its
+   <% if Rails.env.development? %>
+      <div class="mascotbox"><%= image_tag("/mascot/duelingpetsmascotbattirothebat.jpeg", class: "mascot") %></div>
+   <% elsif Rails.env.production? %>
+      <div class="mascotbox"><%= image_tag("http://static.duelingpets.net/mascot/duelingpetsmascotbattirothebat.jpeg", class: "mascot") %></div>
+   <% end %>
+   <br>
+   <p>We have a great forum structure that allows the community to grow to a very large size by utilizing its
 five tier structure. Pets can also engage in battles with monsters to gain experience, points and boost tokens. Duelingpets
 even rewards users for creating content on the site itself by giving the users a set of points for their creations. The site
 itself is still in development and continues to grow with each passing day. Feel free to register for an account to get
 started on your adventure.</p>
+</div>
 <!--End indent-->
-<% if Rails.env.development? %>
-   <div class="mascotbox"><%= image_tag("/mascot/duelingpetsmascotbattirothebat.jpeg", class: "mascot") %></div>
-<% elsif Rails.env.production? %>
-   <div class="mascotbox"><%= image_tag("http://static.duelingpets.net/mascot/duelingpetsmascotbattirothebat.jpeg", class: "mascot") %></div>
-<% end %>
 <br>
-<p class="pagetext">Amount of Online users: <%= getOnline %></p>
-<p class="pagetext">Amount of Inactive users: <%= getInactive %></p>
-<p class="pagetext">Amount of Offline users: <%= getOffline %></p>
-<p class="pagetext">Total users: <%= getTotal %></p>
-<br>
-<p class="pagetext">Users signed up today: <%= getDaySignups %></p>
-<p class="pagetext">Users signed up this week: <%= getWeekSignups %></p>
-<p class="pagetext">Users signed up this month: <%= getMonthSignups %></p>
-<p class="pagetext">Users signed up this year: <%= getYearSignups %></p>
-<br>
-<br>
-<p class="pagetext"><%= link_to "Sitemap", sitemap_path %></p>
+<div class="pagetext">
+   <p>Amount of Online users: <%= getOnline %></p>
+   <p>Amount of Inactive users: <%= getInactive %></p>
+   <p>Amount of Offline users: <%= getOffline %></p>
+   <p>Total users: <%= getTotal %></p>
+   <br>
+   <p>Users signed up today: <%= getDaySignups %></p>
+   <p>Users signed up this week: <%= getWeekSignups %></p>
+   <p>Users signed up this month: <%= getMonthSignups %></p>
+   <p>Users signed up this year: <%= getYearSignups %></p>
+   <br>
+   <br>
+   <p><%= link_to "Sitemap", sitemap_path %></p>
+</div>

@@ -28,11 +28,20 @@ module OnlineusersHelper
    end
 
    private
-      def getStatus(onlineUserFound)
+      def getStatus(user)
          status = "Offline"
+         onlineUserFound = Onlineuser.find_by_user_id(user.id)
          if(onlineUserFound.signed_in_at)
             if(!onlineUserFound.signed_out_at)
-               status = "Online"
+               if(onlineUserFound.last_visited == nil)
+                  status = "Online"
+               else
+                  if((currentTime - onlineUserFound.last_visited) > 30.minutes)
+                     status = "Inactive"
+                  else
+                     status = "Online"
+                  end
+               end
             else
                status = "Offline"
             end
@@ -40,11 +49,14 @@ module OnlineusersHelper
          return status
       end
 
-      def getTime(onlineUserFound)
+      def getTime(user, status)
          value = ""
-         #if(getStatus(onlineUserFound) != "Online")
+         onlineUserFound = Onlineuser.find_by_user_id(user.id)
+         if(status == "Inactive")
+            value = onlineUserFound.last_visited
+         else
             value = onlineUserFound.signed_out_at
-         #end
+         end
          return value
       end
 
@@ -54,35 +66,6 @@ module OnlineusersHelper
             if(logged_in)
                if(logged_in.admin)
                   @onlineusers = Onlineuser.order("id").page(params[:page]).per(10)
-               else
-                  redirect_to root_path
-               end
-            else
-               redirect_to root_path
-            end
-         elsif(type == "new") #Admin only Temp
-            logged_in = current_user
-            if(logged_in)
-               if(logged_in.admin)
-                  @onlineuser = Onlineuser.new
-               else
-                  redirect_to root_path
-               end
-            else
-               redirect_to root_path
-            end
-         elsif(type == "create") #Admin only Temp
-            logged_in = current_user
-            if(logged_in)
-               if(logged_in.admin)
-                  newOnlineUser = Onlineuser.new(params[:onlineuser])
-                  @onlineuser = newOnlineUser
-                  if(@onlineuser.save)
-                     flash[:success] = "Useronline was successfully created."
-                     redirect_to onlineusers_path
-                  else
-                     render "new"
-                  end
                else
                   redirect_to root_path
                end

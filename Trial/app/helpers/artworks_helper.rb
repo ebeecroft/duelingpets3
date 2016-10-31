@@ -96,8 +96,8 @@ module ArtworksHelper
          currentTime = Time.now
          newArtwork.created_on = currentTime
          @artwork = newArtwork
+         @subfolder = subfolderFound
          if(@artwork.save)
-            @subfolder = subfolderFound
             ArtworkMailer.review_artwork(@artwork).deliver
             flash[:success] = "#{@artwork.title} is currently being reviewed please check back later."
             redirect_to subfolder_artwork_path(@subfolder, @artwork)
@@ -120,6 +120,13 @@ module ArtworksHelper
                redirect_to root_path
             end
          elsif(type == "show") #Guest
+            logged_in = current_user
+            if(logged_in)
+               cstatus = Onlineuser.find_by_user_id(logged_in.id)
+               cstatus.last_visited = Time.now
+               @cstatus = cstatus
+               @cstatus.save
+            end
             artworkFound = Artwork.find_by_id(params[:id])
             if(artworkFound)
                subfolderFound = Subfolder.find_by_id(params[:subfolder_id])

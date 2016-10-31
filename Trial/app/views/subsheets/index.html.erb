@@ -1,5 +1,6 @@
 <% provide(:title, "Subsheet: The place that holds all the users subsheets!") %>
 <% provide(:description, "A listing of all the subsheets created for the admin to view.") %>
+<% provide(:style, ".pagebox{text-align:center;}") %>
 <h1 class="pageheader">Listing Subsheets</h1>
 <br>
 <div class="pagebox"><%= paginate @subsheets %></div>

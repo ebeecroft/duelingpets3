@@ -413,6 +413,13 @@ module FightsHelper
                end
             end
          elsif(type == "show") #Guest access
+            logged_in = current_user
+            if(logged_in)
+               cstatus = Onlineuser.find_by_user_id(logged_in.id)
+               cstatus.last_visited = Time.now
+               @cstatus = cstatus
+               @cstatus.save
+            end
             fightFound = Fight.find_by_id(params[:id])
             if(fightFound)
                petownerFound = Petowner.find_by_id(fightFound.petowner_id)

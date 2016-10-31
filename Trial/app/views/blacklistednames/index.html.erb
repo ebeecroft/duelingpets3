@@ -1,18 +1,18 @@
 <% provide(:title, "Blacklistedname: The place that holds all the blacklistednames!") %>
 <% provide(:description, "A listing of all the bot names blacklisted for the admin to view.") %>
+<% provide(:style, ".pagebox{text-align:center;}") %>
 <h1 class="pageheader">Listing blacklistednames</h1>
 <br>
 <div class="pagebox"><%= paginate @blacklistednames %></div>
 <br>
-<p class="pagetext">Name</p>
-<% @blacklistednames.each do |blacklistedname| %>
-   <br>
-   <div class=pagetext>
-      <div class="inner"><%= blacklistedname.name %></div><tr>
+<div class="pagetext">
+   <p>Name</p>
+   <% @blacklistednames.each do |blacklistedname| %>
+      <br>
+      <div class="inner"><%= blacklistedname.name %></div>
       <div class="inner"><%= button_to 'Edit', edit_blacklistedname_path(blacklistedname), method: :get %></div>
       <div class="inner"><%= button_to 'Destroy', blacklistedname, method: :delete, data: { confirm: 'Are you sure?' } %></div>
-   </div>
-<% end %>
-</table>
-<br>
-<p class="pagetext"><%= link_to 'New Blacklistedname', new_blacklistedname_path %></p>
+   <% end %>
+   <br>
+   <p><%= link_to 'New Blacklistedname', new_blacklistedname_path %></p>
+</div>

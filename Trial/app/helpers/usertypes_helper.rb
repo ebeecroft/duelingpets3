@@ -15,38 +15,7 @@ module UsertypesHelper
             logged_in = current_user
             if(logged_in)
                if(logged_in.admin)
-                  @usertypes = Usertype.all
-               else
-                  redirect_to root_path
-               end
-            else
-               redirect_to root_path
-            end
-         elsif(type == "new") #Will be removed when all users are updated
-            logged_in = current_user
-            if(logged_in)
-               if(logged_in.admin)
-                  @usertype = Usertype.new
-               else
-                  redirect_to root_path
-               end
-            else
-               redirect_to root_path
-            end
-         elsif(type == "create") #Will be removed when all users are updated
-            logged_in = current_user
-            if(logged_in)
-               if(logged_in.admin)
-                  newUserType = Usertype.new(params[:usertype])
-                  #newUserType.user_id = logged_in.id
-                  newUserType.privilege = "User"
-                  @usertype = newUserType
-                  if(@usertype.save)
-                     flash[:success] = "Usertype was successfully created."
-                     redirect_to usertypes_path
-                  else
-                     render "new"
-                  end
+                  @usertypes = Usertype.order("id").page(params[:page]).per(10)
                else
                   redirect_to root_path
                end

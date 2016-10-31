@@ -1,5 +1,6 @@
 <% provide(:title, "A collection of many different available preplies!") %>
 <% provide(:description, "A place for the admin to see what preplies are available.") %>
+<% provide(:style, ".pagebox{text-align:center;}") %>
 <h1 class="pageheader">PReplies list</h1>
 <br>
 <div class="pagebox"><%= paginate @preplies %></div>
@@ -14,8 +15,8 @@
       <p>Owner: <%= getType(preply.user) %><%= link_to preply.user.vname, user_path(preply.user) %></p>
       <p>Status: <%= getStatus(preply.user) %>
          <% if getStatus(preply.user) != "Online" %>
-            <% if getTime(preply.user) %>
-               for <%= distance_of_time_in_words_to_now getTime(preply.user) %>
+            <% if getTime(preply.user, getStatus(preply.user)) %>
+               for <%= distance_of_time_in_words_to_now getTime(preply.user, getStatus(preply.user)) %>
             <% end %>
          <% end %>
       </p>

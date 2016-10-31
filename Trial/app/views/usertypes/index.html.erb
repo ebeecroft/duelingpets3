@@ -1,5 +1,10 @@
+<% provide(:title, "Usertypes: Where the usertypes exist!") %>
+<% provide(:description, "The different privilege levels for the admin to view.") %>
+<% provide(:style, ".pagebox{text-align:center;}") %>
 <h1 class="pageheader">Listing usertypes</h1>
-
+<br>
+<div class="pagebox"><%= paginate @usertypes %></div>
+<br>
 <div class="pagetext">
    <table>
       <tr>
@@ -16,5 +21,3 @@
       <% end %>
    </table>
 </div>
-<br>
-<p class="pagetext"><%= link_to 'New Usertype', new_usertype_path %></p>

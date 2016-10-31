@@ -1,5 +1,6 @@
 <% provide(:title, "Onlineuser: Displays the users online status!") %>
 <% provide(:description, "A place where the admin can view all of the users status.") %>
+<% provide(:style, ".pagebox{text-align:center;}") %>
 <h1 class="pageheader">Listing onlineusers</h1>
 <br>
 <div class="pagebox"><%= paginate @onlineusers %></div>
@@ -15,8 +16,8 @@
             <td><%= link_to onlineuser.user.vname, onlineuser.user %>&nbsp;&nbsp;</td>
             <td><%= getStatus(onlineuser.user) %>
                 <% if getStatus(onlineuser.user) != "Online" %>
-                   <% if getTime(onlineuser.user) %>
-                      <%= distance_of_time_in_words_to_now getTime(onlineuser.user) %> ago
+                   <% if getTime(onlineuser.user, getStatus(onlineuser.user)) %>
+                      <%= distance_of_time_in_words_to_now getTime(onlineuser.user, getStatus(onlineuser.user)) %> ago
                    <% end %>
                 <% end %>
             </td>

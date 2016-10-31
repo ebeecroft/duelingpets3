@@ -4,12 +4,4 @@ class OnlineusersController < ApplicationController
    def index
       mode "index"
    end
-
-   def new #Temporary
-      mode "new"
-   end
-
-   def create #Temporary
-      mode "create"
-   end
 end

@@ -1,25 +1,32 @@
+<% provide(:style, ".errorheader{text-align: left;font-weight: bold;padding: 5px 5px 5px 15px;font-size: 12px;
+margin: -7px;margin-bottom: 0px;background-color: #c00;color: #fff;}") %>
+<% provide(:style, ".errorslisted{font-size: 12px;list-style: square;}") %>
+<% provide(:style, "#error_explanation{width: 450px;border: 2px solid red;padding: 7px;padding-bottom: 0;
+margin-bottom: 20px;background-color: #f0f0f0;") %>
 <%= form_for([@user, @petowner]) do |f| %>
-  <% if @petowner.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@petowner.errors.count, "error") %> prohibited this petowner from being saved:</h2>
+   <% if @petowner.errors.any? %>
+      <div class="pagetext">
+         <div id="error_explanation">
+            <h2 class="errorheader"><%= pluralize(@petowner.errors.count, "error") %> prohibited this petowner from being saved:</h2>
 
-      <ul>
-      <% @petowner.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <br>
-  <div class="pagetext">
-    <%= f.hidden_field :pet_id %>
-  </div>
-  <div class="pagetext">
-    <%= f.label :pet_name, "Please Enter Your Pet Name Here" %><br />
-    <%= f.text_field :pet_name %>
-  </div>
-  <div class="pagetext">
-    <%= f.submit "Finish Adopting My Pet!" %>
-  </div>
-  <br>
+            <ul class="errorslisted">
+               <% @petowner.errors.full_messages.each do |msg| %>
+                  <li class="errorslisted"><%= msg %></li>
+               <% end %>
+            </ul>
+         </div>
+      </div>
+   <% end %>
+   <br>
+   <div class="pagetext">
+      <%= f.hidden_field :pet_id %>
+   </div>
+   <div class="pagetext">
+      <%= f.label :pet_name, "Please Enter Your Pet Name Here" %><br />
+      <%= f.text_field :pet_name %>
+   </div>
+   <div class="pagetext">
+      <%= f.submit "Finish Adopting My Pet!" %>
+   </div>
+   <br>
 <% end %>

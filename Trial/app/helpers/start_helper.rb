@@ -114,7 +114,7 @@ module StartHelper
                onlineUsers = allUsers.select{|status| status.signed_in_at != nil && status.signed_out_at == nil}
                inactiveTime = 30.minutes
                activeUsers = onlineUsers.select{|status| status.last_visited == nil || (status.last_visited != nil && (currentTime - status.last_visited) < inactiveTime)}
-               @onlineusers = Kaminari.paginate_array(activeUsers).page(params[:page]).per(10)
+               @onlineusers = Kaminari.paginate_array(activeUsers).page(params[:page]).per(50)
             else
                redirect_to root_path
             end

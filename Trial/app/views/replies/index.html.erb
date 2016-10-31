@@ -1,5 +1,6 @@
 <% provide(:title, "Reply: The place that holds all the users replies!") %>
 <% provide(:description, "A listing of all the replies created for the admin to view.") %>
+<% provide(:style, ".pagebox{text-align:center;}.storyformat{white-space: pre-wrap;}") %>
 <h1 class="pageheader">Listing Replies</h1>
 <br>
 <div class="pagebox"><%= paginate @replies %></div>
@@ -14,8 +15,8 @@
       <p>Created on: <%= reply.created_on.strftime("%B-%d-%Y") %></p>
       <p>Status: <%= getStatus(reply.user) %>
          <% if getStatus(reply.user) != "Online" %>
-            <% if getTime(reply.user) %>
-               for <%= distance_of_time_in_words_to_now getTime(reply.user) %>
+            <% if getTime(reply.user, getStatus(reply.user)) %>
+               for <%= distance_of_time_in_words_to_now getTime(reply.user, getStatus(reply.user)) %>
             <% end %>
          <% end %>
       </p>

@@ -1,6 +1,7 @@
 <% provide(:title, "Petowner: The place that holds all the pets users adopted!") %>
 <% provide(:keywords, "users, adopted, pets") %>
 <% provide(:description, "A list of all the pets the various users adopted during their travels.") %>
+<% provide(:style, ".pagebox{text-align:center;}") %>
 <h1 class="pageheader">
    <% if getOptional %>
       <%= @user.vname %>'s pets
@@ -14,4 +15,3 @@
 <div class="pagebox"><%= paginate @petowners %></div>
 <br>
 <%= render 'petownerinfo' %>
-<div class="outer"></div>

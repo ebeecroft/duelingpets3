@@ -66,6 +66,13 @@ module TcontainersHelper
                redirect_to root_path
             end
          elsif(type == "show") #Guest
+            logged_in = current_user
+            if(logged_in)
+               cstatus = Onlineuser.find_by_user_id(logged_in.id)
+               cstatus.last_visited = Time.now
+               @cstatus = cstatus
+               @cstatus.save
+            end
             tcontainerFound = Tcontainer.find_by_id(params[:id])
             if(tcontainerFound)
                forumFound = Forum.find_by_id(tcontainerFound.forum_id)

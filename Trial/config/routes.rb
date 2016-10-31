@@ -13,11 +13,12 @@ Trial::Application.routes.draw do
       resources :blogs #Builds everything
 #      resources :mainplaylists #Builds everything
       resources :pms, :except =>[:index] #Builds everything
-      resources :pets, :except =>[:index, :show]
+      resources :pets, :except =>[:index, :show, :destroy]
       resources :mainsheets
    end
 
    #Builds the mainsheets
+   get '/mainsheets/list' => 'mainsheets#list'
    get '/mainsheets/maintenance' => 'mainsheets#maintenance'
    resources :mainsheets, :only =>[:index] do
       resources :subsheets, :except =>[:index]
@@ -139,9 +140,10 @@ Trial::Application.routes.draw do
    post 'pets/review2' => 'pets#deny'
 
    #Base pets route
-   resources :pets, :only =>[:index, :show] #Builds everything for pets
+   resources :pets, :only =>[:index, :show, :destroy] #Builds everything for pets
 
    #Builds the item actions
+   get '/items/list' => 'items#list'
    get '/items/maintenance' => 'items#maintenance'
    get '/items/review' => 'items#review' #has to be before the pets controller
    post 'items/review1' => 'items#approve'
@@ -223,16 +225,16 @@ Trial::Application.routes.draw do
    resources :sessionkeys, :only =>[:index] #Only index
 
    #Builds the staff
-   resources :usertypes, :except =>[:show, :destroy] #Only builds index, new, create, edit and update actions
+   resources :usertypes, :only =>[:index, :edit, :update] #Only builds index, new, create, edit and update actions
 
    #Builds the user status
-   resources :onlineusers, :only =>[:index, :new, :create]
+   resources :onlineusers, :only =>[:index]
 
    #Controls page visibility
    resources :maintenancemodes, :except =>[:show, :destroy] #Builds everything except show and destroy
 
    #Builds accountkey authentication pages
-   resources :accountkeys, :only => [:index, :new, :create]
+   resources :accountkeys, :only => [:index]
 
    #Root pages
    get 'maintenance' => "start#maintenance"

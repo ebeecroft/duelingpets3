@@ -100,6 +100,13 @@ module ItemsHelper
             @items = Kaminari.paginate_array(reviewedItems).page(params[:page]).per(9) #reviewedItems
             @count = itemCount
          elsif(type == "show") #Guest Access needed
+            logged_in = current_user
+            if(logged_in)
+               cstatus = Onlineuser.find_by_user_id(logged_in.id)
+               cstatus.last_visited = Time.now
+               @cstatus = cstatus
+               @cstatus.save
+            end
             itemFound = Item.find_by_name(params[:id])
             if(itemFound)
                @item = itemFound
@@ -258,6 +265,18 @@ module ItemsHelper
                   else
                      redirect_to root_path
                   end
+               end
+            else
+               redirect_to root_path
+            end
+         elsif(type == "list") #Admin needed
+            logged_in = current_user
+            if(logged_in)
+               if(logged_in.admin)
+                  allItems = Item.order("created_on desc")
+                  @items = Kaminari.paginate_array(allItems).page(params[:page]).per(9) #reviewedItems
+               else
+                  redirect_to root_path
                end
             else
                redirect_to root_path

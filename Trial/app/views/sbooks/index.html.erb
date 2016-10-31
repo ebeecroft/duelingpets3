@@ -1,6 +1,7 @@
 <% provide(:title, "Series: A creative world from the mind of a fanfiction writer!") %>
 <% provide(:keywords, "creative, world, fanfiction, writer") %>
 <% provide(:description, "Where all of the wonderful imaginative spark from the user stories comes from.") %>
+<% provide(:style, ".pagebox{text-align:center;}") %>
 <h1 class="pageheader">
    <% if getOptional %>
       <%= @user.vname %>'s series
@@ -12,10 +13,12 @@
 <div class="pagebox"><%= paginate @sbooks %></div>
 <% @sbooks.each do |sbook| %>
    <br>
-   <p class="pagetext"><%= link_to sbook.name, user_sbook_path(sbook.user, sbook) %></p>
-   <p class="pagetext">Created on: <%= sbook.created_on.strftime("%B-%d-%Y") %></p>
-   <p class="pagetext">Open series? <%= sbook.series_open %></p>
-   <% if !getOptional %>
-      <p class="pagetext">Author: <%= getType(sbook.user) %><%= link_to sbook.user.vname, user_path(sbook.user) %></p>
-   <% end %>
+   <div class="pagetext">
+      <p><%= getType(sbook.user) %><%= link_to sbook.name, user_sbook_path(sbook.user, sbook) %></p>
+      <p>Created on: <%= sbook.created_on.strftime("%B-%d-%Y") %></p>
+      <p>Open series? <%= sbook.series_open %></p>
+      <% if !getOptional %>
+         <p>Author: <%= getType(sbook.user) %><%= link_to sbook.user.vname, user_path(sbook.user) %></p>
+      <% end %>
+   </div>
 <% end %>

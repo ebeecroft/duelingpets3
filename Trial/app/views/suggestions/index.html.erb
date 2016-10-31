@@ -1,5 +1,6 @@
 <% provide(:title, "Suggestion: The place that holds all the users suggestions!") %>
 <% provide(:description, "A listing of all the suggestions created for the admin to view.") %>
+<% provide(:style, ".pagebox{text-align:center;}") %>
 <h1 class="pageheader">Listing suggestions</h1>
 <br>
 <div class="pagebox"><%= paginate @suggestions %></div>

@@ -1,5 +1,6 @@
 <% provide(:title, "Reply: Edit your reply here!") %>
 <% provide(:description, "Allows the users to change their reply to the best of their abilities.") %>
+<% provide(:style, ".pagetextheader{padding-left: 3%;padding-right: 3%;font-size: 24px;font-weight: bold;}") %>
 <h1 class="pagetextheader">Editing reply</h1>
 <%= render 'form' %>
 <p class="pagetext"><%= link_to 'Back', user_blog_path(@blog.user, @blog) %></p>

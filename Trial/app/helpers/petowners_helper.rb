@@ -92,6 +92,13 @@ module PetownersHelper
             else
                purchaseCode = 2
                pouch.amount = moneyLeft
+               if(pouch.user_id != petowner.pet.user_id)
+                  petPouch = Pouch.find_by_user_id(petowner.pet.user_id)
+                  profit = (petowner.pet.cost * 0.10)
+                  petPouch.amount += profit
+                  @ppouch = petPouch
+                  @ppouch.save
+               end
                @pouch = pouch
             end
          end
@@ -129,6 +136,13 @@ module PetownersHelper
                end
             end
          elsif(type == "show") #Guest
+            logged_in = current_user
+            if(logged_in)
+               cstatus = Onlineuser.find_by_user_id(logged_in.id)
+               cstatus.last_visited = Time.now
+               @cstatus = cstatus
+               @cstatus.save
+            end
             userFound = User.find_by_vname(params[:user_id])
             if(userFound)
                petownerFound = Petowner.find_by_id(params[:id])

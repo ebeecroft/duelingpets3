@@ -1,5 +1,6 @@
 <% provide(:title, "A collection of many different available pets!") %>
 <% provide(:description, "A place for the admin to see what pets and monsters are available.") %>
+<% provide(:style, ".pagebox{text-align:center;}") %>
 <h1 class="pageheader">Pet List</h1>
 <br>
 <div class="pagebox"><%= paginate @pets %></div>
@@ -7,7 +8,7 @@
    <br>
    <div class="pagetext">
       <div class="inner"><%= link_to pet.species_name, pet %></div>
-      <div class="inner"><%= button_to 'Edit', edit_pet_path(pet), method: :get %></div>
+      <div class="inner"><%= button_to 'Edit', edit_user_pet_path(pet), method: :get %></div>
       <div class="inner"><%= button_to 'Destroy', pet, method: :delete, data: { confirm: 'Are you sure?' } %></div>
       <br>
       <div class="inner"><%= image_tag pet.image_url(:thumb).to_s %></div>

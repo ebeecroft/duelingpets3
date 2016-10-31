@@ -174,8 +174,14 @@ module PetsHelper
       def switch(type)
          if(type == "index") #Guest
             petType("pet")
-#            @count2 = 0
          elsif(type == "show") #Guest
+            logged_in = current_user
+            if(logged_in)
+               cstatus = Onlineuser.find_by_user_id(logged_in.id)
+               cstatus.last_visited = Time.now
+               @cstatus = cstatus
+               @cstatus.save
+            end
             #We want to show pets regardless of review status
             petFound = Pet.find_by_species_name(params[:id])
             if(petFound)
@@ -299,18 +305,18 @@ module PetsHelper
          elsif(type == "destroy") #Admin
             logged_in = current_user
             if(logged_in)
-               petFound = Pet.find_by_species_name(params[:id])
-               if(petFound)
-                  if(logged_in.admin)
+               if(logged_in.admin)
+                  petFound = Pet.find_by_species_name(params[:id])
+                  if(petFound)
                      @pet = petFound
                      @pet.destroy
                      flash[:success] = 'Pet was succesfully removed.'
                      redirect_to pets_url
                   else
-                     redirect_to root_path
+                     render "public/404"
                   end
                else
-                  render "public/404"
+                  redirect_to root_path
                end
             else
                redirect_to root_path

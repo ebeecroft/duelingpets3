@@ -1,15 +1,15 @@
-<% provide(:title, "Inventory: A place to store users items!") %>
-<% provide(:keywords, "inventory, item, storage") %>
-<% provide(:description, "Allows users to keep track of their purchases that they made.") %>
-<h1 class="pageheader">
+<% provide(:style, ".pagebox{text-align:center;}.petbox{font-size:16px;text-align:center;font-weight: bold;}") %>
 <% if getOptional %>
-  My Inventory
+   <% provide(:title, "My Inventory: Item storage!") %>
+   <% provide(:description, "Allows users to keep track of their purchases that they made.") %>
+   <h1 class="pageheader">My Inventory</h1>
+   <br>
+   <p class="pagetext">Am I forgetting something? *some one yells in the background* Ah yes that is right, one of the audience members has been wondering where do those items that I purchased go to? Hmm. Let me think, ah yes now I remember, why the items are sucked into the fabric of time through a wormhole and pass out the other end planting itself in your inventory, which is labeled inventory. In that mystical place you can select one of your purchased items and equip it to your adopted pet or use it directly depending on its conditions.</p>
 <% else %>
-  Inventory List
+   <% provide(:title, "Inventory: Displays items!") %>
+   <% provide(:description, "Displays items owned by other users to admin.") %>
+   <h1 class="pageheader">Inventory List</h1>
 <% end %>
-</h1>
-<br>
-<p class="pagetext">Am I forgetting something? *some one yells in the background* Ah yes that is right, one of the audience members has been wondering where do those items that I purchased go to? Hmm. Let me think, ah yes now I remember, why the items are sucked into the fabric of time through a wormhole and pass out the other end planting itself in your inventory, which is labeled inventory. In that mystical place you can select one of your purchased items and equip it to your adopted pet or use it directly depending on its conditions.</p>
 <br>
 <div class="pagebox"><%= paginate @inventories %></div>
 <br>
@@ -18,14 +18,12 @@
    <!--Determines if there is any inventory items to list-->
    <% if @icount > 0 %>
       <!--Selects the minimum default pet that the user has-->
-      <%= form_tag(petowner_equips_path(@selectpet)) do |inventoryChoice| %>
-         <!--Determines if there is any pets to choose from-->
-         <% if @petCount > 0 %>
+      <% if @petCount > 0 %>
+         <%= form_tag(petowner_equips_path(@selectpet)) do |inventoryChoice| %>
+            <!--Determines if there is any pets to choose from-->
             <p class="petbox">My current pet is: <%= collection_select(:selectedpet, :petowner_id, @mypets, :id, :pet_name) %></p>
             <br>
-         <% end %>
-         <%= render 'userinventory' %>
-         <% if @petCount > 0 %>
+            <%= render 'userinventory' %>
             <br>
             <p class="pagetext"><%= submit_tag("Use item!") %></p>
          <% end %>

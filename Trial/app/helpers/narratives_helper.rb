@@ -31,6 +31,38 @@ module NarrativesHelper
    end
 
    private
+      def getStatus(user)
+         status = "Offline"
+         onlineUserFound = Onlineuser.find_by_user_id(user.id)
+         if(onlineUserFound.signed_in_at)
+            if(!onlineUserFound.signed_out_at)
+               if(onlineUserFound.last_visited == nil)
+                  status = "Online"
+               else
+                  if((currentTime - onlineUserFound.last_visited) > 30.minutes)
+                     status = "Inactive"
+                  else
+                     status = "Online"
+                  end
+               end
+            else
+               status = "Offline"
+            end
+         end
+         return status
+      end
+
+      def getTime(user, status)
+         value = ""
+         onlineUserFound = Onlineuser.find_by_user_id(user.id)
+         if(status == "Inactive")
+            value = onlineUserFound.last_visited
+         else
+            value = onlineUserFound.signed_out_at
+         end
+         return value
+      end
+
       def getType(user)
          if(user.admin)
             value = "$"

@@ -98,6 +98,13 @@ module MaintopicsHelper
                redirect_to root_path
             end
          elsif(type == "show") #Guest
+            logged_in = current_user
+            if(logged_in)
+               cstatus = Onlineuser.find_by_user_id(logged_in.id)
+               cstatus.last_visited = Time.now
+               @cstatus = cstatus
+               @cstatus.save
+            end
             maintopicFound = Maintopic.find_by_id(params[:id])
             if(maintopicFound)
                tcontainerFound = Tcontainer.find_by_id(maintopicFound.tcontainer_id)

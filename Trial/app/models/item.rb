@@ -1,7 +1,7 @@
 class Item < ActiveRecord::Base
+  attr_accessible :description, :name, :hp, :atk, :def, :spd, :manyuses, :ipicture, :remote_ipicture_url, :ipicture_cache
   has_many :inventories, :foreign_key => "item_id", :dependent => :destroy
   belongs_to :user
-  attr_accessible :description, :name, :hp, :atk, :def, :spd, :manyuses, :ipicture, :remote_ipicture_url
   mount_uploader :ipicture, IpictureUploader
   VALID_VALUE_REGEX = /\A[0-9]+\z/i
   validates :description, presence: true

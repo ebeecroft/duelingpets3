@@ -2,31 +2,31 @@ class ItemsController < ApplicationController
    include ItemsHelper
 
    def index
-     mode "index"
+      mode "index"
    end
 
    def show
-     mode "show"
+      mode "show"
    end
 
    def new
-     mode "new"
+      mode "new"
    end
 
    def edit
-     mode "edit"
+      mode "edit"
    end
 
    def create
-     mode "create"
+      mode "create"
    end
 
    def update
-     mode "update"
+      mode "update"
    end
 
    def destroy
-     mode "destroy"
+      mode "destroy"
    end
 
    def review
@@ -39,6 +39,10 @@ class ItemsController < ApplicationController
 
    def deny
       mode "deny"
+   end
+
+   def list
+      mode "list"
    end
 
    def maintenance

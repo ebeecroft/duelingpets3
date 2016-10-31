@@ -73,6 +73,12 @@ module PmsHelper
          elsif(type == "show") #Login only
             logged_in = current_user
             if(logged_in)
+               cstatus = Onlineuser.find_by_user_id(logged_in.id)
+               cstatus.last_visited = Time.now
+               @cstatus = cstatus
+               @cstatus.save
+            end
+            if(logged_in)
                pmFound = Pm.find_by_id(params[:id])
                if(pmFound)
                   sender = User.find_by_vname(pmFound.from_user.vname)

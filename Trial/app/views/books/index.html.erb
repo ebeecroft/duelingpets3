@@ -1,5 +1,6 @@
 <% provide(:title, "Book: Checkout the great selection of books available!") %>
 <% provide(:description, "A place where the admin can view all of the books the users have created for their particular interest.") %>
+<% provide(:style, ".pagebox{text-align:center;}") %>
 <h1 class="pageheader">Listing books</h1>
 <br>
 <div class="pagebox"><%= paginate @books %></div>

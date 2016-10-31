@@ -1,6 +1,7 @@
 <% provide(:title, "Login: Are you ready to get back to your virtual pet account?") %>
 <% provide(:keywords, "virtual, pet, account") %>
 <% provide(:description, "Welcome back from your trip, I hope it was pleasent one. Please sign back in when your ready.") %>
+<% provide(:style, ".pagetextheader{padding-left: 3%;padding-right: 3%;font-size: 24px;font-weight: bold;}") %>
 <h1 class="pagetextheader">Sign in</h1>
 <br>
 <%= form_for(:session, url: sessions_path) do |f| %>

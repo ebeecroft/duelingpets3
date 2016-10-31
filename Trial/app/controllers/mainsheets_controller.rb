@@ -28,4 +28,8 @@ class MainsheetsController < ApplicationController
    def destroy
       mode "destroy"
    end
+
+   def list
+      mode "list"
+   end
 end

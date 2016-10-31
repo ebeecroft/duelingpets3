@@ -26,7 +26,6 @@ module PasswordrecoveriesHelper
                      @passwordtoken = token
                      UserMailer.recover_account(@user, @passwordtoken).deliver
                      flash[:success] = "Your password was succesfully sent"
-#                     flash[:success] = "Temp password is: #{token}"
                   else
                      flash[:success] = "Your password was succesfully sent"
                   end

@@ -94,9 +94,9 @@ module SoundsHelper
          newSound.user_id = logged_in.id
          currentTime = Time.now
          newSound.created_on = currentTime
+         @subsheet = subsheetFound
          @sound = newSound
          if(@sound.save)
-            @subsheet = subsheetFound
             SoundMailer.review_sound(@sound).deliver
             flash[:success] = "#{@sound.name} is currently being reviewed please check back later."
             redirect_to subsheet_sound_path(@subsheet, @sound)
@@ -119,6 +119,13 @@ module SoundsHelper
                redirect_to root_path
             end
          elsif(type == "show") #Guest
+            logged_in = current_user
+            if(logged_in)
+               cstatus = Onlineuser.find_by_user_id(logged_in.id)
+               cstatus.last_visited = Time.now
+               @cstatus = cstatus
+               @cstatus.save
+            end
             soundFound = Sound.find_by_id(params[:id])
             if(soundFound)
                subsheetFound = Subsheet.find_by_id(params[:subsheet_id])

@@ -1,14 +1,21 @@
+<% provide(:style, ".errorheader{text-align: left;font-weight: bold;padding: 5px 5px 5px 15px;font-size: 12px;
+margin: -7px;margin-bottom: 0px;background-color: #c00;color: #fff;}") %>
+<% provide(:style, ".errorslisted{font-size: 12px;list-style: square;}") %>
+<% provide(:style, "#error_explanation{width: 450px;border: 2px solid red;padding: 7px;padding-bottom: 0;
+margin-bottom: 20px;background-color: #f0f0f0;") %>
 <%= form_for @item, :html => {:multipart => true} do |f| %>
   <% if @item.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
+     <div class="pagetext">
+        <div id="error_explanation">
+           <h2 class="errorheader"><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
 
-      <ul>
-      <% @item.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
+           <ul class="errorslisted">
+              <% @item.errors.full_messages.each do |msg| %>
+                 <li class="errorslisted"><%= msg %></li>
+              <% end %>
+           </ul>
+        </div>
+     </div>
   <% end %>
   <br>
   <div class="pagetext">
@@ -16,11 +23,15 @@
     <%= f.text_field :name %>
   </div>
   <div class="pagetext">
+     <%= image_tag @item.ipicture_url(:thumb).to_s if @item.ipicture? %>
+  </div>
+  <div class="pagetext">
     <%= f.file_field :ipicture %>
   </div>
   <div class="pagetext">
     <%= f.label :remote_ipicture_url, "or Image_URL" %>
     <%= f.text_field :remote_ipicture_url %>
+    <%= f.hidden_field :ipicture_cache %>
   </div>
   <div class="pagetext">
     <%= f.label :description %><br />

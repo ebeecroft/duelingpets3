@@ -1,5 +1,6 @@
 <% provide(:title, "A collection of all the inbound pms!") %>
 <% provide(:description, "A place for the current user to see his recieved messages.") %>
+<% provide(:style, ".pagebox{text-align:center;}") %>
 <h1 class="pageheader">Inbox</h1>
 <br>
 <div class="pagebox"><%= paginate @pms %></div>

@@ -1,5 +1,6 @@
 <% provide(:title, "PM: The place where users get to view messages!") %>
 <% provide(:description, "A place where users can message each other.") %>
+<% provide(:style, ".pagebox{text-align:center;}") %>
 <p id="notice"><%= notice %></p>
 <h1 class="pageheader">
    <div class="inner"><%= @pm.title %></div>
@@ -11,16 +12,18 @@
 <br>
 <div class="pagebox"><%= paginate @preplies %></div>
 <br>
-<p class="pagetext"><%= @pm.description %></p>
-<p class="pagetext">Created on: <%= @pm.created_on.strftime("%B-%d-%Y") %></p>
-<p class="pagetext">Owner: <%= getType(@pm.from_user) %><%= link_to @pm.from_user.vname, user_path(@pm.from_user) %></p>
-<p class="pagetext">Status: <%= getStatus(@pm.from_user) %>
-   <% if getStatus(@pm.from_user) != "Online" %>
-      <% if getTime(@pm.from_user, getStatus(@pm.from_user)) %>
-         for <%= distance_of_time_in_words_to_now getTime(@pm.from_user, getStatus(@pm.from_user)) %>
+<div class="pagetext">
+   <p><%= @pm.description %></p>
+   <p>Created on: <%= @pm.created_on.strftime("%B-%d-%Y") %></p>
+   <p>Owner: <%= getType(@pm.from_user) %><%= link_to @pm.from_user.vname, user_path(@pm.from_user) %></p>
+   <p>Status: <%= getStatus(@pm.from_user) %>
+      <% if getStatus(@pm.from_user) != "Online" %>
+         <% if getTime(@pm.from_user, getStatus(@pm.from_user)) %>
+            for <%= distance_of_time_in_words_to_now getTime(@pm.from_user, getStatus(@pm.from_user)) %>
+         <% end %>
       <% end %>
-   <% end %>
-</p>
+   </p>
+</div>
 <% @preplies.each do |preply| %>
    <br>
    <div class="pagetext">

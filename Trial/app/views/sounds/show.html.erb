@@ -4,11 +4,13 @@
 <p id="notice"><%= notice %></p>
 <h1 class="pageheader"><%= @sound.name %></h1>
 <br>
-<p class="pagetext"><%= audio_tag(@sound.ogg_url.to_s, :controls => true) %></p>
-<p class="pagetext"><%= audio_tag(@sound.mp3_url.to_s, :controls => true) %></p>
-<p class="pagetext"><%= audio_tag(@sound.wav_url.to_s, :controls => true) %></p>
-<p class="pagetext"><%= @sound.description %></p>
-<p class="pagetext">Created on: <%= @sound.created_on.strftime("%B-%d-%Y") %></p>
-<p class="pagetext">Announcer: <%= getType(@sound.user) %><%= link_to @sound.user.vname, user_path(@sound.user) %></p>
-<br>
-<p class="pagetext"><%= link_to 'Back', mainsheet_subsheet_path(@subsheet.mainsheet, @sound.subsheet) %></p>
+<div class="pagetext">
+   <p><%= audio_tag(@sound.ogg_url.to_s, :controls => true) %></p>
+   <p><%= audio_tag(@sound.mp3_url.to_s, :controls => true) %></p>
+   <p><%= audio_tag(@sound.wav_url.to_s, :controls => true) %></p>
+   <p><%= @sound.description %></p>
+   <p>Created on: <%= @sound.created_on.strftime("%B-%d-%Y") %></p>
+   <p>Announcer: <%= getType(@sound.user) %><%= link_to @sound.user.vname, user_path(@sound.user) %></p>
+   <br>
+   <p><%= link_to 'Back', mainsheet_subsheet_path(@subsheet.mainsheet, @sound.subsheet) %></p>
+</div>

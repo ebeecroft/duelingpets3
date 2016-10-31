@@ -218,11 +218,11 @@ module UsersHelper
             domain_only = blacklistedDomains.select{|blacklistedDomain| blacklistedDomain.domain_only}
             #Email specific
             specificMatch = "false"
-            domainOnlyMatch = domain_only.select{|blacklisted_domain| blacklisted_domain.name.downcase == domain.downcase}
+            domainOnlyMatch = domain_only.select{|blacklisted_domain| domain && blacklisted_domain.name.downcase == domain.downcase}
             if(domainOnlyMatch.count == 0)
                domain_specific = blacklistedDomains.select{|blacklistedDomain| !blacklistedDomain.domain_only}
-               domainSpecificMatch = domain_specific.select{|blacklisted_domain| blacklisted_domain.name.downcase == domain.downcase}
-               nameMatch = blacklistedNames.select{|blacklistedName| blacklistedName.name.downcase == name.downcase}
+               domainSpecificMatch = domain_specific.select{|blacklisted_domain| domain && blacklisted_domain.name.downcase == domain.downcase}
+               nameMatch = blacklistedNames.select{|blacklistedName| name && blacklistedName.name.downcase == name.downcase}
                if(nameMatch.count > 0 && domainSpecificMatch.count > 0)
                   specificMatch = "true"
                end

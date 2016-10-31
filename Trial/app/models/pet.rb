@@ -1,5 +1,5 @@
 class Pet < ActiveRecord::Base
-  attr_accessible :description, :species_name, :hp, :atk, :def, :spd, :monster, :image, :remote_image_url
+  attr_accessible :description, :species_name, :hp, :atk, :def, :spd, :monster, :image, :remote_image_url, :image_cache
   has_many :petowners, :foreign_key => "pet_id", :dependent => :destroy
   has_many :fights, :foreign_key => "pet_id", :dependent => :destroy
   belongs_to :user

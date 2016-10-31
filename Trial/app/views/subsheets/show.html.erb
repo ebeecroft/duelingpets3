@@ -1,17 +1,13 @@
 <% provide(:title, "Subsheet: The place where users audio gets uploaded to!") %>
 <% provide(:keywords, "user, audio, uploaded") %>
 <% provide(:description, "Breaks down users music into nice folders.") %>
+<% provide(:style, ".pagebox{text-align:center;}.container{display:inline-block;padding-right:2%;}") %>
 <p id="notice"><%= notice %></p>
 <h1 class="pageheader"><%= @subsheet.name %></h1>
 <br>
 <p class="pagetext"><%= @subsheet.description %></p>
 <br>
 <div class="pagebox"><%= paginate @sounds %></div>
-<!--Container--->
-<!--Title of Artwork First-->
-<!--Author on the bottom-->
-<!--End of Container-->
-<!--Should eventually change order for processing of art images--->
 <br>
 <div class="pagetext">
    <% @sounds.each_with_index do |sound, index| %>

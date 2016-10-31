@@ -1,9 +1,12 @@
 <% provide(:title, "Active: The place that holds all the active users!") %>
 <% provide(:description, "A listing of all the active users.") %>
+<% provide(:style, ".pagebox{text-align:center;}") %>
 <h1 class="pageheader">Active users</h1>
 <br>
 <div class="pagebox"><%= paginate @onlineusers %></div>
 <br>
-<% @onlineusers.each do |activeuser| %>
-   <p class="pagetext"><%= activeuser.user.vname %>&nbsp;&nbsp;</p>
-<% end %>
+<div class="pagetext">
+   <% @onlineusers.each do |activeuser| %>
+      <div class="inner"><%= activeuser.user.vname %>&nbsp;&nbsp;</div>
+   <% end %>
+</div>

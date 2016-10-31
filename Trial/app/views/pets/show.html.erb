@@ -40,11 +40,9 @@
          </tr>
       </table>
    </div>
-   <div class="outer">
-      <p><%= @pet.description %></p>
-      <p>Created on: <%= @pet.created_on.strftime("%B-%d-%Y") %></p>
-      <p>Creator: <%= getType(@pet.user) %><%= link_to @pet.user.vname, user_path(@pet.user) %></p>
-   </div>
+   <p><%= @pet.description %></p>
+   <p>Created on: <%= @pet.created_on.strftime("%B-%d-%Y") %></p>
+   <p>Creator: <%= getType(@pet.user) %><%= link_to @pet.user.vname, user_path(@pet.user) %></p>
 </div>
 <br>
 <% if getPetType2(@pet.monster) %>

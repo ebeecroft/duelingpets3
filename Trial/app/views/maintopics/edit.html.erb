@@ -1,5 +1,6 @@
 <% provide(:title, "Maintopic: Edit your maintopic here!") %>
 <% provide(:description, "Allows the users to change their maintopic to the best of their abilities.") %>
+<% provide(:style, ".pagetextheader{padding-left: 3%;padding-right: 3%;font-size: 24px;font-weight: bold;}") %>
 <h1 class="pagetextheader">Editing maintopic</h1>
 <%= render 'form' %>
 <p class="pagetext"><%= link_to 'Back', tcontainer_maintopic_path(@maintopic.tcontainer, @maintopic) %></p>

@@ -6,18 +6,58 @@
       <meta name="keywords" content="<%= yield(:keywords) %>">
       <meta name="description" content="<%= yield(:description) %>">
       <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta name="robots" content="<%= yield(:robots) %>">
       <% if Rails.env.development? %>
          <%= stylesheet_link_tag "application.css", :media => "all" %>
       <% end %>
       <%= csrf_meta_tags %>
+      <style>
+         html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,
+         big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,
+         dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,
+         canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,
+         time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;vertical-align:baseline;font:inherit;}
+         /* HTML5 display-role reset for older browsers */
+         article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block;}
+         body{line-height:1;}
+         ol,ul{list-style:none;}
+         blockquote,q{quotes:none;}
+         blockquote:before,blockquote:after,q:before,q:after{content:'';content:none;}
+         table{border-collapse:collapse;border-spacing:0;}
+         .box{max-width: 100%;}
+         .pagecontent{background-color: #F2F5A9; font-family: 'Lucida Sans Unicode','Lucida Grande',Helvetica,Arial,sans-serif;}
+         .banner{width: 100%; height: 110px;}
+         .logo{font-size: 24px; text-align:left; font-weight: bold; padding-left: 3%;}
+         .profilebar{padding-right: 1%;text-align: right;}
+         .navigationC{padding-left: 3%;padding-right: 3%;text-align: center;background: #088A29;font-weight: bold;}
+         .navigation{padding-top: 0.5%;padding-bottom: 0.5%;font-size: 80%; /* mobile version */}
+         .navigationspacing{display: inline-block;padding-right: 1%;padding-bottom: 3%; /* mobile compliant */}
+         @media(min-width: 640px){.navigation{font-size: 120%; /* desktop version */}
+         .navigationspacing{display: inline-block;padding-right: 1%;padding-bottom: 0%;}}
+         .navigation a{text-decoration: none;color: #faac58;}
+         .contentbox{font-size: 16px;}
+         .pageheader{font-size: 24px;text-align:center;font-weight: bold;/*h1tags*/}
+         .pagetext{padding-left: 3%;padding-right: 3%;/*indents text*/}
+         a.skip{left: -999px;position: absolute;top: auto;width: 1px;height: 1px;overflow: hidden;}
+         a.skip:focus, a.skip:active{color: #fff;background-color: #000;left: auto;top: auto;width: 30%;height: auto;
+         overflow: auto;margin: 10px 35%;padding: 5px;border: 4px solid yellow;text-align: center;font-size: 1.2em;}
+         .alert-herror, .alert-aerror, .alert-derror, .alert-serror, .regcolor, .alert-error{color: #ff0000;}
+         .alert-success{color: #00ff00;}
+         .sessiontime{color: #0000ff;display: inline-block;}
+         .inner{display: inline-block;}
+         .dropdown{position: relative;}
+         .drop-nav{position:absolute;display:none;}
+         .drop-nav li{background: #088A29;border: 1px solid rgba(0,255,0,.2);}
+         .dropdown:hover > .drop-nav{display:block;}
+         .menucolor{color:#faac58;}
+         <%= yield(:style) %>
+      </style>
    </head>
    <body class="pagecontent">
       <!--Need something to encompass this-->
-      <div class="headerbox">
+      <div class="box">
          <%= render 'layouts/header' %>
-      </div>
-      <br>
-      <div class="contentbox">
+         <br>
          <div class="pagetext">
             <% flash.each do |key, value| %>
                <div class="alert alert-<%= key %>"><%= value %></div>

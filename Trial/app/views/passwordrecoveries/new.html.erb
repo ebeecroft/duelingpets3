@@ -1,6 +1,7 @@
 <% provide(:title, "Recover: Need help with your password?") %>
 <% provide(:keywords, "virtual, pet, account") %>
 <% provide(:description, "Helps reset your forgotten password.") %>
+<% provide(:style, ".pagetextheader{padding-left: 3%;padding-right: 3%;font-size: 24px;font-weight: bold;}") %>
 <h1 class="pagetextheader">Reset password</h1>
 <br>
 <%= form_for(:session, url: passwordrecoveries_path) do |f| %><!--Has to have session-->

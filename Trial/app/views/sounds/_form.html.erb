@@ -1,53 +1,73 @@
+<% provide(:style, ".errorheader{text-align: left;font-weight: bold;padding: 5px 5px 5px 15px;font-size: 12px;
+margin: -7px;margin-bottom: 0px;background-color: #c00;color: #fff;}") %>
+<% provide(:style, ".errorslisted{font-size: 12px;list-style: square;}") %>
+<% provide(:style, "#error_explanation{width: 450px;border: 2px solid red;padding: 7px;padding-bottom: 0;
+margin-bottom: 20px;background-color: #f0f0f0;") %>
 <%= form_for([@subsheet, @sound]) do |f| %>
-  <% if @sound.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@sound.errors.count, "error") %> prohibited this sound from being saved:</h2>
+   <% if @sound.errors.any? %>
+      <div class="pagetext">
+         <div id="error_explanation">
+            <h2 class="errorheader"><%= pluralize(@sound.errors.count, "error") %> prohibited this sound from being saved:</h2>
 
-      <ul>
-      <% @sound.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <br>
-  <div class="pagetext">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <br>
-  <p class="pagetext">Ogg files</p>
-  <div class="pagetext">
-    <%= f.file_field :ogg %>
-  </div>
-  <div class="pagetext">
-    <%= f.label :remote_ogg_url, "or Ogg URL" %><br/>
-    <%= f.text_field :remote_ogg_url %>
-  </div>
-  <br>
-  <p class="pagetext">Mp3 files</p>
-  <div class="pagetext">
-    <%= f.file_field :mp3 %>
-  </div>
-  <div class="pagetext">
-    <%= f.label :remote_mp3_url, "or Mp3 URL" %><br/>
-    <%= f.text_field :remote_mp3_url %>
-  </div>
-  <br>
-  <p class="pagetext">Wav files</p>
-  <div class="pagetext">
-    <%= f.file_field :wav %>
-  </div>
-  <div class="pagetext">
-    <%= f.label :remote_wav_url, "or Wav URL" %><br/>
-    <%= f.text_field :remote_wav_url %>
-  </div>
-  <div class="pagetext">
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
-  </div>
-  <div class="pagetext">
-    <%= f.submit %>
-  </div>
-  <br>
+            <ul class="errorslisted">
+               <% @sound.errors.full_messages.each do |msg| %>
+                  <li class="errorslisted"><%= msg %></li>
+               <% end %>
+            </ul>
+         </div>
+      </div>
+   <% end %>
+   <br>
+   <div class="pagetext">
+      <%= f.label :name %><br />
+      <%= f.text_field :name %>
+   </div>
+   <br>
+   <div class="pagetext">
+      <%= audio_tag(@sound.ogg_url.to_s, :controls => true) if @sound.ogg? %>
+   </div>
+   <p class="pagetext">Ogg files</p>
+   <div class="pagetext">
+      <%= f.file_field :ogg %>
+   </div>
+   <div class="pagetext">
+      <%= f.label :remote_ogg_url, "or Ogg URL" %><br/>
+      <%= f.text_field :remote_ogg_url %>
+      <%= f.hidden_field :ogg_cache %>
+   </div>
+   <br>
+   <div class="pagetext">
+      <%= audio_tag(@sound.mp3_url.to_s, :controls => true) if @sound.mp3? %>
+   </div>
+   <p class="pagetext">Mp3 files</p>
+   <div class="pagetext">
+      <%= f.file_field :mp3 %>
+   </div>
+   <div class="pagetext">
+      <%= f.label :remote_mp3_url, "or Mp3 URL" %><br/>
+      <%= f.text_field :remote_mp3_url %>
+      <%= f.hidden_field :mp3 %>
+   </div>
+   <br>
+   <div class="pagetext">
+      <%= audio_tag(@sound.wav_url.to_s, :controls => true) if @sound.wav? %>
+   </div>
+   <p class="pagetext">Wav files</p>
+   <div class="pagetext">
+      <%= f.file_field :wav %>
+   </div>
+   <div class="pagetext">
+      <%= f.label :remote_wav_url, "or Wav URL" %><br/>
+      <%= f.text_field :remote_wav_url %>
+      <%= f.hidden_field :wav_cache %>
+   </div>
+   <br>
+   <div class="pagetext">
+      <%= f.label :description %><br />
+      <%= f.text_area :description %>
+   </div>
+   <div class="pagetext">
+      <%= f.submit %>
+   </div>
+   <br>
 <% end %>
