@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160921053800) do
+ActiveRecord::Schema.define(:version => 20160929040958) do
 
   create_table "accountkeys", :force => true do |t|
     t.integer  "user_id"
@@ -32,6 +32,19 @@ ActiveRecord::Schema.define(:version => 20160921053800) do
     t.datetime "created_at",                      :null => false
     t.datetime "updated_at",                      :null => false
     t.string   "art"
+  end
+
+  create_table "blacklisteddomains", :force => true do |t|
+    t.string   "name"
+    t.boolean  "domain_only", :default => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+  end
+
+  create_table "blacklistednames", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "blogs", :force => true do |t|
