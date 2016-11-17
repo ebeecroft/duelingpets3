@@ -1,8 +1,5 @@
 Trial::Application.routes.draw do
 
-  resources :referrals
-
-
    #Builds the users actions and the nested actions
    get '/users/maintenance' => 'users#maintenance'
    resources :users, :except => [:new] do #builds everything except new
@@ -18,6 +15,7 @@ Trial::Application.routes.draw do
       resources :pms, :except =>[:index] #Builds everything
       resources :pets, :except =>[:index, :show, :destroy]
       resources :mainsheets
+      resources :referrals, :only =>[:index]
    end
 
    #Builds the mainsheets
@@ -239,8 +237,12 @@ Trial::Application.routes.draw do
    #Builds accountkey authentication pages
    resources :accountkeys, :only => [:index]
 
+   #Builds the referrals
+   resources :referrals, :only=>[:index, :new, :create]
+
    #Root pages
    get 'maintenance' => "start#maintenance"
+   get 'stats' => "start#stats"
    root :to => "start#home"
 end
 
