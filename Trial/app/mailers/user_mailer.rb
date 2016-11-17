@@ -57,6 +57,6 @@ class UserMailer < ActionMailer::Base
       @referral = referral
       @points = points
       @url = "http://www.duelingpets.net/referrals"
-      mail(to: referral.referrer.email, "Congratulations you Referred a New User")
+      mail(to: referral.referrer.email, subject: "Congratulations you Referred a New User")
    end
 end
