@@ -42,7 +42,7 @@
             </tr>
             <tr>
                <!--Remember to change this field when I implement the new fix-->
-               <td>Creator: <%= getType(pet.user) %><%= link_to findUser(pet.user_id), user_path(findUser(pet.user_id)) %></td>
+               <td>Creator: <%= getType(pet.user) %><%= link_to pet.user.vname, user_path(pet.user) %></td>
             </tr>
             <tr>
                <td>Created: <%= distance_of_time_in_words_to_now pet.created_on %> ago</td>

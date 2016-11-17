@@ -1,66 +1,75 @@
+<% provide(:style, ".errorheader{text-align: left;font-weight: bold;padding: 5px 5px 5px 15px;font-size: 12px;
+margin: -7px;margin-bottom: 0px;background-color: #c00;color: #fff;}") %>
+<% provide(:style, ".errorslisted{font-size: 12px;list-style: square;}") %>
+<% provide(:style, "#error_explanation{width: 450px;border: 2px solid red;padding: 7px;padding-bottom: 0;
+margin-bottom: 20px;background-color: #f0f0f0;") %>
 <%= form_for [@user, @pet], :html => {:multipart => true} do |f| %>
-  <% if @pet.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@pet.errors.count, "error") %> prohibited this pet from being saved:</h2>
+   <% if @pet.errors.any? %>
+      <div class="pagetext">
+         <div id="error_explanation">
+            <h2 class="errorheader"><%= pluralize(@pet.errors.count, "error") %> prohibited this pet from being saved:</h2>
 
-      <ul>
-      <% @pet.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <br>
-  <div class="pagetext">
-    <%= f.label :species_name %><br />
-    <%= f.text_field :species_name %>
-  </div>
-  <br>
-  <div class="pagetext">
-    <%= f.file_field :image %>
-  </div>
-  <br>
-  <div class="pagetext">
-    <%= f.label :remote_image_url, "or image URL" %><br/>
-    <%= f.text_field :remote_image_url %>
-  </div>
-  <br>
-  <div class="pagetext">
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
-  </div>
-  <br>
-  <div class="pagetext">
-    <%= f.label :monster %>?<br />
-    <%= f.check_box :monster %>
-  </div>
-  <br>
-  <div class="pagetext">
-    <%= f.label :hp %><br />
-    <%= f.text_field :hp %>
-  </div>
-  <br>
-  <div class="pagetext">
-    <%= f.label :atk %><br />
-    <%= f.text_field :atk %>
-  </div>
-  <br>
-  <div class="pagetext">
-    <%= f.label :def %><br />
-    <%= f.text_field :def %>
-  </div>
-  <br>
-  <div class="pagetext">
-    <%= f.label :spd %><br />
-    <%= f.text_field :spd %>
-  </div>
-  <br>
-  <div>
-  <p class="pagetext">Images submitted must be free from copyright restrictions, and appropriate for all ages. Inappropriate images will be removed and user privileges may be revoked. Please contact webmaster if you encounter inappropriate content. Also any pets that are uploaded to this site must go through a review process before it can appear on the adopt and monster pages.</p>
-  </div>
-  <br>
-  <div class="pagetext">
-    <%= f.submit %>
-  </div>
-  <br>
+            <ul class="errorslisted">
+               <% @pet.errors.full_messages.each do |msg| %>
+                  <li class="errorslisted"><%= msg %></li>
+               <% end %>
+            </ul>
+         </div>
+      </div>
+   <% end %>
+   <br>
+   <div class="pagetext">
+      <%= f.label :species_name %><br />
+      <%= f.text_field :species_name %>
+   </div>
+   <br>
+   <div class="pagetext">
+      <%= image_tag @pet.image_url(:thumb).to_s if @pet.image? %>
+   </div>
+   <div class="pagetext">
+      <%= f.file_field :image %>
+   </div>
+   <br>
+   <div class="pagetext">
+      <%= f.label :remote_image_url, "or image URL" %><br/>
+      <%= f.text_field :remote_image_url %>
+      <%= f.hidden_field :image_cache %>
+   </div>
+   <br>
+   <div class="pagetext">
+      <%= f.label :description %><br />
+      <%= f.text_area :description %>
+   </div>
+   <br>
+   <div class="pagetext">
+      <%= f.label :monster %>?<br />
+      <%= f.check_box :monster %>
+   </div>
+   <br>
+   <div class="pagetext">
+      <%= f.label :hp %><br />
+      <%= f.text_field :hp %>
+   </div>
+   <br>
+   <div class="pagetext">
+      <%= f.label :atk %><br />
+      <%= f.text_field :atk %>
+   </div>
+   <br>
+   <div class="pagetext">
+      <%= f.label :def %><br />
+      <%= f.text_field :def %>
+   </div>
+   <br>
+   <div class="pagetext">
+      <%= f.label :spd %><br />
+      <%= f.text_field :spd %>
+   </div>
+   <br>
+   <p class="pagetext">Images submitted must be free from copyright restrictions, and appropriate for all ages. Inappropriate images will be removed and user privileges may be revoked. Please contact webmaster if you encounter inappropriate content. Also any pets that are uploaded to this site must go through a review process before it can appear on the adopt and monster pages.</p>
+   <br>
+   <div class="pagetext">
+      <%= f.submit %>
+   </div>
+   <br>
 <% end %>

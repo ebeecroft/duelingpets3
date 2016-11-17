@@ -1,6 +1,7 @@
 <% provide(:title, "Gallery: The place where users get to upload their artwork!") %>
 <% provide(:keywords, "gallery, digital-artwork, traditional-artwork") %>
 <% provide(:description, "A place where users can showcase their talent to the world at large.") %>
+<% provide(:style, ".pagebox{text-align:center;}.container{display:inline-block;padding-right:2%;}") %>
 <p id="notice"><%= notice %></p>
 <h1 class="pageheader">
    <div class="inner"><%= @mainfolder.name %></div>
@@ -21,7 +22,7 @@
             <div class="inner"><%= button_to 'Edit', edit_mainfolder_subfolder_path(@mainfolder, subfolder), method: :get %></div>
             <div class="inner"><%= button_to 'Destroy', [@mainfolder, subfolder], method: :delete, data: { confirm: 'Are you sure?' } %></div>
          <% end %>
-         <p><%= image_tag getArtwork(subfolder) %></p>
+         <p><%= image_tag(getArtwork(subfolder), :class=>"artworkscale") %></p>
          <p>Created on: <%= subfolder.created_on.strftime("%B-%d-%Y") %></p>
          <p>Owner: <%= getType(subfolder.user) %><%= link_to subfolder.user.vname, user_path(subfolder.user) %></p>
          <p>Collaboration: <%= subfolder.collab_mode %></p>
@@ -31,6 +32,7 @@
          <br>
       <% end %>
    <% end %>
+</div>
 <br>
 <% if current_user %>
    <p class="pagetext"><%= link_to "New Subfolder", new_mainfolder_subfolder_path(@mainfolder) %></p>

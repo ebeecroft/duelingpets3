@@ -1,0 +1,24 @@
+<% provide(:title, "Mainsheets: Playing soungs all night long!") %>
+<% provide(:keywords, "creative, world, fanfiction, writer") %>
+<% provide(:description, "Where users can create awesome tunes for others to listen to.") %>
+<% provide(:style, ".pagebox{text-align:center;}") %>
+<h1 class="pageheader">
+   <% if getOptional %>
+      <%= @user.vname %>'s mainsheets
+   <% else %>
+      Listing mainsheets
+   <% end %>
+</h1>
+<br>
+<div class="pagebox"><%= paginate @mainsheets %></div>
+<% @mainsheets.each do |mainsheet| %>
+   <br>
+   <div class="pagetext">
+      <p><%= link_to mainsheet.name, user_mainsheet_path(mainsheet.user, mainsheet) %></p>
+      <p>Created on: <%= mainsheet.created_on.strftime("%B-%d-%Y") %></p>
+      <p><%= mainsheet.description %></p>
+      <% if !getOptional %>
+         <p>Announcer: <%= getType(mainsheet.user) %><%= link_to mainsheet.user.vname, user_path(mainsheet.user) %></p>
+      <% end %>
+   </div>
+<% end %>

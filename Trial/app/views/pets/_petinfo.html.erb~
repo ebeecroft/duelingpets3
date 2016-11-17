@@ -1,3 +1,4 @@
+<% provide(:style, ".container{display:inline-block;padding-right:2%;}") %>
 <div class="pagetext">
    <% @pets.each_with_index do |pet, index| %>
       <div class="container">
@@ -12,7 +13,7 @@
                   <div class="inner"><%= radio_button_tag :pet_id, pet.id %></div>
                <% end %>
             <% end %>
-            <p><%= image_tag pet.image_url(:thumb).to_s %></p>
+            <p><%= image_tag(pet.image_url(:thumb).to_s, :class=>"artworkscale") %></p>
          </div>
          <div class="inner">
             <table>
@@ -38,7 +39,7 @@
                <% end %>
             </table>
          </div>
-         <p>Creator: <%= getType(pet.user) %><%= link_to pet.user.vname, user_path(findUser(pet.user_id)) %></p>
+         <p>Creator: <%= getType(pet.user) %><%= link_to pet.user.vname, user_path(pet.user) %></p>
          <p>Created on: <%= pet.created_on.strftime("%B-%d-%Y") %></p>
       </div>
       <% if ((index + 1) % 3) == 0 %>         

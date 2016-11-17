@@ -1,5 +1,9 @@
 <% provide(:title, "User: Edit your account here!") %>
 <% provide(:description, "Allows the users to change their account settings to the best of their abilities.") %>
+<% provide(:style, ".pagetextheader{padding-left: 3%;padding-right: 3%;font-size: 24px;font-weight: bold;}") %>
+<% provide(:style, "#error_explanation{width: 450px;border: 2px solid red;padding: 7px;padding-bottom: 0;margin-bottom: 20px;
+background-color: #f0f0f0;ul li {font-size: 12px;list-style: square;}h2 {text-align: left;font-weight: bold;
+padding: 5px 5px 5px 15px;font-size: 12px;margin: -7px;margin-bottom: 0px;background-color: #c00;color: #fff;}}") %>
 <h1 class="pagetextheader">Editing user</h1>
-<%= render 'form' %>
+<%= render 'form', object: "Edit" %>
 <p class="pagetext"><%= link_to 'Back', @user %></p>

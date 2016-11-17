@@ -1,0 +1,54 @@
+<% provide(:title, "PM: The place where users get to view messages!") %>
+<% provide(:description, "A place where users can message each other.") %>
+<% provide(:style, ".pagebox{text-align:center;}") %>
+<p id="notice"><%= notice %></p>
+<h1 class="pageheader">
+   <div class="inner"><%= @pm.title %></div>
+   <% if current_user && (current_user.id == @pm.from_user_id || current_user.admin) %>
+      <div class="inner"><%= button_to 'Edit', edit_user_pm_path(@pm.from_user, @pm), method: :get %></div>
+      <div class="inner"><%= button_to 'Destroy', [@pm.from_user, @pm], method: :delete, data: { confirm: 'Are you sure?' } %></div>
+   <% end %>
+</h1>
+<br>
+<div class="pagebox"><%= paginate @preplies %></div>
+<br>
+<div class="pagetext">
+<p><%= @pm.description %></p>
+<p>Created on: <%= @pm.created_on.strftime("%B-%d-%Y") %></p>
+<p>Owner: <%= getType(@pm.from_user) %><%= link_to @pm.from_user.vname, user_path(@pm.from_user) %></p>
+<p>Status: <%= getStatus(@pm.from_user) %>
+   <% if getStatus(@pm.from_user) != "Online" %>
+      <% if getTime(@pm.from_user, getStatus(@pm.from_user)) %>
+         for <%= distance_of_time_in_words_to_now getTime(@pm.from_user, getStatus(@pm.from_user)) %>
+      <% end %>
+   <% end %>
+</p>
+</div>
+<% @preplies.each do |preply| %>
+   <br>
+   <div class="pagetext">
+      <div class="inner">re: <%= preply.pm.title %></div>
+      <% if current_user && (current_user.id == preply.user_id || current_user.admin) %>
+         <div class="inner"><%= button_to 'Edit', edit_pm_preply_path(@pm, preply), method: :get %></div>
+         <div class="inner"><%= button_to 'Destroy', [@pm, preply], method: :delete, data: { confirm: 'Are you sure?' } %></div>
+      <% end %>
+      <br>
+      <p><%= preply.message %></p>
+      <p>Created on: <%= preply.created_on.strftime("%B-%d-%Y") %></p>
+      <p>Owner: <%= getType(preply.user) %><%= link_to preply.user.vname, user_path(preply.user) %></p>
+      <p>Status: <%= getStatus(preply.user) %>
+         <% if getStatus(preply.user) != "Online" %>
+            <% if getTime(preply.user, getStatus(preply.user)) %>
+               for <%= distance_of_time_in_words_to_now getTime(preply.user, getStatus(preply.user)) %>
+            <% end %>
+         <% end %>
+      </p>
+      <!--Remember to add the online user setting here-->
+   </div>
+<% end %>
+<% if current_user %>
+   <br>
+   <p class="pagetext"><%= link_to 'New PReply', new_pm_preply_path(@pm) %></p>
+   <br>
+<% end %>
+<p class="pagetext"><%= link_to 'Back', pms_outbox_path %></p>

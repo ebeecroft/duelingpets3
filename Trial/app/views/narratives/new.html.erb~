@@ -1,5 +1,6 @@
 <% provide(:title, "Narrative: Create new narratives here!") %>
 <% provide(:description, "Where new narratives are born from the users wild imagination.") %>
+<% provide(:style, ".pagetextheader{padding-left: 3%;padding-right: 3%;font-size: 24px;font-weight: bold;}") %>
 <h1 class="pagetextheader">New narrative</h1>
 <%= render 'form' %>
 <p class="pagetext"><%= link_to 'Back', maintopic_subtopic_path(@subtopic.maintopic, @subtopic) %></p>

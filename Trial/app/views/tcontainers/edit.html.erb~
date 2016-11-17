@@ -3,4 +3,3 @@
 <h1 class="pagetextheader">Editing tcontainer</h1>
 <%= render 'form' %>
 <p class="pagetext"><%= link_to 'Back', forum_tcontainer_path(@tcontainer.forum, @tcontainer) %></p>
-

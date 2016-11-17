@@ -1,0 +1,5 @@
+<% provide(:title, "Sound: Edit your sound here!") %>
+<% provide(:description, "Allows the users to change the sound to the best of their abilities.") %>
+<h1 class="pagetextheader">Editing sound</h1>
+<%= render 'form' %>
+<p class="pagetext"><%= link_to 'Back', subsheet_sound_path(@subsheet, @sound) %></p>

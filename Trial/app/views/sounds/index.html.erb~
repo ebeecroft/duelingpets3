@@ -1,0 +1,21 @@
+<% provide(:title, "Sound: Where all the sounds are collected as a whole.") %>
+<% provide(:description, "A place where the admin can view all the sounds that have been collected.") %>
+<h1 class="pageheader">Listing Sounds</h1>
+<br>
+<div class="pagebox"><%= paginate @sounds %></div>
+<% @sounds.each do |sound| %>
+   <br>
+   <div class="pagetext">
+      <p>I belong to <%= link_to sound.subsheet.name, mainsheet_subsheet_path(sound.subsheet.mainsheet, sound.subsheet) %> subsheet</p>
+      <div class="inner">Name: <%= link_to sound.name, subsheet_sound_path(sound.subsheet, sound) %></div>
+      <div class="inner"><%= button_to 'Edit', edit_subsheet_sound_path(sound.subsheet, sound), method: :get %></div>
+      <div class="inner"><%= button_to 'Destroy', [sound.subsheet, sound], method: :delete, data: { confirm: 'Are you sure?' } %></div>
+      <p><%= audio_tag sound.ogg_url.to_s, :controls => true %></p>
+      <p><%= audio_tag sound.mp3_url.to_s, :controls => true %></p>
+      <p><%= audio_tag sound.wav_url.to_s, :controls => true %></p>
+      <p>Created on: <%= sound.created_on.strftime("%B-%d-%Y") %></p>
+      <p><%= sound.description %></p>
+      <p>Announcer: <%= getType(sound.user) %><%= link_to sound.user.vname, user_path(sound.user) %></p>
+      <p>Reviewed: <%= sound.reviewed %></p>
+   </div>
+<% end %>

@@ -1,5 +1,6 @@
 <% provide(:title, "Subtopic: The place that holds all the users subtopics!") %>
 <% provide(:description, "A listing of all the subtopics created for the admin to view.") %>
+<% provide(:style, ".pagebox{text-align:center;}.containerbox{border:1px solid;}") %>
 <h1 class="pageheader">Listing Subtopics</h1>
 <br>
 <div class="pagebox"><%= paginate @subtopics %></div>
@@ -11,6 +12,13 @@
       <div class="inner"><%= button_to 'Edit', edit_maintopic_subtopic_path(subtopic.maintopic, subtopic), method: :get %></div>
       <div class="inner"><%= button_to 'Destroy', [subtopic.maintopic, subtopic], method: :delete, data: { confirm: 'Are you sure?' } %></div>
       <p>by: <%= getType(subtopic.user) %><%= link_to subtopic.user.vname, user_path(subtopic.user) %></p>
+      <p>Status: <%= getStatus(subtopic.user) %>
+         <% if getStatus(subtopic.user) != "Online" %>
+            <% if getTime(subtopic.user, getStatus(subtopic.user)) %>
+               for <%= distance_of_time_in_words_to_now getTime(subtopic.user, getStatus(subtopic.user)) %>
+            <% end %>
+         <% end %>
+      </p>
       <pre class="storyformat"><%= subtopic.description %></pre>
    </div>
 <% end %>

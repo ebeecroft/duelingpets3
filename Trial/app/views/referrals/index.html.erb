@@ -1,27 +1,26 @@
-<h1>Listing referrals</h1>
-
-<table>
-  <tr>
-    <th>User</th>
-    <th>Referred by</th>
-    <th>Created on</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @referrals.each do |referral| %>
-  <tr>
-    <td><%= referral.user_id %></td>
-    <td><%= referral.referred_by_id %></td>
-    <td><%= referral.created_on %></td>
-    <td><%= link_to 'Show', referral %></td>
-    <td><%= link_to 'Edit', edit_referral_path(referral) %></td>
-    <td><%= link_to 'Destroy', referral, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
-
+<% provide(:title, "A collection of referred users!") %>
+<% provide(:description, "Where the user can see the referrals.") %>
+<% provide(:style, ".pagebox{text-align:center;}") %>
+<h1 class="pageheader">
+   <% if getOptional %>
+      <%= @user.vname %>'s referrals
+   <% else %>
+      Listing referrals
+   <% end %>
+</h1>
+<br>
+<div class="pagebox"><%= paginate @referrals %></div>
+<br>
+<div class="pagetext">
+   <% @referrals.each do |referral| %>
+      <br>
+      <% if !getOptional %>
+         <p>User: <%= referral.referre.vname %> referred by <%= referral.referrer.vname %></p>
+      <% else %>
+         <p>User referred: <%= referral.referre.vname %></p>
+      <% end %>
+      <p>Created: <%= referral.created_on.strftime("%B-%d-%Y") %></p>
+   <% end %>
+</div>
 <br />
-
 <%= link_to 'New Referral', new_referral_path %>

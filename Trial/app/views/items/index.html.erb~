@@ -1,9 +1,10 @@
 <% provide(:title, "Item: Displays all the items in the shop!") %>
 <% provide(:keywords, "item, shop") %>
-<% provide(:description, "Where users to get together to socialize, roleplay or even chat.") %>
+<% provide(:description, "Where users go to purchase items for their pet.") %>
+<% provide(:style, ".pagebox{text-align:center;}") %>
 <h1 class="pageheader">Zeriach's Item Shop</h1>
 <br>
-<p class="pagetext">Welcome to my shop of weird and wonderful things, can I interest you in a particular item?</p>
+<p id="main" tabindex="-1" class="pagetext">Welcome to my shop of weird and wonderful things, can I interest you in a particular item?</p>
 <br>
 <div class="pagebox"><%= paginate @items %></div>
 <br>
@@ -21,6 +22,6 @@
 <% end %>
 <br>
 <!--Prevents a visting user from creating a pet if not logged in -->
-<% if !current_user.nil? && current_user.admin %>
+<% if !current_user.nil? %>
    <p class="pagetext"><%= link_to 'New Item', new_item_path %></p>
 <% end %>

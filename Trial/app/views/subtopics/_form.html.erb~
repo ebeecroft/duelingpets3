@@ -1,3 +1,8 @@
+<% provide(:style, ".errorheader{text-align: left;font-weight: bold;padding: 5px 5px 5px 15px;font-size: 12px;
+margin: -7px;margin-bottom: 0px;background-color: #c00;color: #fff;}") %>
+<% provide(:style, ".errorslisted{font-size: 12px;list-style: square;}") %>
+<% provide(:style, "#error_explanation{width: 450px;border: 2px solid red;padding: 7px;padding-bottom: 0;
+margin-bottom: 20px;background-color: #f0f0f0;") %>
 <%= form_for([@maintopic,@subtopic]) do |f| %>
   <% if @subtopic.errors.any? %>
     <div id="error_explanation">
@@ -10,15 +15,17 @@
       </ul>
     </div>
   <% end %>
-  <div class="field">
+  <br>
+  <div class="pagetext">
     <%= f.label :topicname %><br />
     <%= f.text_field :topicname %>
   </div>
-  <div class="field">
+  <div class="pagetext">
     <%= f.label :description %><br />
     <%= f.text_area :description %>
   </div>
-  <div class="actions">
+  <div class="pagetext">
     <%= f.submit %>
   </div>
+  <br>
 <% end %>

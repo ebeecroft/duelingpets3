@@ -82,7 +82,12 @@ module EquipsHelper
             end
             @petowner = petownerFound
             @petowner.save
-            @inventory.destroy
+            if(@inventory.qty > 1)
+               @inventory.qty -= 1
+               @inventory.save
+            else
+               @inventory.destroy
+            end
             redirect_to user_inventories_path(@petowner.user.vname)
          end
       end
@@ -93,7 +98,11 @@ module EquipsHelper
          newEquip.petowner_id = petownerFound.id
          @equip = newEquip
          if(@equip.save)
-            @inventory.equipped = true
+            if(@inventory.qty > 1)
+               @inventory.qty -= 1
+            else
+               @inventory.equipped = true
+            end
             @inventory.save
             redirect_to petowner_equips_path(petownerFound)
          else
@@ -173,7 +182,12 @@ module EquipsHelper
                      if(petownerFound)
                         inventoryFound = Inventory.find_by_id(equipFound.inventory_id)
                         if(inventoryFound)
-                           inventoryFound.equipped = false
+                           if(inventoryFound.qty == 0)
+                              inventoryFound.qty += 1
+                              inventoryFound.equipped = false
+                           else
+                              inventoryFound.qty += 1
+                           end
                            @inventory = inventoryFound
                            if(@inventory.save)
                               @equip = equipFound

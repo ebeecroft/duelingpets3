@@ -1,3 +1,4 @@
+<% provide(:style, ".userspacing{display:inline-block;padding-right:3%;}") %>
 <div class="pagetext">
    <% if current_user && (current_user.id == @user.id || current_user.admin?) %>
       <div class="userspacing">First name: <%= @user.first_name %></div>
@@ -11,5 +12,11 @@
    <% if current_user && (current_user.id == @user.id || current_user.admin?) %>
       <p>Money: <%= @pouch.amount %></p>
    <% end %>
-   <p>Status: <%= getStatus(@user) %></p>
+   <p>Status: <%= getStatus(@user) %>
+      <% if getStatus(@user) != "Online" %>
+         <% if getTime(@user, getStatus(@user)) %>
+            for <%= distance_of_time_in_words_to_now getTime(@user, getStatus(@user)) %>
+         <% end %>
+      <% end %>
+   </p>
 </div>

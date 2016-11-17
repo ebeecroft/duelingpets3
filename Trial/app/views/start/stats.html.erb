@@ -1,0 +1,11 @@
+<% provide(:title, "Duelingpets: A kid friendly virtual pet site!") %>
+<% provide(:keywords, "virtual, pet") %>
+<% provide(:description, "Duelingpets is a kid friendly virtual pet site that allows users to create their own pets, art, and stories.") %>
+<% provide(:style, ".mascot{width: 25%;height:25%;} .mascotbox{text-align:center;}") %>
+<% provide(:robots, "index, follow") %>
+<h1 id="main" tabindex="-1" class="pageheader">Statistics</h1>
+<br>
+<div class="pagetext">
+   <h2 class="pageheader2">Signups</h2>
+   <p>Today: <%= getDaySignups %> Week: <%= getWeekSignups %> Month: <%= getMonthSignups %> Year: <%= getYearSignups %></p>
+</div>

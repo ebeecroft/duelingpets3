@@ -1,4 +1,4 @@
-<% provide(:style, ".container{display:inline-block;padding-right:2%;}") %>
+<% provide(:style, ".container{display:inline-block;padding-right:2%;padding-bottom:6%;}@media(min-width: 640px){.container{display:inline-block;padding-right:2%;padding-bottom:0%;}}") %>
 <div class="pagetext">
    <% @pets.each_with_index do |pet, index| %>
       <div class="container">
@@ -13,7 +13,7 @@
                   <div class="inner"><%= radio_button_tag :pet_id, pet.id %></div>
                <% end %>
             <% end %>
-            <p><%= image_tag pet.image_url(:thumb).to_s %></p>
+            <p><%= image_tag(pet.image_url(:thumb).to_s, :class=>"artworkscale") %></p>
          </div>
          <div class="inner">
             <table>

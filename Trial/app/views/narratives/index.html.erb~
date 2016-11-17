@@ -1,5 +1,6 @@
 <% provide(:title, "Narrative: The place that holds all the users narratives!") %>
 <% provide(:description, "A listing of all the narratives created for the admin to view.") %>
+<% provide(:style, ".pagebox{text-align:center;}.storyformat{white-space:pre-wrap;}") %>
 <h1 class="pageheader">Listing Narratives</h1>
 <br>
 <div class="pagebox"><%= paginate @narratives %></div>
@@ -10,6 +11,13 @@
       <div class="inner"><%= button_to 'Edit', edit_subtopic_narrative_path(narrative.subtopic, narrative), method: :get %></div>
       <div class="inner"><%= button_to 'Destroy', [narrative.subtopic, narrative], method: :delete, data: { confirm: 'Are you sure?' } %></div>
       <p>by: <%= getType(narrative.user) %><%= link_to narrative.user.vname, user_path(narrative.user) %></p>
+      <p>Status: <%= getStatus(narrative.user) %>
+         <% if getStatus(narrative.user) != "Online" %>
+            <% if getTime(narrative.user) %>
+               for <%= distance_of_time_in_words_to_now getTime(narrative.user) %>
+            <% end %>
+         <% end %>
+      </p>
       <pre class="storyformat">Story: <%= narrative.story %></pre>
    </div>
 <% end %>

@@ -1,0 +1,31 @@
+<% provide(:title, "Blog: The place that holds all the blogs users created!") %>
+<% provide(:keywords, "writing, news, journals") %>
+<% provide(:description, "All of the available blogs for the users to display their news.") %>
+<h1 class="pageheader">
+   <% if getOptional %>
+      <%= @user.vname %>'s blogs
+   <% else %>
+      Listing blogs
+   <% end %>
+</h1>
+<br>
+<div class="pagebox"><%= paginate @blogs %></div>
+<% @blogs.each do |blog| %>
+   <br>
+   <div class="pagetext">
+      <p><%= link_to blog.title, user_blog_path(blog.user.vname, blog) %></p>
+      <p>Created on: <%= blog.created_on.strftime("%B-%d-%Y") %></p>
+      <p><%= blog.description %></p>
+      <% if !getOptional %>
+         <p>Owner: <%= getType(blog.user) %><%= link_to blog.user.vname, user_path(blog.user) %></p>
+         <p>Status: <%= getStatus(blog.user) %>
+            <% if getStatus(blog.user) != "Online" %>
+               <% if getTime(blog.user, getStatus(blog.user)) %>
+                  for <%= distance_of_time_in_words_to_now getTime(blog.user, getStatus(blog.user)) %>
+               <% end %>
+            <% end %>
+         </p>
+         <!--Add the online status here too-->
+      <% end %>
+   </div>
+<% end %>

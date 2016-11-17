@@ -1,6 +1,7 @@
 <% provide(:title, "Gallery: The place that holds all the art users created!") %>
 <% provide(:keywords, "gallery, digital-artwork, traditional-artwork") %>
 <% provide(:description, "All of the available galleries for users to use for their artwork.") %>
+<% provide(:style, ".pagebox{text-align:center;}") %>
 <h1 class="pageheader">
    <% if getOptional %>
       <%= @user.vname %>'s galleries
@@ -12,10 +13,12 @@
 <div class="pagebox"><%= paginate @mainfolders %></div>
 <% @mainfolders.each do |mainfolder| %>
    <br>
-   <p class="pagetext"><%= link_to mainfolder.name, user_mainfolder_path(mainfolder.user.vname, mainfolder) %></p>
-   <p class="pagetext">Created on: <%= mainfolder.created_on.strftime("%B-%d-%Y") %></p>
-   <p class="pagetext"><%= mainfolder.description %></p>
-   <% if !getOptional %>
-      <p class="pagetext">Owner: <%= getType(mainfolder.user) %><%= link_to mainfolder.user.vname, user_path(mainfolder.user) %></p>
-   <% end %>
+   <div class="pagetext">
+      <p><%= link_to mainfolder.name, user_mainfolder_path(mainfolder.user.vname, mainfolder) %></p>
+      <p>Created on: <%= mainfolder.created_on.strftime("%B-%d-%Y") %></p>
+      <p><%= mainfolder.description %></p>
+      <% if !getOptional %>
+         <p>Owner: <%= getType(mainfolder.user) %><%= link_to mainfolder.user.vname, user_path(mainfolder.user) %></p>
+      <% end %>
+   </div>
 <% end %>

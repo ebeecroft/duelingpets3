@@ -1,6 +1,7 @@
 <% provide(:title, "Maintopic: The place where users get to build their social community!") %>
 <% provide(:keywords, "users, social, community") %>
 <% provide(:description, "A place where users can first start to generate topics for their particular forum.") %>
+<% provide(:style, ".pagebox{text-align:center;}") %>
 <p id="notice"><%= notice %></p>
 <h1 class="pageheader"><%= @maintopic.topicname %></h1>
 <br>
@@ -14,6 +15,13 @@
          <div class="inner"><%= button_to 'Destroy', [@maintopic, subtopic], method: :delete, data: { confirm: 'Are you sure?' } %></div>
       <% end %>
       <p>by: <%= getType(subtopic.user) %><%= link_to subtopic.user.vname, user_path(subtopic.user) %></p>
+      <p>Status: <%= getStatus(subtopic.user) %>
+         <% if getStatus(subtopic.user) != "Online" %>
+            <% if getTime(subtopic.user, getStatus(subtopic.user)) %>
+               for <%= distance_of_time_in_words_to_now getTime(subtopic.user, getStatus(subtopic.user)) %>
+            <% end %>
+         <% end %>
+      </p>
    </div>
    <br>
 <% end %>

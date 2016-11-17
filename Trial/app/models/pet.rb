@@ -4,7 +4,8 @@ class Pet < ActiveRecord::Base
   has_many :fights, :foreign_key => "pet_id", :dependent => :destroy
   belongs_to :user
   mount_uploader :image, ImageUploader
-  validates :species_name, presence: true, uniqueness: { case_sensitive: false}
+  VALID_NAME = /\A[A-Za-z][A-Za-z][A-Za-z0-9 ]+\z/
+  validates :species_name, presence: true, format: {with: VALID_NAME}, uniqueness: { case_sensitive: false}
   validates :description, presence: true
 
   def to_param

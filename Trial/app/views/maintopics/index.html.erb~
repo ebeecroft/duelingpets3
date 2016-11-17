@@ -1,5 +1,6 @@
 <% provide(:title, "Maintopic: The place that holds all the users maintopics!") %>
 <% provide(:description, "A listing of all the maintopics created for the admin to view.") %>
+<% provide(:style, ".pagebox{text-align:center;}") %>
 <h1 class="pageheader">Listing Maintopics</h1>
 <br>
 <div class="pagebox"><%= paginate @maintopics %></div>
@@ -14,5 +15,12 @@
       <% end %>
       <p>by: <%= getType(maintopic.user) %><%= link_to maintopic.user.vname, user_path(maintopic.user) %></p>
       <pre class="storyformat"><%= maintopic.description %></pre>
+      <p>Status: <%= getStatus(forum.user) %>
+         <% if getStatus(forum.user) != "Online" %>
+            <% if getTime(forum.user) %>
+               for <%= distance_of_time_in_words_to_now getTime(forum.user) %>
+            <% end %>
+         <% end %>
+      </p>
    </div>
 <% end %>

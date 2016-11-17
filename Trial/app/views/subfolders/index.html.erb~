@@ -1,5 +1,6 @@
 <% provide(:title, "Subfolder: The place that holds all the users subfolders!") %>
 <% provide(:description, "A listing of all the subfolders created for the admin to view.") %>
+<% provide(:style, ".pagebox{text-align:center;}") %>
 <h1 class="pageheader">Listing Subfolders</h1>
 <br>
 <div class="pagebox"><%= paginate @subfolders %></div>
@@ -14,7 +15,7 @@
       <% end %>
       <p>Created on: <%= subfolder.created_on.strftime("%B-%d-%Y") %></p>
       <p><%= subfolder.description %></p>
-      <p>By: <%= link_to subfolder.user.vname, user_path(subfolder.user) %></p>
+      <p>By: <%= getType(subfolder.user) %><%= link_to subfolder.user.vname, user_path(subfolder.user) %></p>
       <p>Collaboration: <%= subfolder.collab_mode %></p>
    </div>
 <% end %>

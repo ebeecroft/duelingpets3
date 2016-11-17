@@ -1,0 +1,49 @@
+<% provide(:style, ".errorheader{text-align: left;font-weight: bold;padding: 5px 5px 5px 15px;font-size: 12px;
+margin: -7px;margin-bottom: 0px;background-color: #c00;color: #fff;}") %>
+<% provide(:style, ".errorslisted{font-size: 12px;list-style: square;}") %>
+<% provide(:style, "#error_explanation{width: 450px;border: 2px solid red;padding: 7px;padding-bottom: 0;
+margin-bottom: 20px;background-color: #f0f0f0;") %>
+<%= form_for(@blacklisteddomain) do |f| %>
+   <% if @blacklisteddomain.errors.any? %>
+      <div class="pagetext">
+         <div id="error_explanation">
+            <h2 class="errorheader"><%= pluralize(@blacklisteddomain.errors.count, "error") %> prohibited this blacklisteddomain from being saved:</h2>
+
+            <ul class="errorslisted">
+               <% @blacklisteddomain.errors.full_messages.each do |msg| %>
+                  <li class="errorslisted"><%= msg %></li>
+               <% end %>
+            </ul>
+         </div>
+      </div>
+   <% end %>
+   <br>
+
+<%= form_for([@subfolder, @artwork], :html=>{:multipart => true}) do |f| %>
+  <% if @artwork.errors.any? %>
+    <div class="pagetext">
+       <div id="error_explanation">
+         <h2 class="errorheader"><%= pluralize(@artwork.errors.count, "error") %> prohibited this artwork from being saved:</h2>
+
+         <ul class="errorslisted">
+         <% @artwork.errors.full_messages.each do |msg| %>
+           <li class="errorslisted"><%= msg %></li>
+         <% end %>
+         </ul>
+       </div>
+    </div>
+  <% end %>
+
+  <div class="pagetext">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="pagetext">
+    <%= f.label :domain_only %><br />
+    <%= f.check_box :domain_only %>
+  </div>
+  <div class="pagetext">
+    <%= f.submit %>
+  </div>
+  <br>
+<% end %>

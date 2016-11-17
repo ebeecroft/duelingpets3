@@ -26,6 +26,9 @@
                <tr>
                   <td>Type: <%= getItemType(inventory.item) %></td>
                </tr>
+               <tr>
+                  <td>Qty: <%= inventory.qty %></td>
+               </tr>
             </table>
          </div>
          <p>Owner: <%= getType(inventory.user) %><%= link_to inventory.user.vname, user_path(inventory.user) %></p>

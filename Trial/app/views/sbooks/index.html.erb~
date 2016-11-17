@@ -12,10 +12,12 @@
 <div class="pagebox"><%= paginate @sbooks %></div>
 <% @sbooks.each do |sbook| %>
    <br>
-   <p class="pagetext"><%= link_to sbook.name, user_sbook_path(sbook.user, sbook) %></p>
-   <p class="pagetext">Created on: <%= sbook.created_on.strftime("%B-%d-%Y") %></p>
-   <p class="pagetext">Open series? <%= sbook.series_open %></p>
-   <% if !getOptional %>
-      <p class="pagetext">Author: <%= link_to sbook.user.vname, user_path(sbook.user) %></p>
-   <% end %>
+   <div class="pagetext">
+      <p><%= getType(sbook.user) %><%= link_to sbook.name, user_sbook_path(sbook.user, sbook) %></p>
+      <p>Created on: <%= sbook.created_on.strftime("%B-%d-%Y") %></p>
+      <p>Open series? <%= sbook.series_open %></p>
+      <% if !getOptional %>
+         <p>Author: <%= getType(sbook.user) %><%= link_to sbook.user.vname, user_path(sbook.user) %></p>
+      <% end %>
+   </div>
 <% end %>

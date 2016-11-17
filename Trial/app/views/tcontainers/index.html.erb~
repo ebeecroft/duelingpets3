@@ -1,5 +1,6 @@
 <% provide(:title, "Tcontainer: The place that holds all the users tcontainers!") %>
 <% provide(:description, "A listing of all the tcontainers created for the admin to view.") %>
+<% provide(:style, ".pagebox{text-align:center;}.containerbox{border:1px solid;}") %>
 <h1 class="pageheader">Listing tcontainers</h1>
 <br>
 <div class="pagebox"><%= paginate @tcontainers %></div>

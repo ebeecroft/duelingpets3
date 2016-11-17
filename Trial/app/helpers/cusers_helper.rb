@@ -119,6 +119,14 @@ module CusersHelper
       end
    end
 
+   #Referral check
+   def referralCheck
+      allReferrals = Referral.all
+      referralFound = allReferrals.select{|referral| referral.user_id == current_user.id}
+      value = referralFound.count
+      return value
+   end
+
    #Move these to a different helper
    def profile
       if(current_user)

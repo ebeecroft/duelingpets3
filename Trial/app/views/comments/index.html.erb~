@@ -1,13 +1,14 @@
 <% provide(:title, "Comment: A way for users to communicate with each other!") %>
 <% provide(:description, "A place where the admin can view all of the comments the users have created.") %>
+<% provide(:style, ".pagebox{text-align:center;}") %>
 <h1 class="pageheader">Listing comments</h1>
 <br>
 <div class="pagebox"><%= paginate @comments %></div>
 <% @comments.each do |comment| %>
    <br>
    <div class="pagetext">
-      <p>To user: <%= link_to comment.to_user.vname, user_path(comment.to_user) %></p>
-      <div class="inner">From user: <%= link_to comment.from_user.vname, user_path(comment.from_user) %></div>
+      <p>To user: <%= getType(comment.to_user) %><%= link_to comment.to_user.vname, user_path(comment.to_user) %></p>
+      <div class="inner">From user: <%= getType(comment.from_user) %><%= link_to comment.from_user.vname, user_path(comment.from_user) %></div>
       <div class="inner"><%= button_to 'Destroy', [comment.to_user, comment], method: :delete, data: { confirm: 'Are you sure?' } %></div>
       <p>Created: <%= distance_of_time_in_words_to_now comment.created_on %> ago</p>
       <p><%= comment.message %></p>

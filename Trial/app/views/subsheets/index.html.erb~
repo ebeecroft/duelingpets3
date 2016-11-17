@@ -1,0 +1,21 @@
+<% provide(:title, "Subsheet: The place that holds all the users subsheets!") %>
+<% provide(:description, "A listing of all the subsheets created for the admin to view.") %>
+<% provide(:style, ".pagebox{text-align:center;}") %>
+<h1 class="pageheader">Listing Subsheets</h1>
+<br>
+<div class="pagebox"><%= paginate @subsheets %></div>
+<% @subsheets.each do |subsheets| %>
+   <br>
+   <div class="pagetext">
+      <p>I belong to <%= link_to subsheets.mainsheet.name, user_mainsheet_path(subsheet.mainsheet.user, subsheet.mainsheet) %></p>
+      <div class="inner">Subsheet: <%= link_to subsheet.name, mainsheet_subsheet_path(subsheet.mainsheet, subsheet) %></div>
+      <% if current_user && (current_user.id == subsheet.user_id || current_user.admin? )%>
+         <div class="inner"><%= button_to 'Edit', edit_mainsheet_subsheet_path(subsheet.mainsheet, subsheet), method: :get %></div>
+         <div class="inner"><%= button_to 'Destroy', [subsheet.mainsheet, subsheet], method: :delete, data: { confirm: 'Are you sure?' } %></div>
+      <% end %>
+      <p>Created on: <%= subsheet.created_on.strftime("%B-%d-%Y") %></p>
+      <p><%= subsheet.description %></p>
+      <p>By: <%= getType(subsheet.user) %><%= link_to subsheet.user.vname, user_path(subsheet.user) %></p>
+      <p>Collaboration: <%= subsheet.collab_mode %></p>
+   </div>
+<% end %>

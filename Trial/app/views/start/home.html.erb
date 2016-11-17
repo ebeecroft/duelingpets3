@@ -1,7 +1,7 @@
 <% provide(:title, "Duelingpets: A kid friendly virtual pet site!") %>
 <% provide(:keywords, "virtual, pet") %>
 <% provide(:description, "Duelingpets is a kid friendly virtual pet site that allows users to create their own pets, art, and stories.") %>
-<% provide(:style, ".mascot{width: 75%;} .mascotbox{text-align:center;}") %>
+<% provide(:style, ".mascot{width: 25%;height:25%;} .mascotbox{text-align:center;}") %>
 <% provide(:robots, "index, follow") %>
 <h1 id="main" tabindex="-1" class="pageheader">Welcome to the Dueling Pets Home Page!</h1>
 <br>
@@ -15,35 +15,35 @@
 <% end %>
 <!--Need to detect that the user registration is closed here-->
 <div class="pagetext">
-   <p>Battiro the bat mascot welcomes you to Duelingpets the virtual pet site. This particular virtual pet site
-offers users the chance to create their very own pets, monsters and even items. This is a very rare as most pet sites don't 
-utilize the users creativity in creating pets and monsters. On top of this we also have our very own art gallery, stories,
-and audio section.</p>
+   <p>Duelingpets allows users to create their very own pets, monsters and items a feature that not a lot of pet site seems to carry. Users are given points for the content that they create and in addition to that there is also a 10 - 20% income that the creators receive for each item/pet that gets sold allowing artists to earn a living here.</p>
+   <br>
+   <p>Battiro is the friendly little bat mascot that is created by yours trully and provides users with seemless fun and activity and as such a boat load of fun. The awesome artists of this site are truly special and make this site quite a pleasent experience. The users know more about bug quashing then even me and we find less bugs as this site gets better and better. :)</p>
+   <br>
    <% if Rails.env.development? %>
       <div class="mascotbox"><%= image_tag("/mascot/duelingpetsmascotbattirothebat.jpeg", class: "mascot") %></div>
    <% elsif Rails.env.production? %>
       <div class="mascotbox"><%= image_tag("http://static.duelingpets.net/mascot/duelingpetsmascotbattirothebat.jpeg", class: "mascot") %></div>
    <% end %>
    <br>
-   <p>We have a great forum structure that allows the community to grow to a very large size by utilizing its
-five tier structure. Pets can also engage in battles with monsters to gain experience, points and boost tokens. Duelingpets
-even rewards users for creating content on the site itself by giving the users a set of points for their creations. The site
-itself is still in development and continues to grow with each passing day. Feel free to register for an account to get
-started on your adventure.</p>
-</div>
-<!--End indent-->
-<br>
-<div class="pagetext">
-   <p>Amount of Online users: <%= getOnline %></p>
-   <p>Amount of Inactive users: <%= getInactive %></p>
-   <p>Amount of Offline users: <%= getOffline %></p>
-   <p>Total users: <%= getTotal %></p>
+   <p>We offer a navigation system that is built out of two main components Creativity, and Community. The creativity section contains everything the user is able to create like items, pets, monsters, stories, radios. The community section contains where users interact with each other either through the tutorial, forum, and the blogs. Anything else that doesn't fit into those two neat categories is placed to the side of either one.</p>
    <br>
-   <p>Users signed up today: <%= getDaySignups %></p>
-   <p>Users signed up this week: <%= getWeekSignups %></p>
-   <p>Users signed up this month: <%= getMonthSignups %></p>
-   <p>Users signed up this year: <%= getYearSignups %></p>
+   <p>We have a extensive review process that is not automated and allows our staff to review your content before it ever gets seen by other users. Its a security mechanism and is designed to protect the users from inappropriate content. While your content is within this review process only the original creator, the staff and the admin can actually see the pet before it is approved. Once it is approved you will recieve a set of points to your account and not before, this is to prevent users from cheating the system.</p>
    <br>
+   <p>In addition to allowing users to create pet content we also have an art section where users can create their own artwork via a three tier gallery. Galleries is the first section, categories is the second and the artwork is the third. Users can even submit artwork to other users galleries by use of the collab mode button. Unlike most other art sites my site provides points to each content content creator. Unlike other sites which are fully open Duelingpets uses a half open review process similiar to the pet review process. As an additional insentive we provide symbols next to each users name such as ~,!, and ^ similiar to the style of old Deviantart.</p>
    <br>
-   <p><%= link_to "Sitemap", sitemap_path %></p>
+   <p>The fun doesn't stop there we also provide users a place to upload their very own stories simliar to how Fanfiction.net works although a bit better. Stories are composed of three sections such as Series which functions like a category with names such as Silverwing and Spyro, Books is what users use to define a general synopsis of what the story will be about, and finally the Chapter which provides information as to the hero's struggles and his learning periods. Users receive points from each chapter that is created and is reviewed by the team to make sure it is okay.</p>
+   <br>
+   <p>Duelingpets also has an extensive Radio section which functions kind of like Soundcloud. The Radio section is composed of the radio, the categories and the music that goes with it. Users can also use this same feature to create narrative stories, or sound effects. Points are given to users who create musicial content, sound effects or stories. Music is also under review as well.</p>
+   <br>
+   <p>Duelingpets also has an extensive tutorial that is designed to teach the user how to use the features of this site although it is in need of a bit of polish. If anyone has suggestions of how to make it better feel free to let me know your input through the suggestions function.</p>
+   <br>
+   <p>Duelingpest forum structure is designed partly by the websites Unicorn Vision's and Fanfiction.net to give it the five tier structure that it has. Forums are composed of five segments: Forum, Topic Container, Maintopic, Subtopic and Narrative. Forums are like your basic file cabinet and is designed to hold a lot of important information. Topic Containers are like your folders that you place within your file cabinet. Maintopics are like the staples that you put inside of your folder. Subtopics are like the physical sheets of paper that you staple together by the maintopics. Narratives is like the words that appear on your physical sheet of paper but are written by multiple people and provide your communities communication.</p>
+   <br>
+   <p>The News section contains the latest updates of the websites progress as well as other users recently created pets, or information that they feel like sharing.</p>
+   <br>
+   <p>The inventory section is where all the items that you purchased from the shop go for your pets use either by equipping or by drinking them.</p>
+   <br>
+   <p>Duelingpets also has its very own messaging system that users can use to send messages to each other on a one to one basis that doesn't clutter up their message system. This is accomplished by a two tier system of Pm's and replies.</p>
+   <br>
+   <p>As to the future plans of Duelingpets we are looking to eventually having our very own video section so that we could upload video content in a similiar process as to what Youtube does but will do it in way that causes less hassle to users and to provide fair use to all.</p>
 </div>

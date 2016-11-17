@@ -144,8 +144,20 @@ module InventoriesHelper
                         if(amountLeft < 0)
                            redirect_to items_path
                         else
-                           newInventory = userFound.inventories.new(params[:inventory])
-                           newInventory.item_id = itemFound.id
+                           #Need to check to see if the item is in the database already
+                           existingInventory = Inventory.find_by_id(userFound.inventories.select{|inventory| inventory.item_id == itemFound.id})
+                           currentInventory = {}
+                           if(existingInventory)
+                              #Increase qty by 1
+                              existingInventory.qty += 1
+                              existingInventory.equipped = false
+                              currentInventory = existingInventory
+                           else
+                              newInventory = userFound.inventories.new(params[:inventory])
+                              newInventory.item_id = itemFound.id
+                              newInventory.qty = 1
+                              currentInventory = newInventory
+                           end
                            itemPouch = Pouch.find_by_user_id(itemFound.user_id)
                            profit = 0
                            if(itemFound.cost >= 12)
@@ -153,7 +165,7 @@ module InventoriesHelper
                                  profit = (itemFound.cost * 0.20)
                               end
                            end
-                           @inventory = newInventory
+                           @inventory = currentInventory
                            itemPouch.amount += profit
                            @ipouch = itemPouch
                            #Stores the inventory in the database if successful

@@ -1,0 +1,5 @@
+<% provide(:title, "Sound: Create new sounds here!") %>
+<% provide(:description, "New sounds are uploaded only to the site when the sound gets approved.") %>
+<h1 class="pagetextheader">New sound</h1>
+<%= render 'form' %>
+<p class="pagetext"><%= link_to 'Back', mainsheet_subsheet_path(@subsheet.mainsheet, @subsheet) %></p>

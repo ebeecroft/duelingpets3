@@ -1,5 +1,6 @@
 <% provide(:title, "Book: Checkout the great selection of books available!") %>
 <% provide(:description, "A place where the admin can view all of the books the users have created for their particular interest.") %>
+<% provide(:style, ".pagebox{text-align:center;}") %>
 <h1 class="pageheader">Listing books</h1>
 <br>
 <div class="pagebox"><%= paginate @books %></div>
@@ -11,7 +12,7 @@
       <div class="inner"><%= button_to 'Destroy', [book.sbook, book], method: :delete, data: { confirm: 'Are you sure?' } %></div>
       <p><%= book.description %></p>
       <p>Created on: <%= book.created_on.strftime("%B-%d-%Y") %></p>
-      <p>Author: <%= link_to book.user.vname, user_path(book.user) %></p>
+      <p>Author: <%= getType(book.user) %><%= link_to book.user.vname, user_path(book.user) %></p>
       <p>Series: <%= link_to book.sbook.name, user_sbook_path(book.sbook.user, book.sbook) %></p>
    </div>
 <% end %>

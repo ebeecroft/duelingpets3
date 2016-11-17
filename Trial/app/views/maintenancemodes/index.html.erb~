@@ -1,5 +1,6 @@
 <% provide(:title, "Maintenancemode: The home of the webmaster!") %>
 <% provide(:description, "A place where the admin can turn on and off the various attributes of the site.") %>
+<% provide(:style, ".pagebox{text-align:center;}") %>
 <h1 class="pageheader">Listing maintenancemodes</h1>
 <br>
 <div class="pagebox"><%= paginate @maintenancemodes %></div>

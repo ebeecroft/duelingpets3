@@ -4,8 +4,9 @@ class Item < ActiveRecord::Base
   belongs_to :user
   mount_uploader :ipicture, IpictureUploader
   VALID_VALUE_REGEX = /\A[0-9]+\z/i
+  VALID_NAME = /\A[A-Za-z][A-Za-z][A-Za-z0-9 ]+\z/
   validates :description, presence: true
-  validates :name, presence: true, uniqueness: { case_sensitive: false}
+  validates :name, presence: true, format: {with: VALID_NAME}, uniqueness: { case_sensitive: false}
   validates :hp, presence: true, format: { with: VALID_VALUE_REGEX}
   validates :atk, presence: true, format: { with: VALID_VALUE_REGEX}
   validates :def, presence: true, format: { with: VALID_VALUE_REGEX}

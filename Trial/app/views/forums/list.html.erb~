@@ -1,5 +1,6 @@
 <% provide(:title, "A collection of many different available forums!") %>
 <% provide(:description, "A place for the admin to see what forums are available.") %>
+<% provide(:style, ".pagebox{text-align:center;}") %>
 <h1 class="pageheader">Forum list</h1>
 <br>
 <div class="pagebox"><%= paginate @forums %></div>
@@ -11,6 +12,13 @@
       <div class="inner"><%= button_to 'Destroy', [forum.user, forum], method: :delete, data: { confirm: 'Are you sure?' } %></div>
       <br>
       <p>Owner: <%= getType(forum.user) %><%= link_to forum.user.vname, user_path(forum.user) %></p>
+      <p>Status: <%= getStatus(forum.user) %>
+         <% if getStatus(forum.user) != "Online" %>
+            <% if getTime(forum.user) %>
+               for <%= distance_of_time_in_words_to_now getTime(forum.user) %>
+            <% end %>
+         <% end %>
+      </p>
       <p><%= forum.description %></p>
    </div>
    <br>

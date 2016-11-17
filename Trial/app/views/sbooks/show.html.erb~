@@ -1,6 +1,7 @@
 <% provide(:title, "Series: Where the user may witness their wonderful fanfiction stories!") %>
 <% provide(:keywords, "user, fanfiction, stories") %>
 <% provide(:description, "A place where users can showcase their stories to the rest of the world.") %>
+<% provide(:style, ".pagebox{text-align:center;}") %>
 <p id="notice"><%= notice %></p>
 <h1 class="pageheader">
    <div class="inner"><%= @sbook.name %></div>
@@ -22,7 +23,7 @@
       <% end %>
       <p><%= book.description %></p>
       <p>Created on: <%= book.created_on %></p>
-      <p>Author: <%= link_to book.user.vname, user_path(book.user) %></p>
+      <p>Author: <%= getType(book.user) %><%= link_to book.user.vname, user_path(book.user) %></p>
    </div>
 <% end %>
 <% if current_user %>

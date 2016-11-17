@@ -1,6 +1,7 @@
 <% provide(:title, "Tcontainer: Where forum topics are contained!") %>
 <% provide(:keywords, "forum, topics, contained") %>
 <% provide(:description, "A special type of container for the forum that holds multiple topics.") %>
+<% provide(:style, ".pagebox{text-align:center;}.containerbox{border:1px solid;}") %>
 <p id="notice"><%= notice %></p>
 <h1 class="pageheader"><%= @tcontainer.name %></h1>
 <br>

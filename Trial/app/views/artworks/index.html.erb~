@@ -13,7 +13,7 @@
       <p><%= image_tag artwork.art_url(:thumb).to_s %></p>
       <p>Created on: <%= artwork.created_on.strftime("%B-%d-%Y") %></p>
       <p><%= artwork.description %></p>
-      <p>Artist: <%= getType %><%= link_to artwork.user.vname, user_path(artwork.user) %></p>
+      <p>Artist: <%= getType(artwork.user) %><%= link_to artwork.user.vname, user_path(artwork.user) %></p>
       <p>Reviewed: <%= artwork.reviewed %></p>
    </div>
 <% end %>

@@ -1,4 +1,4 @@
-<% provide(:style, ".container{display:inline-block;padding-right:2%;}") %>
+<% provide(:style, ".container{display:inline-block;padding-right:2%;padding-bottom:6%;}@media(min-width: 640px){.container{display:inline-block;padding-right:2%;padding-bottom:0%;}}") %>
 <div class="pagetext">
    <% @items.each_with_index do |item, index| %>
       <div class="container">
@@ -7,7 +7,7 @@
             <% if current_user %>
                <div class="inner"><%= radio_button_tag :item_id, item.id %></div>
             <% end %>
-            <p><%= image_tag item.ipicture_url(:thumb).to_s %></p>
+            <p><%= image_tag(item.ipicture_url(:thumb).to_s, :class=>"artworkscale") %></p>
          </div>
          <div class="inner">
             <table>

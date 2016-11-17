@@ -1,5 +1,6 @@
 <% provide(:title, "Sessionkey: The place that holds all the users sessionkeys!") %>
 <% provide(:description, "A listing of all the sessionkeys created for the admin to view.") %>
+<% provide(:style, ".pagebox{text-align:center;}") %>
 <h1 class="pageheader">Listing sessionkeys</h1>
 <br>
 <div class="pagebox"><%= paginate @sessionkeys %></div>
@@ -13,7 +14,7 @@
       </tr>
       <% @sessionkeys.each do |sessionkey| %>
          <tr>
-            <td><%= getType(sessionkey.user) %><%= link_to sessionkey.user.vname, user_path(sessionkey.user) %>&nbsp;&nbsp;&nbsp;</td>
+            <td><%= link_to sessionkey.user.vname, user_path(sessionkey.user) %>&nbsp;&nbsp;&nbsp;</td>
             <td><%= sessionkey.remember_token %>&nbsp;&nbsp;&nbsp;</td>
             <td><%= sessionkey.expiretime %></td>
          </tr>

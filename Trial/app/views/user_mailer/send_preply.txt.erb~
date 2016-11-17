@@ -1,0 +1,13 @@
+A new preply has arrived from: <%= @preply.user.vname %>
+===============================================
+ 
+Message: <%= @preply.message %>
+
+In order to reply to this preply please click on your
+inbox to access your messages. Next click on the message to 
+view it and then finally click the preply link to create a new preply.
+Once you fill in the message and submit you replied to the preply.
+
+To view this preply on your account, just follow this link: <%= @url %>.
+ 
+Thank you for utilizing the communication room!

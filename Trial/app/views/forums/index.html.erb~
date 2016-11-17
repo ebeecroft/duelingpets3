@@ -1,6 +1,7 @@
 <% provide(:title, "Forum: The current social communities available!") %>
 <% provide(:keywords, "forum, users, social, community") %>
 <% provide(:description, "All of the available locations for users to hang out and have some fun.") %>
+<% provide(:style, ".pagebox{text-align:center;}") %>
 <h1 class="pageheader">
    <% if getOptional %>
       <%= @user.vname %>'s forums
@@ -12,9 +13,18 @@
 <div class="pagebox"><%= paginate @forums %></div>
 <% @forums.each do |forum| %>
    <br>
-   <p class="pagetext"><%= link_to forum.name, user_forum_path(forum.user.vname, forum) %></p>
-   <p class="pagetext"><%= forum.description %></p>
-   <% if !getOptional %>
-      <p class="pagetext"><%= getType(forum.user) %><%= link_to forum.user.vname, user_path(forum.user) %></p>
+   <div class="pagetext">
+      <p id="main" tabindex="-1"><%= link_to forum.name, user_forum_path(forum.user.vname, forum) %></p>
+      <p><%= forum.description %></p>
+      <% if !getOptional %>
+         <p><%= getType(forum.user) %><%= link_to forum.user.vname, user_path(forum.user) %></p>
+         <p>Status: <%= getStatus(forum.user) %>
+         <% if getStatus(forum.user) != "Online" %>
+            <% if getTime(forum.user, getStatus(forum.user)) %>
+               for <%= distance_of_time_in_words_to_now getTime(forum.user, getStatus(forum.user)) %>
+            <% end %>
+         <% end %>
+      </p>
    <% end %>
+   </div>
 <% end %>

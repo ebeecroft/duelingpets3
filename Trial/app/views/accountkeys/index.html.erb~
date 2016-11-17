@@ -1,0 +1,22 @@
+<% provide(:title, "Accountkey: A way to keep bad users out!") %>
+<% provide(:description, "A place where the admin can view all of the valid user tokens.") %>
+<h1 class="pageheader">Listing accountkeys</h1>
+<br>
+<div class="pagetext">
+   <table>
+      <tr>
+         <th>User</th>
+         <th>Token</th>
+         <th>Activated</th>
+      </tr>
+      <% @accountkeys.each do |accountkey| %>
+         <tr>
+            <td><%= accountkey.user.vname %>&nbsp;&nbsp;</td>
+            <td><%= accountkey.token %>&nbsp;&nbsp;</td>
+            <td><%= accountkey.activated %></td>
+         </tr>
+      <% end %>
+   </table>
+</div>
+<br />
+<p class="pagetext"><%= link_to 'New Accountkey', new_accountkey_path %></p>

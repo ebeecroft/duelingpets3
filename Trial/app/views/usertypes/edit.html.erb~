@@ -1,3 +1,6 @@
-<h1 class="pageheader">Editing usertype</h1>
+<% provide(:title, "Usertypes: Edit your usertypes here!") %>
+<% provide(:description, "Allows the admin to change the user privileges.") %>
+<% provide(:style, ".pagetextheader{padding-left: 3%;padding-right: 3%;font-size: 24px;font-weight: bold;}") %>
+<h1 class="pagetextheader">Editing usertype</h1>
 <%= render 'form' %>
 <p class="pagetext"><%= link_to 'Back', usertypes_path %></p>

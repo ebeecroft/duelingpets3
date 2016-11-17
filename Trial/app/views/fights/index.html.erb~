@@ -1,6 +1,7 @@
 <% provide(:title, "Fight: Displays all fights a pet has engaged in!") %>
 <% provide(:keywords, "battle, pet, monster, fight") %>
 <% provide(:description, "Shows your battles against the various monsters and what the outcome is.") %>
+<% provide(:style, ".pagebox{text-align:center;}") %>
 <h1 class="pageheader">
    <% if getOptional %>
       <%= @petowner.pet_name%>'s battles

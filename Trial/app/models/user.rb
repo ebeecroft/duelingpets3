@@ -46,6 +46,10 @@ class User < ActiveRecord::Base
    has_many :replies, :foreign_key => "user_id", :dependent => :destroy
    has_many :items, :foreign_key => "user_id", :dependent => :destroy
 
+   #Referals
+   has_one :referral, :foreign_key => "user_id", :dependent => :destroy
+   has_many :referrals, :foreign_key => "referred_by_id", :dependent => :destroy
+
    #PM
    has_many :pms, :foreign_key => "user_id", :dependent => :destroy
    has_many :preplies, :foreign_key => "user_id", :dependent => :destroy

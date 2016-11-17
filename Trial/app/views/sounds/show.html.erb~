@@ -1,0 +1,16 @@
+<% provide(:title, "Sound: The place for really good music, sound effects and speech.") %>
+<% provide(:keywords, "music, speech, sound") %>
+<% provide(:description, "Where users can take the time to listen to good quality music, speech and sound effects.") %>
+<p id="notice"><%= notice %></p>
+<h1 class="pageheader"><%= @sound.name %></h1>
+<br>
+<div class="pagetext">
+   <p><%= audio_tag(@sound.ogg_url.to_s, :controls => true) %></p>
+   <p><%= audio_tag(@sound.mp3_url.to_s, :controls => true) %></p>
+   <p><%= audio_tag(@sound.wav_url.to_s, :controls => true) %></p>
+   <p><%= @sound.description %></p>
+   <p>Created on: <%= @sound.created_on.strftime("%B-%d-%Y") %></p>
+   <p>Announcer: <%= getType(@sound.user) %><%= link_to @sound.user.vname, user_path(@sound.user) %></p>
+   <br>
+   <p><%= link_to 'Back', mainsheet_subsheet_path(@subsheet.mainsheet, @sound.subsheet) %></p>
+</div>

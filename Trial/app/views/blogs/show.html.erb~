@@ -1,0 +1,44 @@
+<% provide(:title, "Blog: The place where users get to create new news!") %>
+<% provide(:keywords, "news, journals, writing") %>
+<% provide(:description, "A place where users can tell about their latest creations.") %>
+<% provide(:style, ".pagebox{text-align:center;}") %>
+<p id="notice"><%= notice %></p>
+<h1 class="pageheader">
+   <div class="inner"><%= @blog.title %></div>
+   <% if current_user && (current_user.id == @blog.user_id || current_user.admin) %>
+      <div class="inner"><%= button_to 'Edit', edit_user_blog_path(@blog.user, @blog), method: :get %></div>
+      <div class="inner"><%= button_to 'Destroy', [@blog.user, @blog], method: :delete, data: { confirm: 'Are you sure?' } %></div>
+   <% end %>
+</h1>
+<br>
+<p class="pagetext"><%= @blog.description %></p>
+<br>
+<div class="pagebox"><%= paginate @replies %></div>
+<br>
+<% @replies.each do |reply| %>
+   <div class="pagetext">
+      <div class="inner"><%= getType(reply.user) %><%= link_to reply.user.vname, user_path(reply.user) %></div>
+      <% if current_user && (current_user.id == reply.user_id || current_user.admin) %>
+         <div class="inner"><%= button_to 'Edit', edit_blog_reply_path(@blog, reply), method: :get %></div>
+         <div class="inner"><%= button_to 'Destroy', [@blog, reply], method: :delete, data: { confirm: 'Are you sure?' } %></div>
+      <% end %>
+      <br>
+      <p><%= reply.message %></p>
+      <p>Created on: <%= reply.created_on.strftime("%B-%d-%Y") %></p>
+      <p>Status: <%= getStatus(reply.user) %>
+         <% if getStatus(reply.user) != "Online" %>
+            <% if getTime(reply.user, getStatus(reply.user)) %>
+               for <%= distance_of_time_in_words_to_now getTime(reply.user, getStatus(reply.user)) %>
+            <% end %>
+         <% end %>
+      </p>
+      <!--Remember to add the online user setting here-->
+   </div>
+<% end %>
+<% if current_user %>
+   <br>
+   <p class="pagetext"><%= link_to 'New Reply', new_blog_reply_path(@blog) %></p>
+   <br>
+<% end %>
+<!--Come back to add more when we need replies--->
+<p class="pagetext"><%= link_to 'Back', user_blogs_path(@blog.user) %></p>

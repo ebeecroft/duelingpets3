@@ -5,6 +5,7 @@ class Sound < ActiveRecord::Base
    mount_uploader :ogg, OggUploader
    mount_uploader :mp3, Mp3Uploader
    mount_uploader :wav, WavUploader
-   validates :name, presence: true, uniqueness: { case_sensitive: false}
+   VALID_NAME = /\A[A-Za-z][A-Za-z][A-Za-z0-9 ]+\z/
+   validates :name, presence: true, format: {with: VALID_NAME, case_sensitive: false}
    validates :description, presence: true
 end

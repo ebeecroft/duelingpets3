@@ -1,0 +1,19 @@
+<% provide(:title, "Blacklisteddomain: The place that holds all the blacklisteddomains!") %>
+<% provide(:description, "A listing of all the bot domains blacklisted for the admin to view.") %>
+<% provide(:style, ".pagebox{text-align:center;}") %>
+<h1 class="pageheader">Listing blacklisteddomains</h1>
+<br>
+<div class="pagebox"><%= paginate @blacklisteddomains %></div>
+<br>
+<div class="pagetext">
+   <p>Domain</p>
+   <% @blacklisteddomains.each do |blacklisteddomain| %>
+      <br>
+      <div class="inner"><%= blacklisteddomain.name %></div>
+      <div class="inner"><%= button_to 'Edit', edit_blacklisteddomain_path(blacklisteddomain), method: :get %></div>
+      <div class="inner"><%= button_to 'Destroy', blacklisteddomain, method: :delete, data: { confirm: 'Are you sure?' } %></div>
+      <p>Domain only? <%= blacklisteddomain.domain_only %></p>
+   <% end %>
+   <br>
+   <p><%= link_to 'New Blacklisteddomain', new_blacklisteddomain_path %></p>
+</div>

@@ -1,5 +1,8 @@
+<% provide(:title, "Usertypes: Where the usertypes exist!") %>
+<% provide(:description, "The different privilege levels for the admin to view.") %>
+<% provide(:style, ".pagebox{text-align:center;}") %>
 <h1 class="pageheader">Listing usertypes</h1>
-
+<br>
 <div class="pagetext">
    <table>
       <tr>
@@ -9,12 +12,10 @@
       </tr>
       <% @usertypes.each do |usertype| %>
          <tr>
-            <td><%= getType(userType.user) %><%= usertype.user.vname %>&nbsp;&nbsp;</td>
+            <td><%= usertype.user.vname %>&nbsp;&nbsp;</td>
             <td><%= usertype.privilege %>&nbsp;&nbsp;</td>
             <td><%= button_to 'Edit', edit_usertype_path(usertype), method: :get %></td>
          </tr>
       <% end %>
    </table>
 </div>
-<br>
-<p class="pagetext"><%= link_to 'New Usertype', new_usertype_path %></p>

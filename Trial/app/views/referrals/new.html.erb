@@ -1,5 +1,13 @@
-<h1>New referral</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Back', referrals_path %>
+<% provide(:title, "Referral: Create new referrals here!") %>
+<% provide(:description, "Where referred users can create new referrals.") %>
+<% provide(:style, ".pagetextheader{padding-left: 3%;padding-right: 3%;font-size: 24px;font-weight: bold;}") %>
+<h1 class="pagetextheader">New referral</h1>
+<br>
+<%= form_for(:session, url: referrals_path) do |f| %><!--Has to have session-->
+   <div class="pagetext">
+      <p><%= f.label :vname, "Virtual Name" %></p>
+      <p><%= f.text_field :vname %></p>
+      <p><%= f.submit "New referral" %></p>
+   </div>
+<% end %>
+<p class="pagetext"><%= link_to 'Back', referrals_path %></p>

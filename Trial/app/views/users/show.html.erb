@@ -41,6 +41,12 @@
       <p>Pets</p>
       <p><%= link_to 'My pets', user_petowners_path(@user) %></p>
    <% end %>
+   <!--Referrals section-->
+   <% if current_user %>
+      <br>
+      <p>Referrals</p>
+      <div class="inner"><%= link_to 'Referrals', user_referrals_path(@user) %></div>
+   <% end %>
    <!--Radio section-->
    <% if @rcount > 0 || (current_user && current_user.id == @user.id) %>
       <br>

@@ -11,11 +11,17 @@
       wonderful community has created for your benefit.
       Please feel free to contribute as well, and have tons
       of fun in the forums. The many users of this site will
-      be happy to greet you and welcome you with welcome arms.
+      be happy to greet you and welcome you with open arms.
     </p>
     <p>
       You have successfully signed up to Duelingpets.net,
       your login id is: <%= @user.login_id %>.<br>
+    </p>
+    <p>
+      In order to activate your account for the first time
+      please be sure to use this token: <%= @accounttoken %>
+      in the Activate link below the login screen. Once you
+      have activated your account you may login normally.
     </p>
     <p>
       To login to the site, just follow this link: <%= @url %>.

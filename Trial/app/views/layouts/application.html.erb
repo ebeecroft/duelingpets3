@@ -7,16 +7,13 @@
       <meta name="description" content="<%= yield(:description) %>">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       <meta name="robots" content="<%= yield(:robots) %>">
+      <meta charset="UTF-8">
       <% if Rails.env.development? %>
-         <%= stylesheet_link_tag "application.css", :media => "all" %>
+         <%= stylesheet_link_tag "application.css", :media => "all", :property => "stylesheet" %>
       <% end %>
       <%= csrf_meta_tags %>
       <style>
-         html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,
-         big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,
-         dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,
-         canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,
-         time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;vertical-align:baseline;font:inherit;}
+         *{margin:0;padding:0;border:0;font-size:100%;vertical-align:baseline;font:inherit;}
          /* HTML5 display-role reset for older browsers */
          article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block;}
          body{line-height:1;}
@@ -25,31 +22,44 @@
          blockquote:before,blockquote:after,q:before,q:after{content:'';content:none;}
          table{border-collapse:collapse;border-spacing:0;}
          .box{max-width: 100%;}
-         .pagecontent{background-color: #F2F5A9; font-family: 'Lucida Sans Unicode','Lucida Grande',Helvetica,Arial,sans-serif;}
+         .pagecontent{background-color: #609732; font-family: 'Lucida Sans Unicode','Lucida Grande',Helvetica,Arial,sans-serif; font-size: 16px;}
          .banner{width: 100%; height: 110px;}
          .logo{font-size: 24px; text-align:left; font-weight: bold; padding-left: 3%;}
-         .profilebar{padding-right: 1%;text-align: right;}
-         .navigationC{padding-left: 3%;padding-right: 3%;text-align: center;background: #088A29;font-weight: bold;}
+         .profilebar{padding-right: 1%;text-align: right;color:#ffc2aa;}
+         .profilebar a{color:#ffc2aa;}
+         .navigationC{padding-left: 3%;padding-right: 3%;text-align: center;background: #530e53;font-weight: bold;}
          .navigation{padding-top: 0.5%;padding-bottom: 0.5%;font-size: 80%; /* mobile version */}
          .navigationspacing{display: inline-block;padding-right: 1%;padding-bottom: 3%; /* mobile compliant */}
          @media(min-width: 640px){.navigation{font-size: 120%; /* desktop version */}
          .navigationspacing{display: inline-block;padding-right: 1%;padding-bottom: 0%;}}
-         .navigation a{text-decoration: none;color: #faac58;}
+         .navigation a{text-decoration: none;color: #ffc2aa;}
          .contentbox{font-size: 16px;}
-         .pageheader{font-size: 24px;text-align:center;font-weight: bold;/*h1tags*/}
-         .pagetext{padding-left: 3%;padding-right: 3%;/*indents text*/}
+         .pageheader{font-size: 24px;text-align:center;font-weight: bold;color:#ffc2aa;/*h1tags*/}
+         .pagetext{padding-left: 3%;padding-right: 3%;color:#ffc2aa;/*indents text*/}
          a.skip{left: -999px;position: absolute;top: auto;width: 1px;height: 1px;overflow: hidden;}
          a.skip:focus, a.skip:active{color: #fff;background-color: #000;left: auto;top: auto;width: 30%;height: auto;
          overflow: auto;margin: 10px 35%;padding: 5px;border: 4px solid yellow;text-align: center;font-size: 1.2em;}
          .alert-herror, .alert-aerror, .alert-derror, .alert-serror, .regcolor, .alert-error{color: #ff0000;}
          .alert-success{color: #00ff00;}
-         .sessiontime{color: #0000ff;display: inline-block;}
+         .sessiontime{color: #ffc2aa;display: inline-block;}
          .inner{display: inline-block;}
+         .mavspacing{position: relative; display: inline-block; padding: 0.6% 1%; color:#ffc2aa;} /*Change for mobile*/
          .dropdown{position: relative;}
          .drop-nav{position:absolute;display:none;}
-         .drop-nav li{background: #088A29;border: 1px solid rgba(0,255,0,.2);}
-         .dropdown:hover > .drop-nav{display:block;}
-         .menucolor{color:#faac58;}
+         .drop-nav li{background: #530e53; padding: 7% 0%;} /* Good adjustment*//*border: 1px solid rgba(0,255,0,.2);*/
+         .mavspacing:hover > .drop-nav{padding: 8% 0%; display:block;} /*Good adjustment*/
+         .menucolor{color:#ffc2aa;}
+         .navigation a:hover{background-color:#609732;}
+         .footer{background: #530e53; color: #ffc2aa; text-align: center; font-weight: bold; font-size: 110%; padding: 0.6% 1%;}
+         .footer a{color:#ffc2aa;}
+         .onlinestats{padding: 0.8% 3%;text-align: center;background: #530e53;font-weight: bold;color:#ffc2aa;font-size:103%;}
+         .navigationC{padding-left: 3%;padding-right: 3%;text-align: center;background: #530e53;font-weight: bold;}
+         .pageheader2{font-size: 150%;font-weight: bold;color:#ffc2aa;/*h1tags*/}
+         .forumheader{background: #530e53; font-weight:bold; font-size: 120%;padding: 1% 0%;}
+         .forumheader a{color:#ffc2aa;}
+         .artworkscale{width: 100%; height: 100%;}/*mobile130*/
+         .pagetext2{padding-left: 3%;padding-right: 3%;color:#ffc2aa;font-size: 30%;/*indents text*/}/*bad idea*/
+         .inner2{display: inline-block;width:50%}/*bad idea*/
          <%= yield(:style) %>
       </style>
    </head>
@@ -58,20 +68,28 @@
       <div class="box">
          <%= render 'layouts/header' %>
          <br>
-         <div class="pagetext">
-            <% flash.each do |key, value| %>
-               <div class="alert alert-<%= key %>"><%= value %></div>
-               <br>
-            <% end %>
-         </div>
+         <% if !flash.empty? %>
+            <div class="pagetext">
+               <% flash.each do |key, value| %>
+                  <div class="alert alert-<%= key %>"><%= value %></div>
+                  <br>
+               <% end %>
+            </div>
+         <% end %>
          <%= yield %>
+         <br>
+         <div class="footer">
+         <div class="pagetext">
+            <div class="navigationspacing"><%= link_to "Sitemap", sitemap_path %></div>
+            <div class="navigationspacing"><%= link_to "Stats", stats_path %></div>
+         </div>
       </div>
       <!--To here-->
       <% if Rails.env.development? %>
          <%= javascript_include_tag "application.js" %>
       <% elsif Rails.env.production? %>
          <%= javascript_include_tag "http://static.duelingpets.net/assets/application.js" %>
-         <%= stylesheet_link_tag "http://static.duelingpets.net/assets/application.css", :media => "all" %>
+         <%= stylesheet_link_tag "http://static.duelingpets.net/assets/application.css", :media => "all", :property =>"stylesheet" %>
       <% end %>
    </body>
 </html>

@@ -1,3 +1,4 @@
 class Referral < ActiveRecord::Base
-  attr_accessible :created_on, :referred_by_id, :user_id
+   belongs_to :referre, :class_name => 'User', :foreign_key => 'user_id'
+   belongs_to :referrer, :class_name => 'User', :foreign_key => 'referred_by_id'
 end

@@ -1,3 +1,4 @@
+<% provide(:style, ".container{display:inline-block;padding-right:2%;}") %>
 <div class="pagetext">
    <% @petowners.each_with_index do |petowner, index| %>
       <div class="container"><!--This should be a container which seperates things-->

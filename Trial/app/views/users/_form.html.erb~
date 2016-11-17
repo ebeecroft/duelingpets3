@@ -1,21 +1,34 @@
+<% provide(:style, ".errorheader{text-align: left;font-weight: bold;padding: 5px 5px 5px 15px;font-size: 12px;
+margin: -7px;margin-bottom: 0px;background-color: #c00;color: #fff;}") %>
+<% provide(:style, ".errorslisted{font-size: 12px;list-style: square;}") %>
+<% provide(:style, "#error_explanation{width: 450px;border: 2px solid red;padding: 7px;padding-bottom: 0;
+margin-bottom: 20px;background-color: #f0f0f0;") %>
 <%= form_for @user, :html => {:multipart => true} do |f| %>
   <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+     <div class="pagetext">
+        <div id="error_explanation">
+           <h2 class="errorheader"><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
-      <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
+           <ul class="errorslisted">
+              <% @user.errors.full_messages.each do |msg| %>
+                 <li class="errorslisted"><%= msg %></li>
+              <% end %>
+           </ul>
+        </div>
+     </div>
   <% end %>
   <br>
   <!--<p class="pagetext">Virtual Name(Vname) is the only information seen by other users.</p>-->
-  <div class="pagetext">
-    <%= f.label :avatar %><br />
-    <%= f.file_field :avatar %>
-  </div>
+  <% if object == "Edit" %>
+     <div class="pagetext">
+        <%= image_tag @user.avatar_url(:thumb).to_s if @user.avatar? %>
+     </div>
+     <div class="pagetext">
+       <%= f.label :avatar %><br />
+       <%= f.file_field :avatar %>
+       <%= f.hidden_field :avatar_cache %>
+     </div>
+  <% end %>
   <div class="pagetext">
     <%= f.label :first_name %><br />
     <%= f.text_field :first_name %>

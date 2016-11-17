@@ -1,3 +1,4 @@
+<% provide(:style, ".container{display:inline-block;padding-right:2%;}") %>
 <div class="pagetext">
    <% @inventories.each_with_index do |inventory, index| %>
       <div class="container">
@@ -27,7 +28,7 @@
                </tr>
             </table>
          </div>
-         <p>Owner: <%= link_to inventory.user.vname, user_path(inventory.user) %></p>
+         <p>Owner: <%= getType(inventory.user) %><%= link_to inventory.user.vname, user_path(inventory.user) %></p>
       </div>
       <% if ((index + 1)%3) == 0 %>         
          <br>

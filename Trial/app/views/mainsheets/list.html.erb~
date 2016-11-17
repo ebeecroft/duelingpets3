@@ -1,0 +1,19 @@
+<% provide(:title, "Mainsheets: Playing soungs all night long!") %>
+<% provide(:description, "Where users can create awesome tunes for others to listen to.") %>
+<% provide(:style, ".pagebox{text-align:center;}") %>
+<h1 class="pageheader">Mainsheet list</h1>
+<br>
+<div class="pagebox"><%= paginate @mainsheets %></div>
+<% @mainsheets.each do |mainsheet| %>
+   <br>
+   <div class="pagetext">
+      <p><%= link_to mainsheet.name, user_mainsheet_path(mainsheet.user, mainsheet) %></p>
+      <div class="inner"><%= button_to 'Edit', edit_user_mainsheet_path(mainsheet.user, mainsheet), method: :get %></div>
+      <div class="inner"><%= button_to 'Destroy', [mainsheet.user, @mainsheet], method: :delete, data: { confirm: 'Are you sure?' } %></div>
+      <p>Created on: <%= mainsheet.created_on.strftime("%B-%d-%Y") %></p>
+      <p><%= mainsheet.description %></p>
+      <% if !getOptional %>
+         <p>Announcer: <%= getType(mainsheet.user) %><%= link_to mainsheet.user.vname, user_path(mainsheet.user) %></p>
+      <% end %>
+   </div>
+<% end %>

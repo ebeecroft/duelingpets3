@@ -1,0 +1,24 @@
+<% provide(:title, "A collection of many different available preplies!") %>
+<% provide(:description, "A place for the admin to see what preplies are available.") %>
+<% provide(:style, ".pagebox{text-align:center;}") %>
+<h1 class="pageheader">PReplies list</h1>
+<br>
+<div class="pagebox"><%= paginate @preplies %></div>
+<% @preplies.each do |preply| %>
+   <br>
+   <div class="pagetext">
+      <p>Belongs to pm: <%= link_to prely.pm.title, user_pm_path(@pm.from_user, @pm) %></p>
+      <div class="inner"><%= preply.message %></div>
+      <div class="inner"><%= button_to 'Edit', edit_pm_reply_path(preply.pm, preply), method: :get %></div>
+      <div class="inner"><%= button_to 'Destroy', [preply.pm, preply], method: :delete, data: { confirm: 'Are you sure?' } %></div>
+      <p>Created on: <%= preply.created_on.strftime("%B-%d-%Y") %></p>
+      <p>Owner: <%= getType(preply.user) %><%= link_to preply.user.vname, user_path(preply.user) %></p>
+      <p>Status: <%= getStatus(preply.user) %>
+         <% if getStatus(preply.user) != "Online" %>
+            <% if getTime(preply.user, getStatus(preply.user)) %>
+               for <%= distance_of_time_in_words_to_now getTime(preply.user, getStatus(preply.user)) %>
+            <% end %>
+         <% end %>
+      </p>
+   </div>
+<% end %>

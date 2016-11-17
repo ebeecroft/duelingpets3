@@ -1,0 +1,26 @@
+<% provide(:title, "A collection of all the outbound pms!") %>
+<% provide(:description, "A place for the current user to see his sent messages.") %>
+<% provide(:style, ".pagebox{text-align:center;}") %>
+<h1 class="pageheader">Outbox</h1>
+<br>
+<div class="pagebox"><%= paginate @pms %></div>
+<% @pms.each do |pm| %>
+   <br>
+   <div class="pagetext">
+      <div class="inner"><%= link_to pm.title, user_pm_path(pm.to_user.vname, pm) %>(<%= getCount(pm) %>)</div>
+      <% if current_user.id == pm.from_user.id %>
+         <div class="inner"><%= button_to 'Edit', edit_user_pm_path(pm.from_user, pm), method: :get %></div>
+         <div class="inner"><%= button_to 'Destroy', [pm.from_user, pm], method: :delete, data: { confirm: 'Are you sure?' } %></div>
+      <% end %>
+      <p>Created on: <%= pm.created_on.strftime("%B-%d-%Y") %></p>
+      <p><%= pm.description %></p>
+      <p>Owner: <%= getType(pm.from_user) %><%= link_to pm.from_user.vname, user_path(pm.from_user) %></p>
+      <p>Status: <%= getStatus(pm.from_user) %>
+         <% if getStatus(pm.from_user) != "Online" %>
+            <% if getTime(pm.from_user, getStatus(pm.from_user)) %>
+               for <%= distance_of_time_in_words_to_now getTime(pm.from_user, getStatus(pm.from_user)) %>
+            <% end %>
+         <% end %>
+      </p>
+   </div>
+<% end %>

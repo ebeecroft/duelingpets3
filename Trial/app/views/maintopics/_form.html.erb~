@@ -1,7 +1,13 @@
+<% provide(:style, ".errorheader{text-align: left;font-weight: bold;padding: 5px 5px 5px 15px;font-size: 12px;
+margin: -7px;margin-bottom: 0px;background-color: #c00;color: #fff;}") %>
+<% provide(:style, ".errorslisted{font-size: 12px;list-style: square;}") %>
+<% provide(:style, "#error_explanation{width: 450px;border: 2px solid red;padding: 7px;padding-bottom: 0;
+margin-bottom: 20px;background-color: #f0f0f0;") %>
 <%= form_for([@tcontainer, @maintopic]) do |f| %>
-  <% if @maintopic.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@maintopic.errors.count, "error") %> prohibited this maintopic from being saved:</h2>
+   <% if @maintopic.errors.any? %>
+      <div class="pagetext">
+         <div id="error_explanation">
+            <h2 class="errorheader"><%= pluralize(@maintopic.errors.count, "error") %> prohibited this maintopic from being saved:</h2>
 
       <ul>
       <% @maintopic.errors.full_messages.each do |msg| %>
@@ -11,6 +17,20 @@
     </div>
   <% end %>
   <br>
+  <%= form_for(@maintenancemode) do |f| %>
+   <% if @maintenancemode.errors.any? %>
+      <div class="pagetext">
+         <div id="error_explanation">
+            <h2 class="errorheader"><%= pluralize(@maintenancemode.errors.count, "error") %> prohibited this maintenancemode from being saved:</h2>
+
+            <ul class="errorslisted">
+               <% @maintenancemode.errors.full_messages.each do |msg| %>
+                  <li class="errorslisted"><%= msg %></li>
+               <% end %>
+            </ul>
+         </div>
+      </div>
+   <% end %>
   <div class="pagetext">
     <%= f.label :topicname %><br />
     <%= f.text_field :topicname %>
@@ -19,7 +39,7 @@
     <%= f.label :description %><br />
     <%= f.text_area :description %>
   </div>
-  <div class="actions">
+  <div class="pagetext">
     <%= f.submit %>
   </div>
   <br>

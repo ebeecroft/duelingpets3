@@ -28,7 +28,7 @@
                <td>
                   <div class="containerbox">
                      <% tcontainer.maintopics.each do |maintopic| %>
-                        <p><%= link_to maintopic.topicname, tcontainer_maintopic_path(tcontainer, maintopic) %></p>
+                        <p class="forumheader"><%= link_to maintopic.topicname, tcontainer_maintopic_path(tcontainer, maintopic) %></p>
                         <p><%= maintopic.description %></p>
                         <p>By: <%= getType(maintopic.user) %><%= link_to maintopic.user.vname, user_path(maintopic.user) %></p>
                         <p>Status: <%= getStatus(maintopic.user) %>
@@ -38,6 +38,7 @@
                               <% end %>
                            <% end %>
                         </p>
+                        <p>Created: <%= distance_of_time_in_words_to_now maintopic.created_on %> ago</p>
                         <br>
                      <% end %>
                   </div>
@@ -49,7 +50,7 @@
 <% end %>
 <% if current_user %>
    <br>
-   <p class="pagetext"><%= link_to 'New Tcontainer', new_forum_tcontainer_path(@forum) %></p>
+   <p class="pagetext"><%= link_to 'New Topic Container', new_forum_tcontainer_path(@forum) %></p>
 <% end %>
 <br>
 <p class="pagetext"><%= link_to 'Back', user_forums_path(@forum.user) %>

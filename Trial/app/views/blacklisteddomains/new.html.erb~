@@ -1,0 +1,5 @@
+<% provide(:title, "Blacklisteddomain: Add new domains to the blacklist!") %>
+<% provide(:description, "New domains are added to the blacklist.") %>
+<h1 class="pagetextheader">New blacklisteddomain</h1>
+<%= render 'form' %>
+<p class="pagetext"><%= link_to 'Back', blacklisteddomains_path %></p>

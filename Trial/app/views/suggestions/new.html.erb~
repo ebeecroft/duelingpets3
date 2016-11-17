@@ -1,5 +1,6 @@
 <% provide(:title, "Suggestion: The place where users can suggest improvements to the site!") %>
 <% provide(:description, "A place where users can help make the site better by posting suggestions for improvements.") %>
+<% provide(:style, ".pagetextheader{padding-left: 3%;padding-right: 3%;font-size: 24px;font-weight: bold;}") %>
 <h1 class="pagetextheader">New suggestion</h1>
 <%= render 'form' %>
 <p class="pagetext"><%= link_to 'Back', root_path %></p>

@@ -1,5 +1,6 @@
 <% provide(:title, "Artwork: A place to review uploaded artwork!") %>
 <% provide(:description, "The place where one can review unprocessed art and add it to the approved artwork section.") %>
+<% provide(:style, ".pagebox.pagebox{text-align:center;}") %>
 <h1 class="pageheader">Artworks to be reviewed</h1>
 <br>
 <div class="pagebox"><%= paginate @artworks %></div>
