@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160929040958) do
+ActiveRecord::Schema.define(:version => 20161117045117) do
 
   create_table "accountkeys", :force => true do |t|
     t.integer  "user_id"
@@ -143,6 +143,7 @@ ActiveRecord::Schema.define(:version => 20160929040958) do
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
     t.boolean  "equipped",   :default => false
+    t.integer  "qty",        :default => 0
   end
 
   create_table "items", :force => true do |t|
@@ -289,6 +290,14 @@ ActiveRecord::Schema.define(:version => 20160929040958) do
     t.boolean  "maintenance", :default => false
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
+  end
+
+  create_table "referrals", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "referred_by_id"
+    t.datetime "created_on"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "replies", :force => true do |t|
