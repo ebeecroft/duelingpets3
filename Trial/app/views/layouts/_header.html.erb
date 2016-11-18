@@ -16,7 +16,7 @@
 <div class="navigationC">
 <ul id="navigationbox" class="navigation">
    <% unless current_page?(root_path) %>
-      <li class="mavspacing"><%= link_to "Home", root_path %></li><!---try to figure out if statement--->
+      <li class="mavspacing"><%= link_to "Home", root_path %></li>
    <% end %>
    <li id="submenu" class="mavspacing">Creativity*
       <ul class="drop-nav">
@@ -36,7 +36,7 @@
          <li><%= link_to "Tutorial", tutorial %></li>
          <li><%= link_to "Forum", forums_path %></li>
          <% if current_user %>
-            <li><%= link_to "Suggestions", new_suggestion_path %></li><!--Come back to this later-->
+            <li><%= link_to "Suggestions", new_suggestion_path %></li>
             <li><%= link_to "Active Users", active_path %></li>
          <% end %>
       </ul>

@@ -43,7 +43,8 @@
          .alert-success{color: #00ff00;}
          .sessiontime{color: #ffc2aa;display: inline-block;}
          .inner{display: inline-block;}
-         .mavspacing{position: relative; display: inline-block; padding: 0.6% 1%; color:#ffc2aa;} /*Change for mobile*/
+         .mavspacing{position: relative; display: inline-block; padding: 1.5% 1%; color:#ffc2aa;}
+         @media(min-device-width: 640px){.mavspacing{position: relative; display: inline-block; padding: 0.6% 1%; color:#ffc2aa;}} /*Change for mobile*/
          .dropdown{position: relative;}
          .drop-nav{position:absolute;display:none;}
          .drop-nav li{background: #530e53; padding: 7% 0%;} /* Good adjustment*//*border: 1px solid rgba(0,255,0,.2);*/
@@ -79,9 +80,10 @@
          <%= yield %>
          <br>
          <div class="footer">
-         <div class="pagetext">
-            <div class="navigationspacing"><%= link_to "Sitemap", sitemap_path %></div>
-            <div class="navigationspacing"><%= link_to "Stats", stats_path %></div>
+            <div class="pagetext">
+               <div class="mavspacing"><%= link_to "Sitemap", sitemap_path %></div>
+               <div class="mavspacing"><%= link_to "Stats", stats_path %></div>
+            </div>
          </div>
       </div>
       <!--To here-->
